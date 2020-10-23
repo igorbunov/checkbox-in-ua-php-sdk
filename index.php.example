@@ -23,10 +23,10 @@ if (!function_exists('pre')) {
 
 try {
     $config = new Config([
-        'apiUrl' => 'https://dev-api.checkbox.in.ua/api/v1',
-        'login' => 'some login',
-        'password' => 'some password',
-        'licenseKey' => 'some license key'
+        Config::API_URL => 'https://dev-api.checkbox.in.ua/api/v1',
+        Config::LOGIN => 'some login',
+        Config::PASSWORD => 'some password',
+        Config::LICENSE_KEY => 'some license key'
     ]);
 
 //    $api = new CheckboxJsonApi($config);

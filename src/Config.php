@@ -9,6 +9,7 @@ class Config
     const API_URL = 'apiUrl';
     const LOGIN = 'login';
     const PASSWORD = 'password';
+    const LICENSE_KEY = 'licenseKey';
 
     public function __construct(array $data)
     {
