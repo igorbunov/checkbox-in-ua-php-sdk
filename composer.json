@@ -1,0 +1,22 @@
+{
+  "name": "igorbunov/checkbox-in-ua-php-sdk",
+  "description": "PHP SDK for integration with checkbox.in.ua api",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "igorbunov",
+      "email": "igorbunov.ua@mail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "guzzlehttp/guzzle": "^6.3",
+    "php": ">=7.2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "VetScan\\" : "src"
+    }
+  }
+}

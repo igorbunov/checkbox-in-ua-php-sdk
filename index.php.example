@@ -1,0 +1,16 @@
+<?php
+
+require_once 'vendor/autoload.php';
+
+if (!function_exists('pre')) {
+    function pre(){
+        $numargs = func_num_args();
+        $arguments = func_get_args();
+
+        echo '<pre>';
+        for($i = 0; $i < $numargs; $i++){
+            var_dump($arguments[$i]);
+        }
+        echo '</pre>';
+    }
+}
