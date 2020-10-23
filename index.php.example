@@ -2,6 +2,11 @@
 
 require_once 'vendor/autoload.php';
 
+use Checkbox\CheckboxJsonApi;
+use Checkbox\Config;
+use Checkbox\Errors\InvalidCredentials;
+use Checkbox\Errors\Validation;
+
 if (!function_exists('pre')) {
     function pre(){
         $numargs = func_num_args();
@@ -13,4 +18,48 @@ if (!function_exists('pre')) {
         }
         echo '</pre>';
     }
+}
+
+
+try {
+    $config = new Config([
+        'apiUrl' => 'https://dev-api.checkbox.in.ua/api/v1',
+        'login' => 'some login',
+        'password' => 'some password',
+        'licenseKey' => 'some license key'
+    ]);
+
+//    $api = new CheckboxJsonApi($config);
+//    $api->signInCashier();
+//    $api->signOutCashier();
+
+
+    $api = (new CheckboxJsonApi())
+        ->setConfig($config)
+        ->setConnectTimeout(10)
+        ->signInCashier();
+
+
+//    pre('sign cashier via pin code', $api->signInCashierViaPinCode('some pin code'));
+//    pre('sign cashier via signature', $api->signInCashierViaSignature('some signature in base64'));
+//    pre('ping tax service', $api->pingTaxServiceAction());
+
+//    $currentShift = $api->getCashierShift();
+//    pre('get shift', $api->getShift($currentShift['id']));
+
+//    pre('profile', $api->getCashierProfile());
+//    pre('cashier shift', $api->getCashierShift());
+//    pre('get shifts', $api->getShifts());
+//    pre('start shift', $api->createShift());
+//    pre('close shift', $api->closeShift());
+
+    $api->signOutCashier();
+
+} catch (InvalidCredentials $err) {
+    pre('creds err', $err->getMessage());
+} catch (Validation $err) {
+    pre('valid err', $err->getMessage());
+    pre('error detail', $err->getDetail());
+} catch (\Exception $err) {
+    pre('default err', $err->getMessage());
 }
