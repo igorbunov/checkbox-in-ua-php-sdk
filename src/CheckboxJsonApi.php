@@ -4,6 +4,8 @@ namespace Checkbox;
 
 use Checkbox\Errors\InvalidCredentials;
 use Checkbox\Errors\Validation;
+use Checkbox\Mappers\ShiftMapper;
+use Checkbox\Models\Shift;
 use GuzzleHttp\Client;
 
 class CheckboxJsonApi
@@ -168,7 +170,7 @@ class CheckboxJsonApi
         return $jsonResponse;
     }
 
-    public function getCashierShift()
+    public function getCashierShift(): Shift
     {
         $response = $this->guzzleClient->request(
             self::METHOD_GET,
@@ -180,7 +182,7 @@ class CheckboxJsonApi
 
         $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
-        return $jsonResponse;
+        return (new ShiftMapper())->jsonToObject($jsonResponse);
     }
 
     public function pingTaxServiceAction()
