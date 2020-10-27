@@ -9,6 +9,7 @@ use Checkbox\Errors\InvalidCredentials;
 use Checkbox\Errors\Validation;
 use Checkbox\Errors\NoActiveShift;
 use Checkbox\Errors\AlreadyOpenedShift;
+use Checkbox\Errors\EmptyResponse;
 
 if (!function_exists('pre')) {
     function pre(){
@@ -65,6 +66,8 @@ try {
 
 } catch (InvalidCredentials $err) {
     pre('creds err', $err->getMessage());
+}  catch (EmptyResponse $err) {
+    pre('empty response', $err->getMessage());
 } catch (Validation $err) {
     pre('valid err', $err->getMessage());
     pre('error detail', $err->getDetail());

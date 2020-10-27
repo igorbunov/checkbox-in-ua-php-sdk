@@ -2,6 +2,6 @@
 
 namespace Checkbox\Errors;
 
-class NoActiveShift extends \Exception
+class EmptyResponse extends \Exception
 {
 }

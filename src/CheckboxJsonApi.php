@@ -3,17 +3,18 @@
 namespace Checkbox;
 
 use Checkbox\Errors\InvalidCredentials;
+use Checkbox\Errors\EmptyResponse;
 use Checkbox\Errors\Validation;
-use Checkbox\Mappers\CloseShiftMapper;
-use Checkbox\Mappers\CreateShiftMapper;
-use Checkbox\Mappers\ProfileMapper;
-use Checkbox\Mappers\ShiftMapper;
-use Checkbox\Mappers\ShiftsMapper;
-use Checkbox\Models\CloseShift;
-use Checkbox\Models\CreateShift;
-use Checkbox\Models\Profile;
-use Checkbox\Models\Shift;
-use Checkbox\Models\Shifts;
+use Checkbox\Mappers\Cashier\CashierMapper;
+use Checkbox\Mappers\Shifts\CloseShiftMapper;
+use Checkbox\Mappers\Shifts\CreateShiftMapper;
+use Checkbox\Mappers\Shifts\ShiftMapper;
+use Checkbox\Mappers\Shifts\ShiftsMapper;
+use Checkbox\Models\Cashier\Cashier;
+use Checkbox\Models\Shifts\CloseShift;
+use Checkbox\Models\Shifts\CreateShift;
+use Checkbox\Models\Shifts\Shift;
+use Checkbox\Models\Shifts\Shifts;
 use GuzzleHttp\Client;
 
 class CheckboxJsonApi
@@ -101,6 +102,10 @@ class CheckboxJsonApi
 
         $jsonResponse = json_decode($response->getBody()->getContents(), true);
 
+        if (is_null($jsonResponse)) {
+            throw new EmptyResponse('Запрос вернул пустой результат');
+        }
+
         $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
         $this->setHeadersWithToken($jsonResponse['access_token']);
@@ -163,7 +168,7 @@ class CheckboxJsonApi
         return $jsonResponse;
     }
 
-    public function getCashierProfile(): Profile
+    public function getCashierProfile(): Cashier
     {
         $response = $this->guzzleClient->request(
             self::METHOD_GET,
@@ -175,7 +180,7 @@ class CheckboxJsonApi
 
         $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
-        return (new ProfileMapper())->jsonToObject($jsonResponse);
+        return (new CashierMapper())->jsonToObject($jsonResponse);
     }
 
     public function getCashierShift(): Shift
@@ -187,6 +192,10 @@ class CheckboxJsonApi
         );
 
         $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        if (is_null($jsonResponse)) {
+            throw new EmptyResponse('Запрос вернул пустой результат');
+        }
 
         $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
