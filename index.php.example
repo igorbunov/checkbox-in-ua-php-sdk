@@ -10,6 +10,8 @@ use Checkbox\Errors\Validation;
 use Checkbox\Errors\NoActiveShift;
 use Checkbox\Errors\AlreadyOpenedShift;
 use Checkbox\Errors\EmptyResponse;
+use Checkbox\Models\CashRegisters\CashRegistersQueryParams;
+use Checkbox\Models\Shifts\ShiftsQueryParams;
 
 if (!function_exists('pre')) {
     function pre(){
@@ -46,14 +48,24 @@ try {
 
 //    pre('profile', $api->getCashierProfile());
 
-
-//    $currentShift = $api->getCashierShift();
-//    pre($currentShift);
-//    pre('get shift', $api->getShift($currentShift->id));
 //    pre('cashier shift', $api->getCashierShift());
+//    pre('get shift', $api->getShift('19b98dd3-a5ac-48b9-9eb6-6995e6eb567f'));
+
 //    pre('get shifts', $api->getShifts());
+
+//    pre('get shifts', $api->getShifts(new ShiftsQueryParams(
+//        [ShiftsQueryParams::STATUS_CLOSED, ShiftsQueryParams::STATUS_OPENED], false, 2, 0
+//    )));
+
 //    pre('start shift', $api->createShift());
 //    pre('close shift', $api->closeShift());
+
+
+//    pre('cash registers', $api->getCashRegisters());
+//    pre('cash registers', $api->getCashRegisters(new CashRegistersQueryParams(true, 3, 0)));
+
+//    pre('cash register', $api->getCashRegister('a2e32685-b489-43e6-b658-faf4656f86d0'));
+//    pre('cash register', $api->getCashRegister('1c9b7dfb-4ffd-4f40-83da-d9b758c0c29a'));
 
     // end mapped //
 

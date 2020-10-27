@@ -3,6 +3,7 @@
 namespace Checkbox\Models\Shifts;
 
 use Checkbox\Models\Cashier\Cashier;
+use Checkbox\Models\CashRegisters\CashRegister;
 
 class CloseShift
 {

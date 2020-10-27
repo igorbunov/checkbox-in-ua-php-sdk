@@ -4,6 +4,7 @@ namespace Checkbox\Mappers\Shifts;
 
 use Checkbox\Errors\AlreadyOpenedShift;
 use Checkbox\Mappers\Cashier\CashierMapper;
+use Checkbox\Mappers\CashRegisters\CashRegisterMapper;
 use Checkbox\Models\Shifts\CreateShift;
 
 class CreateShiftMapper

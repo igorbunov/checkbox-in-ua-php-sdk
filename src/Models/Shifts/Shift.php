@@ -2,6 +2,9 @@
 
 namespace Checkbox\Models\Shifts;
 
+use Checkbox\Models\Cashier\Cashier;
+use Checkbox\Models\CashRegisters\CashRegister;
+
 class Shift
 {
     public $id;
@@ -17,6 +20,7 @@ class Shift
     public $balance;
     public $taxes;
     public $cash_register;
+    public $cashier;
 
     public function __construct(
         $id,
@@ -31,7 +35,8 @@ class Shift
         $updated_at,
         Balance $balance,
         Taxes $taxes,
-        CashRegister $cash_register
+        ?CashRegister $cash_register,
+        ?Cashier $cashier
     ) {
         $this->id = $id;
         $this->serial = $serial;
@@ -46,5 +51,6 @@ class Shift
         $this->balance = $balance;
         $this->taxes = $taxes;
         $this->cash_register = $cash_register;
+        $this->cashier = $cashier;
     }
 }

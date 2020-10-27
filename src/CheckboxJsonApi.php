@@ -6,15 +6,19 @@ use Checkbox\Errors\InvalidCredentials;
 use Checkbox\Errors\EmptyResponse;
 use Checkbox\Errors\Validation;
 use Checkbox\Mappers\Cashier\CashierMapper;
+use Checkbox\Mappers\CashRegisters\CashRegisterMapper;
+use Checkbox\Mappers\CashRegisters\CashRegistersMapper;
 use Checkbox\Mappers\Shifts\CloseShiftMapper;
 use Checkbox\Mappers\Shifts\CreateShiftMapper;
 use Checkbox\Mappers\Shifts\ShiftMapper;
 use Checkbox\Mappers\Shifts\ShiftsMapper;
 use Checkbox\Models\Cashier\Cashier;
+use Checkbox\Models\CashRegisters\CashRegistersQueryParams;
 use Checkbox\Models\Shifts\CloseShift;
 use Checkbox\Models\Shifts\CreateShift;
 use Checkbox\Models\Shifts\Shift;
 use Checkbox\Models\Shifts\Shifts;
+use Checkbox\Models\Shifts\ShiftsQueryParams;
 use GuzzleHttp\Client;
 
 class CheckboxJsonApi
@@ -221,11 +225,15 @@ class CheckboxJsonApi
 
     // start Shift methods //
 
-    public function getShifts(): Shifts
+    public function getShifts(ShiftsQueryParams $queryParams = null): Shifts
     {
+        if (is_null($queryParams)) {
+            $queryParams = new ShiftsQueryParams();
+        }
+
         $response = $this->guzzleClient->request(
             self::METHOD_GET,
-            $this->routes->getShifts(),
+            $this->routes->getShifts($queryParams),
             $this->requestOptions
         );
 
@@ -282,6 +290,45 @@ class CheckboxJsonApi
     }
 
     // end Shift methods //
+
+    // start cash registers methods //
+
+    public function getCashRegisters(CashRegistersQueryParams $queryParams = null)
+    {
+        if (is_null($queryParams)) {
+            $queryParams = new CashRegistersQueryParams();
+        }
+
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getCashRegisters($queryParams),
+            $this->requestOptions
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new CashRegistersMapper())->jsonToObject($jsonResponse);
+    }
+    public function getCashRegister(string $registerId)
+    {
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getCashRegister($registerId),
+            $this->requestOptions
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new CashRegisterMapper())->jsonToObject($jsonResponse);
+    }
+
+    // end cash registers methods //
+
+
 
 
 

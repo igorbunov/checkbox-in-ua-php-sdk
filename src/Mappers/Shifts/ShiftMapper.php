@@ -2,6 +2,8 @@
 
 namespace Checkbox\Mappers\Shifts;
 
+use Checkbox\Mappers\Cashier\CashierMapper;
+use Checkbox\Mappers\CashRegisters\CashRegisterMapper;
 use Checkbox\Models\Shifts\Shift;
 
 class ShiftMapper
@@ -16,8 +18,9 @@ class ShiftMapper
         $balance = (new BalanceMapper())->jsonToObject($json['balance']);
         $initialTransaction = (new InitialTransactionMapper())->jsonToObject($json['initial_transaction']);
         $closingTransaction = (new ClosingTransactionMapper())->jsonToObject($json['closing_transaction']);
-        $cashRegister = (new CashRegisterMapper())->jsonToObject($json['cash_register']);
+        $cashRegister = (new CashRegisterMapper())->jsonToObject($json['cash_register'] ?? null);
         $taxes = (new TaxesMapper())->jsonToObject($json['taxes']);
+        $cashier = (new CashierMapper())->jsonToObject($json['cashier'] ?? null);
 
         $shift = new Shift(
             $json['id'],
@@ -32,7 +35,8 @@ class ShiftMapper
             $json['updated_at'],
             $balance,
             $taxes,
-            $cashRegister
+            $cashRegister,
+            $cashier
         );
 
         return $shift;

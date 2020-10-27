@@ -2,6 +2,9 @@
 
 namespace Checkbox;
 
+use Checkbox\Models\CashRegisters\CashRegistersQueryParams;
+use Checkbox\Models\Shifts\ShiftsQueryParams;
+
 class Routes
 {
     private $config;
@@ -48,9 +51,25 @@ class Routes
         return $this->apiUrl . '/shifts';
     }
 
-    public function getShifts(): string
+    public function getShifts(ShiftsQueryParams $queryParams): string
     {
-        return $this->apiUrl . '/shifts';
+        $params = [];
+
+        if (count($queryParams->statuses) > 0) {
+            foreach ($queryParams->statuses as $status) {
+                $params[] = "statuses={$status}";
+            }
+        }
+
+        $value = ($queryParams->desc) ? 'true' : 'false';
+        $params[] = "desc={$value}";
+
+        $params[] = "limit={$queryParams->limit}";
+        $params[] = "offset={$queryParams->offset}";
+
+        $params = implode('&', $params);
+pre($params);
+        return $this->apiUrl . '/shifts?' . $params;
     }
 
     public function closeShift(): string
@@ -66,5 +85,28 @@ class Routes
     public function pingTaxServiceAction(): string
     {
         return $this->apiUrl . '/cashier/ping-tax-service';
+    }
+
+    public function getCashRegisters(CashRegistersQueryParams $queryParams): string
+    {
+        $params = [];
+
+        if (!is_null($queryParams->inUse)) {
+            $value = ($queryParams->inUse) ? 'true' : 'false';
+
+            $params[] = "in_use={$value}";
+        }
+
+        $params[] = "limit={$queryParams->limit}";
+        $params[] = "offset={$queryParams->offset}";
+
+        $params = implode('&', $params);
+
+        return $this->apiUrl . '/cash-registers?' . $params;
+    }
+
+    public function getCashRegister(string $registerId): string
+    {
+        return $this->apiUrl . '/cash-registers/' . $registerId;
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
-namespace Checkbox\Mappers\Shifts;
+namespace Checkbox\Mappers\CashRegisters;
 
-use Checkbox\Models\Shifts\CashRegister;
+use Checkbox\Mappers\Shifts\ShiftMapper;
+use Checkbox\Models\CashRegisters\CashRegister;
 
 class CashRegisterMapper
 {
@@ -12,11 +13,15 @@ class CashRegisterMapper
             return null;
         }
 
+        $shift = (new ShiftMapper())->jsonToObject($json['shift'] ?? null);
+
         $cashRegister = new CashRegister(
             $json['id'],
             $json['fiscal_number'],
             $json['created_at'],
-            $json['updated_at']
+            $json['updated_at'],
+            $shift,
+            $json['offline_mode'] ?? null
         );
 
         return $cashRegister;
