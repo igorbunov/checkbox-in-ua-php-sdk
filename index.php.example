@@ -1,11 +1,14 @@
 <?php
 
 require_once 'vendor/autoload.php';
+ini_set("xdebug.overload_var_dump", "off");
 
 use Checkbox\CheckboxJsonApi;
 use Checkbox\Config;
 use Checkbox\Errors\InvalidCredentials;
 use Checkbox\Errors\Validation;
+use Checkbox\Errors\NoActiveShift;
+use Checkbox\Errors\AlreadyOpenedShift;
 
 if (!function_exists('pre')) {
     function pre(){
@@ -20,7 +23,6 @@ if (!function_exists('pre')) {
     }
 }
 
-
 try {
     $config = new Config([
         Config::API_URL => 'https://dev-api.checkbox.in.ua/api/v1',
@@ -33,33 +35,43 @@ try {
 //    $api->signInCashier();
 //    $api->signOutCashier();
 
-
     $api = (new CheckboxJsonApi())
         ->setConfig($config)
         ->setConnectTimeout(10)
         ->signInCashier();
 
+    // mapped //
 
-//    pre('sign cashier via pin code', $api->signInCashierViaPinCode('some pin code'));
-//    pre('sign cashier via signature', $api->signInCashierViaSignature('some signature in base64'));
-//    pre('ping tax service', $api->pingTaxServiceAction());
-
-//    $currentShift = $api->getCashierShift();
-//    pre('get shift', $api->getShift($currentShift['id']));
 
 //    pre('profile', $api->getCashierProfile());
+
+
+//    $currentShift = $api->getCashierShift();
+//    pre($currentShift);
+//    pre('get shift', $api->getShift($currentShift->id));
 //    pre('cashier shift', $api->getCashierShift());
 //    pre('get shifts', $api->getShifts());
 //    pre('start shift', $api->createShift());
 //    pre('close shift', $api->closeShift());
 
-    $api->signOutCashier();
+    // end mapped //
+
+//    pre('sign cashier via pin code', $api->signInCashierViaPinCode('some pin code'));
+//    pre('sign cashier via signature', $api->signInCashierViaSignature('some signature in base64'));
+//    pre('ping tax service', $api->pingTaxServiceAction());
+
+
+//    $api->signOutCashier();
 
 } catch (InvalidCredentials $err) {
     pre('creds err', $err->getMessage());
 } catch (Validation $err) {
     pre('valid err', $err->getMessage());
     pre('error detail', $err->getDetail());
+} catch (NoActiveShift $err) {
+    pre('no shift', $err->getMessage());
+} catch (AlreadyOpenedShift $err) {
+    pre('opened shift', $err->getMessage());
 } catch (\Exception $err) {
     pre('default err', $err->getMessage());
 }

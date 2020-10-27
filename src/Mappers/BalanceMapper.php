@@ -6,8 +6,12 @@ use Checkbox\Models\Balance;
 
 class BalanceMapper
 {
-    public function jsonToObject($json): Balance
+    public function jsonToObject($json): ?Balance
     {
+        if (is_null($json)) {
+            return null;
+        }
+
         $balance = new Balance(
             $json['initial'],
             $json['balance'],

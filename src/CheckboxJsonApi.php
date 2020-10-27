@@ -4,8 +4,16 @@ namespace Checkbox;
 
 use Checkbox\Errors\InvalidCredentials;
 use Checkbox\Errors\Validation;
+use Checkbox\Mappers\CloseShiftMapper;
+use Checkbox\Mappers\CreateShiftMapper;
+use Checkbox\Mappers\ProfileMapper;
 use Checkbox\Mappers\ShiftMapper;
+use Checkbox\Mappers\ShiftsMapper;
+use Checkbox\Models\CloseShift;
+use Checkbox\Models\CreateShift;
+use Checkbox\Models\Profile;
 use Checkbox\Models\Shift;
+use Checkbox\Models\Shifts;
 use GuzzleHttp\Client;
 
 class CheckboxJsonApi
@@ -155,7 +163,7 @@ class CheckboxJsonApi
         return $jsonResponse;
     }
 
-    public function getCashierProfile()
+    public function getCashierProfile(): Profile
     {
         $response = $this->guzzleClient->request(
             self::METHOD_GET,
@@ -167,7 +175,7 @@ class CheckboxJsonApi
 
         $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
-        return $jsonResponse;
+        return (new ProfileMapper())->jsonToObject($jsonResponse);
     }
 
     public function getCashierShift(): Shift
@@ -204,7 +212,7 @@ class CheckboxJsonApi
 
     // start Shift methods //
 
-    public function getShifts()
+    public function getShifts(): Shifts
     {
         $response = $this->guzzleClient->request(
             self::METHOD_GET,
@@ -216,10 +224,10 @@ class CheckboxJsonApi
 
         $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
-        return $jsonResponse;
+        return (new ShiftsMapper())->jsonToObject($jsonResponse);
     }
 
-    public function createShift()
+    public function createShift(): CreateShift
     {
         $response = $this->guzzleClient->request(
             self::METHOD_POST,
@@ -231,10 +239,10 @@ class CheckboxJsonApi
 
         $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
-        return $jsonResponse;
+        return (new CreateShiftMapper())->jsonToObject($jsonResponse);
     }
 
-    public function getShift(string $shiftId)
+    public function getShift(string $shiftId): Shift
     {
         $response = $this->guzzleClient->request(
             self::METHOD_GET,
@@ -246,10 +254,10 @@ class CheckboxJsonApi
 
         $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
-        return $jsonResponse;
+        return (new ShiftMapper())->jsonToObject($jsonResponse);
     }
 
-    public function closeShift()
+    public function closeShift(): CloseShift
     {
         $response = $this->guzzleClient->request(
             self::METHOD_POST,
@@ -261,7 +269,7 @@ class CheckboxJsonApi
 
         $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
-        return $jsonResponse;
+        return (new CloseShiftMapper())->jsonToObject($jsonResponse);
     }
 
     // end Shift methods //

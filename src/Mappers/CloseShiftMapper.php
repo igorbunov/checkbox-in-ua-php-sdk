@@ -2,27 +2,34 @@
 
 namespace Checkbox\Mappers;
 
-use Checkbox\Models\Shift;
+use Checkbox\Errors\NoActiveShift;
+use Checkbox\Models\CloseShift;
 
-class ShiftMapper
+class CloseShiftMapper
 {
-    public function jsonToObject($json): ?Shift
+    public function jsonToObject($json): ?CloseShift
     {
         if (is_null($json)) {
             return null;
         }
 
-        $balance = (new BalanceMapper())->jsonToObject($json['balance']);
+        if (!empty($json['message']) and $json['message'] == 'Cashier has no active shift') {
+            throw new NoActiveShift($json['message']);
+        }
+
+        $zReport = (new ZReportMapper())->jsonToObject($json['z_report']);
         $initialTransaction = (new InitialTransactionMapper())->jsonToObject($json['initial_transaction']);
         $closingTransaction = (new ClosingTransactionMapper())->jsonToObject($json['closing_transaction']);
-        $cashRegister = (new CashRegisterMapper())->jsonToObject($json['cash_register']);
+        $balance = (new BalanceMapper())->jsonToObject($json['balance']);
         $taxes = (new TaxesMapper())->jsonToObject($json['taxes']);
+        $cashRegister = (new CashRegisterMapper())->jsonToObject($json['cash_register']);
+        $cashier = (new CashierMapper())->jsonToObject($json['cashier']);
 
-        $shift = new Shift(
+        $shift = new CloseShift(
             $json['id'],
             $json['serial'],
             $json['status'],
-            $json['z_report'],
+            $zReport,
             $json['opened_at'],
             $json['closed_at'],
             $initialTransaction,
@@ -31,13 +38,14 @@ class ShiftMapper
             $json['updated_at'],
             $balance,
             $taxes,
-            $cashRegister
+            $cashRegister,
+            $cashier
         );
 
         return $shift;
     }
 
-    public function objectToJson(Shift $obj)
+    public function objectToJson(CloseShift $obj)
     {
         pre('objectToJson', $obj);
     }

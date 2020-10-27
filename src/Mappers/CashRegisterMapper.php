@@ -6,8 +6,12 @@ use Checkbox\Models\CashRegister;
 
 class CashRegisterMapper
 {
-    public function jsonToObject($json): CashRegister
+    public function jsonToObject($json): ?CashRegister
     {
+        if (is_null($json)) {
+            return null;
+        }
+
         $cashRegister = new CashRegister(
             $json['id'],
             $json['fiscal_number'],

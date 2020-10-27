@@ -6,8 +6,12 @@ use Checkbox\Models\Taxes;
 
 class TaxesMapper
 {
-    public function jsonToObject($json): Taxes
+    public function jsonToObject($json): ?Taxes
     {
+        if (is_null($json)) {
+            return null;
+        }
+
         $taxessArr = [];
 
         foreach ($json as $jsonRow) {

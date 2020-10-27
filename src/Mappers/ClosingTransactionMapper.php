@@ -2,17 +2,17 @@
 
 namespace Checkbox\Mappers;
 
-use Checkbox\Models\InitialTransaction;
+use Checkbox\Models\ClosingTransaction;
 
-class InitialTransactionMapper
+class ClosingTransactionMapper
 {
-    public function jsonToObject($json): ?InitialTransaction
+    public function jsonToObject($json): ?ClosingTransaction
     {
         if (is_null($json)) {
             return null;
         }
 
-        $transaction = new InitialTransaction(
+        $transaction = new ClosingTransaction(
             $json['id'],
             $json['type'],
             $json['serial'],
@@ -28,7 +28,7 @@ class InitialTransactionMapper
         return $transaction;
     }
 
-    public function objectToJson(InitialTransaction $obj)
+    public function objectToJson(ClosingTransaction $obj)
     {
         pre('objectToJson', $obj);
     }
