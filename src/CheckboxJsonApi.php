@@ -6,6 +6,7 @@ use Checkbox\Errors\InvalidCredentials;
 use Checkbox\Errors\EmptyResponse;
 use Checkbox\Errors\Validation;
 use Checkbox\Mappers\Cashier\CashierMapper;
+use Checkbox\Mappers\CashRegisters\CashRegisterInfoMapper;
 use Checkbox\Mappers\CashRegisters\CashRegisterMapper;
 use Checkbox\Mappers\CashRegisters\CashRegistersMapper;
 use Checkbox\Mappers\Shifts\CloseShiftMapper;
@@ -35,7 +36,7 @@ class CheckboxJsonApi
     public function __construct(Config $config = null, int $connectTimeoutSeconds = 5)
     {
         if (!is_null($config)) {
-            $this->routes = new Routes($config);
+            $this->routes = new Routes($config->get(Config::API_URL));
         }
 
         $this->config = $config;
@@ -132,6 +133,7 @@ class CheckboxJsonApi
         return $this;
     }
 
+    /*
     public function signInCashierViaSignature(string $signature)
     {
         $options = $this->requestOptions;
@@ -151,7 +153,9 @@ class CheckboxJsonApi
 
         return $jsonResponse;
     }
+    */
 
+    /*
     public function signInCashierViaPinCode(string $pinCode)
     {
         $options = $this->requestOptions;
@@ -171,6 +175,7 @@ class CheckboxJsonApi
 
         return $jsonResponse;
     }
+    */
 
     public function getCashierProfile(): Cashier
     {
@@ -311,6 +316,7 @@ class CheckboxJsonApi
 
         return (new CashRegistersMapper())->jsonToObject($jsonResponse);
     }
+
     public function getCashRegister(string $registerId)
     {
         $response = $this->guzzleClient->request(
@@ -324,6 +330,21 @@ class CheckboxJsonApi
         $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
         return (new CashRegisterMapper())->jsonToObject($jsonResponse);
+    }
+
+    public function getCashRegisterInfo()
+    {
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getCashRegisterInfo(),
+            $this->requestOptions
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new CashRegisterInfoMapper())->jsonToObject($jsonResponse);
     }
 
     // end cash registers methods //

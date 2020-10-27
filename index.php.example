@@ -43,10 +43,18 @@ try {
         ->setConnectTimeout(10)
         ->signInCashier();
 
-    // mapped //
+    // profile (касир) //
 
 
 //    pre('profile', $api->getCashierProfile());
+
+//    pre('(REMOVED) sign cashier via pin code', $api->signInCashierViaPinCode('some pin code'));
+//    pre('(REMOVED) sign cashier via signature', $api->signInCashierViaSignature('some signature in base64'));
+//    pre('ping tax service', $api->pingTaxServiceAction());
+
+
+    // shifts (смены) //
+
 
 //    pre('cashier shift', $api->getCashierShift());
 //    pre('get shift', $api->getShift('19b98dd3-a5ac-48b9-9eb6-6995e6eb567f'));
@@ -61,17 +69,22 @@ try {
 //    pre('close shift', $api->closeShift());
 
 
+    // cash registers (пРРО) //
+
+
 //    pre('cash registers', $api->getCashRegisters());
 //    pre('cash registers', $api->getCashRegisters(new CashRegistersQueryParams(true, 3, 0)));
 
-//    pre('cash register', $api->getCashRegister('a2e32685-b489-43e6-b658-faf4656f86d0'));
+//    pre('cash register', $api->getCashRegister('3e650f3e-09b9-44e4-baea-f40f143cbb00'));
 //    pre('cash register', $api->getCashRegister('1c9b7dfb-4ffd-4f40-83da-d9b758c0c29a'));
+//    pre('cash register', $api->getCashRegisterInfo());
 
-    // end mapped //
 
-//    pre('sign cashier via pin code', $api->signInCashierViaPinCode('some pin code'));
-//    pre('sign cashier via signature', $api->signInCashierViaSignature('some signature in base64'));
-//    pre('ping tax service', $api->pingTaxServiceAction());
+    // receipts (чеки) //
+
+
+
+
 
 
 //    $api->signOutCashier();

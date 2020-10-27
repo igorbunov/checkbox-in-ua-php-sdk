@@ -7,13 +7,11 @@ use Checkbox\Models\Shifts\ShiftsQueryParams;
 
 class Routes
 {
-    private $config;
     private $apiUrl;
 
-    public function __construct(Config $config)
+    public function __construct(string $appUrl)
     {
-        $this->config = $config;
-        $this->apiUrl = $this->config->get(Config::API_URL);
+        $this->apiUrl = $appUrl;
     }
 
     public function singInCashier(): string
@@ -68,7 +66,7 @@ class Routes
         $params[] = "offset={$queryParams->offset}";
 
         $params = implode('&', $params);
-pre($params);
+
         return $this->apiUrl . '/shifts?' . $params;
     }
 
@@ -108,5 +106,10 @@ pre($params);
     public function getCashRegister(string $registerId): string
     {
         return $this->apiUrl . '/cash-registers/' . $registerId;
+    }
+
+    public function getCashRegisterInfo(): string
+    {
+        return $this->apiUrl . '/cash-registers/info';
     }
 }
