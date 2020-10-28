@@ -112,4 +112,14 @@ class Routes
     {
         return $this->apiUrl . '/cash-registers/info';
     }
+
+    public function getReceipts(): string
+    {
+        return $this->apiUrl . '/receipts';
+    }
+
+    public function getReceipt(string $receiptId): string
+    {
+        return $this->apiUrl . '/receipts/' . $receiptId;
+    }
 }

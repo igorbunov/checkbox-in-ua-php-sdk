@@ -9,6 +9,7 @@ use Checkbox\Mappers\Cashier\CashierMapper;
 use Checkbox\Mappers\CashRegisters\CashRegisterInfoMapper;
 use Checkbox\Mappers\CashRegisters\CashRegisterMapper;
 use Checkbox\Mappers\CashRegisters\CashRegistersMapper;
+use Checkbox\Mappers\Receipts\ReceiptMapper;
 use Checkbox\Mappers\Shifts\CloseShiftMapper;
 use Checkbox\Mappers\Shifts\CreateShiftMapper;
 use Checkbox\Mappers\Shifts\ShiftMapper;
@@ -348,6 +349,25 @@ class CheckboxJsonApi
     }
 
     // end cash registers methods //
+
+    // start receipts methods //
+
+    public function getReceipt(string $receiptId)
+    {
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getReceipt($receiptId),
+            $this->requestOptions
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new ReceiptMapper())->jsonToObject($jsonResponse);
+    }
+
+    // end receipts methods //
 
 
 

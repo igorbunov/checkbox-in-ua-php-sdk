@@ -82,6 +82,7 @@ try {
 
     // receipts (чеки) //
 
+//    pre('get receipt', $api->getReceipt('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
 
 
 
