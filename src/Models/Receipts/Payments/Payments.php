@@ -4,7 +4,7 @@ namespace Checkbox\Models\Receipts\Payments;
 
 class Payments
 {
-    public $results;
+    public $results = [];
 
     public function __construct(array $payments)
     {
@@ -17,8 +17,8 @@ class Payments
             }
         }
 
-        if (count($this->results) == 0) {
-            throw new \Exception('There\'s no payments');
+        if (count($payments) > 0 and count($this->results) == 0) {
+            throw new \Exception('There\'s wrong payment classes payments');
         }
     }
 }
