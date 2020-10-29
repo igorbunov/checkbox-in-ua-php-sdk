@@ -19,8 +19,8 @@ class GoodItemModel
         GoodModel $good,
         int $sum,
         int $quantity,
-        bool $is_return,
-        GoodTaxes $taxes,
+        bool $is_return = false,
+        ?GoodTaxes $taxes = null,
         string $good_id = '',
         ?Discounts $discounts = null
     ) {

@@ -22,6 +22,15 @@ class CashPaymentMapper
 
     public function objectToJson(CashPaymentPayload $obj)
     {
-        pre('objectToJson', $obj);
+        $result = [
+            'type' => $obj->type,
+            'value' => $obj->value
+        ];
+
+        if (!empty($obj->label)) {
+            $result['label'] = $obj->label;
+        }
+
+        return $result;
     }
 }

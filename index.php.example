@@ -12,6 +12,19 @@ use Checkbox\Errors\AlreadyOpenedShift;
 use Checkbox\Errors\EmptyResponse;
 use Checkbox\Models\CashRegisters\CashRegistersQueryParams;
 use Checkbox\Models\Shifts\ShiftsQueryParams;
+use Checkbox\Models\Receipts\ReceiptsQueryParams;
+use Checkbox\Models\Receipts\Discounts\Discounts;
+use Checkbox\Models\Receipts\Discounts\DiscountModel;
+use Checkbox\Models\Receipts\SellReceipt;
+use Checkbox\Models\Receipts\Payments\Payments;
+use Checkbox\Models\Receipts\Payments\CardPaymentPayload;
+use Checkbox\Models\Receipts\Payments\CashPaymentPayload;
+
+
+use Checkbox\Models\Receipts\Goods\Goods;
+use Checkbox\Models\Receipts\Goods\GoodItemModel;
+use Checkbox\Models\Receipts\Goods\GoodModel;
+
 
 if (!function_exists('pre')) {
     function pre(){
@@ -82,11 +95,91 @@ try {
 
     // receipts (чеки) //
 
+//    pre('get receipt', $api->getReceipts());
+
+//    pre('get receipt', $api->getReceipts(new ReceiptsQueryParams(
+//        '', '', false, 2, 0
+//    )));
+
 //    pre('get receipt', $api->getReceipt('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
 
+//    pre('get receipt pdf', $api->getReceiptPdf('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
+
+//    pre('get receipt pdf', $api->getReceiptHtml('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
+
+//    pre('get receipt pdf', $api->getReceiptText('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
+
+//    pre('get receipt pdf', $api->getReceiptQrCodeImage('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
+
+//    $rawImageContent = $api->getReceiptQrCodeImage('c6a66550-44b8-4767-9bb0-66f0123c8efa');
+//    echo '<img src="data:image/png;base64,' . base64_encode($rawImageContent) . '"/>';
+
+//    pre('all taxes', $api->getAllTaxes());
 
 
+    /*
+     // sale receipt
+    $allTaxes = $api->getAllTaxes();
+    $tax = $allTaxes->getTaxByLabel('Акцизний збір');
 
+    $receipt = new SellReceipt(
+        'Вася Пупкин',
+        'Отдел продаж',
+        new Goods(
+            [
+                new GoodItemModel(
+                    new GoodModel(
+                        'vm-123', // good_id
+                        5000, // 50 грн
+                        'Биовак',
+                        '5р47ле78675е3',
+                        'хидер',
+                        'футер',
+                        '',
+                        [1]
+                    ),
+                    0,
+                    1000,
+                    false,
+                    $allTaxes->getTaxesByLabel('Акцизний збір'),
+                    '',
+                    new Discounts(
+                        [
+                            new DiscountModel(
+                                DiscountModel::TYPE_DISCOUNT,
+                                DiscountModel::MODE_VALUE,
+                                100, // 1 грн
+                                0,
+                                $tax->code,
+                                [],
+                                'my super discount'
+                            )
+                        ]
+                    )
+                )
+            ]
+        ),
+        'admin@gmail.com',
+        null,
+        new Payments([
+            new CardPaymentPayload(
+                400,
+                0,
+                'beznalichka'
+            ),
+            new CashPaymentPayload(
+                4500,
+                'nalichka'
+            )
+        ]),
+        'check header',
+        'check footer',
+        '45435h543twrege'
+    );
+
+    pre('create sell receipt', $api->createSellReceipt($receipt));
+
+    */
 
 //    $api->signOutCashier();
 

@@ -22,8 +22,8 @@ class GoodTaxMapper
             $json['included'],
             $json['created_at'],
             $json['updated_at'] ?? null,
-            $json['value'],
-            $json['extra_value']
+            $json['value'] ?? '',
+            $json['extra_value'] ?? ''
         );
 
         return $tax;

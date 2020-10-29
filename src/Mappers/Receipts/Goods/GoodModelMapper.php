@@ -2,6 +2,7 @@
 
 namespace Checkbox\Mappers\Receipts\Goods;
 
+use Checkbox\Mappers\Shifts\TaxesMapper;
 use Checkbox\Models\Receipts\Goods\GoodModel;
 
 class GoodModelMapper
@@ -25,8 +26,16 @@ class GoodModelMapper
         return $goods;
     }
 
-    public function objectToJson(GoodModel $obj)
+    public function objectToJson(GoodModel $goodModel)
     {
-        pre('objectToJson', $obj);
+        return [
+            'code' => $goodModel->code,
+            'name' => $goodModel->name,
+            'barcode' => $goodModel->barcode,
+            'header' => $goodModel->header,
+            'footer' => $goodModel->footer,
+            'price' => $goodModel->price,
+            'tax' => (new TaxesMapper())->objectToJson($goodModel->tax)
+        ];
     }
 }

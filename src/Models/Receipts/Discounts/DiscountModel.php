@@ -26,7 +26,7 @@ class DiscountModel
         string $mode,
         int $value,
         int $sum,
-        int $tax_code = 0,
+        string $tax_code = '',
         array $tax_codes = [],
         string $name = ''
     ) {

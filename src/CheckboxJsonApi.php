@@ -10,12 +10,17 @@ use Checkbox\Mappers\CashRegisters\CashRegisterInfoMapper;
 use Checkbox\Mappers\CashRegisters\CashRegisterMapper;
 use Checkbox\Mappers\CashRegisters\CashRegistersMapper;
 use Checkbox\Mappers\Receipts\ReceiptMapper;
+use Checkbox\Mappers\Receipts\ReceiptsMapper;
+use Checkbox\Mappers\Receipts\SellReceiptMapper;
+use Checkbox\Mappers\Receipts\Taxes\GoodTaxesMapper;
 use Checkbox\Mappers\Shifts\CloseShiftMapper;
 use Checkbox\Mappers\Shifts\CreateShiftMapper;
 use Checkbox\Mappers\Shifts\ShiftMapper;
 use Checkbox\Mappers\Shifts\ShiftsMapper;
 use Checkbox\Models\Cashier\Cashier;
 use Checkbox\Models\CashRegisters\CashRegistersQueryParams;
+use Checkbox\Models\Receipts\ReceiptsQueryParams;
+use Checkbox\Models\Receipts\SellReceipt;
 use Checkbox\Models\Shifts\CloseShift;
 use Checkbox\Models\Shifts\CreateShift;
 use Checkbox\Models\Shifts\Shift;
@@ -352,6 +357,26 @@ class CheckboxJsonApi
 
     // start receipts methods //
 
+    public function getReceipts(ReceiptsQueryParams $queryParams = null)
+    {
+        if (is_null($queryParams)) {
+            $queryParams = new ReceiptsQueryParams();
+        }
+        $this->routes->getReceipts($queryParams);
+
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getReceipts($queryParams),
+            $this->requestOptions
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new ReceiptsMapper())->jsonToObject($jsonResponse);
+    }
+
     public function getReceipt(string $receiptId)
     {
         $response = $this->guzzleClient->request(
@@ -367,7 +392,123 @@ class CheckboxJsonApi
         return (new ReceiptMapper())->jsonToObject($jsonResponse);
     }
 
+    public function createSellReceipt(SellReceipt $receipt)
+    {
+        $options = $this->requestOptions;
+        $options['body'] = \json_encode((new SellReceiptMapper())->objectToJson($receipt));
+
+        $response = $this->guzzleClient->request(
+            self::METHOD_POST,
+            $this->routes->createSellReceipt(),
+            $options
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new ReceiptMapper())->jsonToObject($jsonResponse);
+    }
+
+    public function getReceiptPdf(string $receiptId)
+    {
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getReceiptPdf($receiptId),
+            $this->requestOptions
+        );
+
+        $response = $response->getBody()->getContents();
+
+        $jsonResponse = json_decode($response, true);
+
+        if (!is_null($jsonResponse)) {
+            throw new Validation($jsonResponse);
+        }
+
+        return $response;
+    }
+
+    public function getReceiptHtml(string $receiptId)
+    {
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getReceiptHtml($receiptId),
+            $this->requestOptions
+        );
+
+        $response = $response->getBody()->getContents();
+
+        $jsonResponse = json_decode($response, true);
+
+        if (!is_null($jsonResponse)) {
+            throw new Validation($jsonResponse);
+        }
+
+        return $response;
+    }
+
+    public function getReceiptText(string $receiptId)
+    {
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getReceiptText($receiptId),
+            $this->requestOptions
+        );
+
+        $response = $response->getBody()->getContents();
+
+        $jsonResponse = json_decode($response, true);
+
+        if (!is_null($jsonResponse)) {
+            throw new Validation($jsonResponse);
+        }
+
+        return $response;
+    }
+
+    public function getReceiptQrCodeImage(string $receiptId)
+    {
+        $options = $this->requestOptions;
+        $options['headers']['Content-Type'] = 'image/png';
+
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getReceiptQrCodeImage($receiptId),
+            $options
+        );
+
+        $response = $response->getBody()->getContents();
+
+        $jsonResponse = json_decode($response, true);
+
+        if (!is_null($jsonResponse)) {
+            throw new Validation($jsonResponse);
+        }
+
+        return $response;
+    }
+
     // end receipts methods //
+
+    // start taxes methods //
+
+    public function getAllTaxes()
+    {
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getAllTaxes(),
+            $this->requestOptions
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new GoodTaxesMapper())->jsonToObject($jsonResponse);
+    }
+
+    // end taxes methods //
 
 
 

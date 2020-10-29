@@ -23,8 +23,8 @@ class TaxesMapper
         return $taxes;
     }
 
-    public function objectToJson(Taxes $obj)
+    public function objectToJson(array $taxessArr)
     {
-        pre('objectToJson', $obj);
+        return $taxessArr;
     }
 }

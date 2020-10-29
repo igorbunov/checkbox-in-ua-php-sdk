@@ -14,7 +14,7 @@ class CardPaymentPayload
         int $value,
         int $code = 0,
         string $label = '',
-        string $card_mask = '0000 0000 0000 0000'
+        string $card_mask = ''
     )
     {
         $this->value = $value;

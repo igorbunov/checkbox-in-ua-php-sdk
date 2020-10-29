@@ -23,8 +23,18 @@ class DiscountsMapper
         return $discounts;
     }
 
-    public function objectToJson(Discounts $obj)
+    public function objectToJson(?Discounts $discounts = null)
     {
-        pre('objectToJson', $obj);
+        if (is_null($discounts)) {
+            return [];
+        }
+
+        $results = [];
+
+        foreach ($discounts->results as $discount) {
+            $results[] = (new DiscountModelMapper())->objectToJson($discount);
+        }
+
+        return $results;
     }
 }

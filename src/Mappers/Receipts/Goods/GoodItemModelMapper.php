@@ -31,8 +31,15 @@ class GoodItemModelMapper
         return $goods;
     }
 
-    public function objectToJson(GoodItemModel $obj)
+    public function objectToJson(GoodItemModel $itemModel)
     {
-        pre('objectToJson', $obj);
+        $result = [
+            'good' => (new GoodModelMapper())->objectToJson($itemModel->good),
+            'quantity' => $itemModel->quantity,
+            'is_return' => $itemModel->is_return,
+            'discounts' => (new DiscountsMapper())->objectToJson($itemModel->discounts)
+        ];
+
+        return $result;
     }
 }

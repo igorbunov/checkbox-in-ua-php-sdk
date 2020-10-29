@@ -30,8 +30,18 @@ class PaymentsMapper
         return $receipt;
     }
 
-    public function objectToJson(Payments $obj)
+    public function objectToJson(Payments $payments)
     {
-        pre('objectToJson', $obj);
+        $results = [];
+
+        foreach ($payments->results as $payment) {
+            if ($payment->type == self::TYPE_CASH) {
+                $results[] = (new CashPaymentMapper())->objectToJson($payment);
+            } elseif ($payment->type == self::TYPE_CARD) {
+                $results[] = (new CardPaymentMapper())->objectToJson($payment);
+            }
+        }
+
+        return $results;
     }
 }

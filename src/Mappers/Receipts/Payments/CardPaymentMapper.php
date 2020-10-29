@@ -25,6 +25,23 @@ class CardPaymentMapper
 
     public function objectToJson(CardPaymentPayload $obj)
     {
-        pre('objectToJson', $obj);
+        $result = [
+            'type' => $obj->type,
+            'value' => $obj->value
+        ];
+
+        if (!empty($obj->code)) {
+            $result['code'] = $obj->code;
+        }
+
+        if (!empty($obj->label)) {
+            $result['label'] = $obj->label;
+        }
+
+        if (!empty($obj->card_mask)) {
+            $result['card_mask'] = $obj->card_mask;
+        }
+
+        return $result;
     }
 }

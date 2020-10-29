@@ -23,8 +23,14 @@ class GoodsMapper
         return $goods;
     }
 
-    public function objectToJson(Goods $obj)
+    public function objectToJson(Goods $goods)
     {
-        pre('objectToJson', $obj);
+        $result = [];
+
+        foreach ($goods->results as $goodRow) {
+            $result[] = (new GoodItemModelMapper())->objectToJson($goodRow);
+        }
+
+        return $result;
     }
 }

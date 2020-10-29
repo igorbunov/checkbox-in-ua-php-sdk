@@ -3,6 +3,7 @@
 namespace Checkbox;
 
 use Checkbox\Models\CashRegisters\CashRegistersQueryParams;
+use Checkbox\Models\Receipts\ReceiptsQueryParams;
 use Checkbox\Models\Shifts\ShiftsQueryParams;
 
 class Routes
@@ -113,13 +114,62 @@ class Routes
         return $this->apiUrl . '/cash-registers/info';
     }
 
-    public function getReceipts(): string
-    {
-        return $this->apiUrl . '/receipts';
-    }
-
     public function getReceipt(string $receiptId): string
     {
         return $this->apiUrl . '/receipts/' . $receiptId;
     }
+
+    public function createSellReceipt(): string
+    {
+        return $this->apiUrl . '/receipts/sell';
+    }
+
+    public function getReceipts(ReceiptsQueryParams $queryParams): string
+    {
+        $params = [];
+
+        if (!empty($queryParams->fiscal_code)) {
+            $params[] = "fiscal_code={$queryParams->fiscal_code}";
+        }
+
+        if (!empty($queryParams->serial)) {
+            $params[] = "serial={$queryParams->serial}";
+        }
+
+        $value = ($queryParams->desc) ? 'true' : 'false';
+        $params[] = "desc={$value}";
+
+        $params[] = "limit={$queryParams->limit}";
+        $params[] = "offset={$queryParams->offset}";
+
+        $params = implode('&', $params);
+
+        return $this->apiUrl . '/receipts?' . $params;
+    }
+
+    public function getReceiptPdf(string $receiptId): string
+    {
+        return $this->apiUrl . '/receipts/' . $receiptId . '/pdf';
+    }
+
+    public function getReceiptHtml(string $receiptId): string
+    {
+        return $this->apiUrl . '/receipts/' . $receiptId . '/html';
+    }
+
+    public function getReceiptText(string $receiptId): string
+    {
+        return $this->apiUrl . '/receipts/' . $receiptId . '/text';
+    }
+
+    public function getReceiptQrCodeImage(string $receiptId): string
+    {
+        return $this->apiUrl . '/receipts/' . $receiptId . '/qrcode';
+    }
+
+    public function getAllTaxes(): string
+    {
+        return $this->apiUrl . '/tax';
+    }
+
 }

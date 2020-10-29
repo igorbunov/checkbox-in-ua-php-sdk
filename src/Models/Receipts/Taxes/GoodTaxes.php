@@ -16,4 +16,28 @@ class GoodTaxes
             $this->results[] = $tax;
         }
     }
+
+    public function getTaxByLabel(string $label): ?GoodTax
+    {
+        foreach ($this->results as $tax) {
+            if ($tax->label == $label) {
+                return $tax;
+            }
+        }
+
+        return null;
+    }
+
+    public function getTaxesByLabel(string $label): ?GoodTaxes
+    {
+        $taxesArr = [];
+
+        foreach ($this->results as $tax) {
+            if ($tax->label == $label) {
+                $taxesArr[] = $tax;
+            }
+        }
+
+        return new GoodTaxes($taxesArr);
+    }
 }

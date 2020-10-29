@@ -25,8 +25,15 @@ class DiscountModelMapper
         return $discount;
     }
 
-    public function objectToJson(DiscountModel $obj)
+    public function objectToJson(DiscountModel $discountModel)
     {
-        pre('objectToJson', $obj);
+        return [
+            'type' => $discountModel->type,
+            'mode' => $discountModel->mode,
+            'value' => $discountModel->value,
+            'tax_code' => $discountModel->tax_code,
+            'tax_codes' => $discountModel->tax_codes,
+            'name' => $discountModel->name
+        ];
     }
 }

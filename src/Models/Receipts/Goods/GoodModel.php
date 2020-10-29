@@ -11,6 +11,7 @@ class GoodModel
     public $footer;
     public $uktzed;
     public $price;
+    public $tax;
 
     public function __construct(
         string $code,
@@ -19,7 +20,8 @@ class GoodModel
         string $barcode = '',
         string $header = '',
         string $footer = '',
-        string $uktzed = ''
+        string $uktzed = '',
+        array $tax = []
     ) {
         $this->code = $code;
         $this->price = $price;
@@ -28,5 +30,6 @@ class GoodModel
         $this->header = $header;
         $this->footer = $footer;
         $this->uktzed = $uktzed;
+        $this->tax = $tax;
     }
 }
