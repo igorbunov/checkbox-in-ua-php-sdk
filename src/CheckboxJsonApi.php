@@ -14,15 +14,19 @@ use Checkbox\Mappers\Receipts\ReceiptsMapper;
 use Checkbox\Mappers\Receipts\SellReceiptMapper;
 use Checkbox\Mappers\Receipts\ServiceReceiptMapper;
 use Checkbox\Mappers\Receipts\Taxes\GoodTaxesMapper;
+use Checkbox\Mappers\Reports\ReportsMapper;
 use Checkbox\Mappers\Shifts\CloseShiftMapper;
 use Checkbox\Mappers\Shifts\CreateShiftMapper;
 use Checkbox\Mappers\Shifts\ShiftMapper;
 use Checkbox\Mappers\Shifts\ShiftsMapper;
+use Checkbox\Mappers\Shifts\ZReportMapper;
 use Checkbox\Models\Cashier\Cashier;
 use Checkbox\Models\CashRegisters\CashRegistersQueryParams;
 use Checkbox\Models\Receipts\ReceiptsQueryParams;
 use Checkbox\Models\Receipts\SellReceipt;
 use Checkbox\Models\Receipts\ServiceReceipt;
+use Checkbox\Models\Reports\PeriodicalReportQueryParams;
+use Checkbox\Models\Reports\ReportsQueryParams;
 use Checkbox\Models\Shifts\CloseShift;
 use Checkbox\Models\Shifts\CreateShift;
 use Checkbox\Models\Shifts\Shift;
@@ -421,10 +425,6 @@ class CheckboxJsonApi
         $options = $this->requestOptions;
         $options['body'] = \json_encode((new ServiceReceiptMapper())->objectToJson($receipt));
 
-//        pre($this->routes->createServiceReceipt(),
-//            $options);
-//        die();
-
         $response = $this->guzzleClient->request(
             self::METHOD_POST,
             $this->routes->createServiceReceipt(),
@@ -446,15 +446,13 @@ class CheckboxJsonApi
             $this->requestOptions
         );
 
-        $response = $response->getBody()->getContents();
+        $responseContents = $response->getBody()->getContents();
 
-        $jsonResponse = json_decode($response, true);
+        $jsonResponse = json_decode($responseContents, true);
 
-        if (!is_null($jsonResponse)) {
-            throw new Validation($jsonResponse);
-        }
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
-        return $response;
+        return $responseContents;
     }
 
     public function getReceiptHtml(string $receiptId)
@@ -482,15 +480,13 @@ class CheckboxJsonApi
             $this->requestOptions
         );
 
-        $response = $response->getBody()->getContents();
+        $responseContents = $response->getBody()->getContents();
 
-        $jsonResponse = json_decode($response, true);
+        $jsonResponse = json_decode($responseContents, true);
 
-        if (!is_null($jsonResponse)) {
-            throw new Validation($jsonResponse);
-        }
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
-        return $response;
+        return $responseContents;
     }
 
     public function getReceiptQrCodeImage(string $receiptId)
@@ -504,15 +500,13 @@ class CheckboxJsonApi
             $options
         );
 
-        $response = $response->getBody()->getContents();
+        $responseContents = $response->getBody()->getContents();
 
-        $jsonResponse = json_decode($response, true);
+        $jsonResponse = json_decode($responseContents, true);
 
-        if (!is_null($jsonResponse)) {
-            throw new Validation($jsonResponse);
-        }
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
-        return $response;
+        return $responseContents;
     }
 
     // end receipts methods //
@@ -535,6 +529,94 @@ class CheckboxJsonApi
     }
 
     // end taxes methods //
+
+    // start report methods //
+
+    public function createXReport()
+    {
+        $response = $this->guzzleClient->request(
+            self::METHOD_POST,
+            $this->routes->createXReport(),
+            $this->requestOptions
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new ZReportMapper())->jsonToObject($jsonResponse);
+    }
+
+    public function getReport(string $reportId)
+    {
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getReport($reportId),
+            $this->requestOptions
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new ZReportMapper())->jsonToObject($jsonResponse);
+    }
+
+    public function getReportText(string $reportId, int $printArea = 42)
+    {
+        if ($printArea < 10 or $printArea > 250) {
+            throw new \Exception('That print area is not valid');
+        }
+
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getReportText($reportId, $printArea),
+            $this->requestOptions
+        );
+
+        $responseContents = $response->getBody()->getContents();
+
+        $jsonResponse = json_decode($responseContents, true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return $responseContents;
+    }
+
+    public function getPeriodicalReport(PeriodicalReportQueryParams $queryParams)
+    {
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getPeriodicalReport($queryParams),
+            $this->requestOptions
+        );
+
+        $responseContents = $response->getBody()->getContents();
+
+        $jsonResponse = json_decode($responseContents, true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return $responseContents;
+    }
+
+    public function getReports(ReportsQueryParams $queryParams)
+    {
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getReports($queryParams),
+            $this->requestOptions
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new ReportsMapper())->jsonToObject($jsonResponse);
+    }
+
+
+    // end report methods //
 
 
 

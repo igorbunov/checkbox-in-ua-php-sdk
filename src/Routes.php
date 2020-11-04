@@ -4,6 +4,8 @@ namespace Checkbox;
 
 use Checkbox\Models\CashRegisters\CashRegistersQueryParams;
 use Checkbox\Models\Receipts\ReceiptsQueryParams;
+use Checkbox\Models\Reports\PeriodicalReportQueryParams;
+use Checkbox\Models\Reports\ReportsQueryParams;
 use Checkbox\Models\Shifts\ShiftsQueryParams;
 
 class Routes
@@ -175,6 +177,62 @@ class Routes
     public function getAllTaxes(): string
     {
         return $this->apiUrl . '/tax';
+    }
+
+    public function createXReport(): string
+    {
+        return $this->apiUrl . '/reports';
+    }
+
+    public function getReport(string $reportId): string
+    {
+        return $this->apiUrl . '/reports/' . $reportId;
+    }
+
+    public function getReportText(string $reportId, int $printArea): string
+    {
+        return $this->apiUrl . '/reports/' . $reportId . '/text?width=' . $printArea;
+    }
+
+    public function getPeriodicalReport(PeriodicalReportQueryParams $queryParams): string
+    {
+        return $this->apiUrl . '/reports/periodical?from_date=' . $queryParams->from_date
+            . '&to_date=' . $queryParams->to_date
+            . '&width=' . $queryParams->width;
+    }
+
+    public function getReports(ReportsQueryParams $queryParams): string
+    {
+        $params = [];
+
+        if (!empty($queryParams->from_date)) {
+            $params[] = "from_date={$queryParams->from_date}";
+        }
+
+        if (!empty($queryParams->to_date)) {
+            $params[] = "to_date={$queryParams->to_date}";
+        }
+
+        if (!empty($queryParams->shift_id) and is_array($queryParams->shift_id)) {
+            foreach ($queryParams->shift_id as $shiftId) {
+                $params[] = "shift_id={$shiftId}";
+            }
+        }
+
+        if (!empty($queryParams->is_z_report)) {
+            $value = ($queryParams->is_z_report) ? 'true' : 'false';
+            $params[] = "is_z_report={$value}";
+        }
+
+        $value = ($queryParams->desc) ? 'true' : 'false';
+        $params[] = "desc={$value}";
+
+        $params[] = "limit={$queryParams->limit}";
+        $params[] = "offset={$queryParams->offset}";
+
+        $params = implode('&', $params);
+
+        return $this->apiUrl . '/reports?' . $params;
     }
 
 }
