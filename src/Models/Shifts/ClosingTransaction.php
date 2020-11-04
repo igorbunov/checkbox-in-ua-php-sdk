@@ -2,7 +2,7 @@
 
 namespace Checkbox\Models\Shifts;
 
-use Checkbox\Models\Transaction;
+use Checkbox\Models\Transactions\Transaction;
 
 class ClosingTransaction extends Transaction
 {

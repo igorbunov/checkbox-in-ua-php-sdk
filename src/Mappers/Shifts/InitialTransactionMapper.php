@@ -22,7 +22,13 @@ class InitialTransactionMapper
             $json['response_status'],
             $json['response_error_message'],
             $json['created_at'],
-            $json['updated_at']
+            $json['updated_at'],
+
+            $json['request_data'] ?? '',
+            $json['request_signature'] ?? '',
+            $json['response_id'] ?? '',
+            $json['response_data_signature'] ?? null,
+            $json['response_data'] ?? null
         );
 
         return $transaction;

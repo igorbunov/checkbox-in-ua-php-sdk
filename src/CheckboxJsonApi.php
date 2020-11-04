@@ -20,6 +20,8 @@ use Checkbox\Mappers\Shifts\CreateShiftMapper;
 use Checkbox\Mappers\Shifts\ShiftMapper;
 use Checkbox\Mappers\Shifts\ShiftsMapper;
 use Checkbox\Mappers\Shifts\ZReportMapper;
+use Checkbox\Mappers\Transactions\TransactionMapper;
+use Checkbox\Mappers\Transactions\TransactionsMapper;
 use Checkbox\Models\Cashier\Cashier;
 use Checkbox\Models\CashRegisters\CashRegistersQueryParams;
 use Checkbox\Models\Receipts\ReceiptsQueryParams;
@@ -32,6 +34,7 @@ use Checkbox\Models\Shifts\CreateShift;
 use Checkbox\Models\Shifts\Shift;
 use Checkbox\Models\Shifts\Shifts;
 use Checkbox\Models\Shifts\ShiftsQueryParams;
+use Checkbox\Models\Transactions\TransactionsQueryParams;
 use GuzzleHttp\Client;
 
 class CheckboxJsonApi
@@ -44,6 +47,7 @@ class CheckboxJsonApi
 
     const METHOD_GET = 'get';
     const METHOD_POST = 'post';
+    const METHOD_PATCH = 'patch';
 
     public function __construct(Config $config = null, int $connectTimeoutSeconds = 5)
     {
@@ -618,7 +622,61 @@ class CheckboxJsonApi
 
     // end report methods //
 
+    // start transaction methods //
 
+    public function getTransaction(string $transactionId)
+    {
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getTransaction($transactionId),
+            $this->requestOptions
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new TransactionMapper())->jsonToObject($jsonResponse);
+    }
+
+    public function getTransactions(TransactionsQueryParams $queryParams)
+    {
+        $response = $this->guzzleClient->request(
+            self::METHOD_GET,
+            $this->routes->getTransactions($queryParams),
+            $this->requestOptions
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new TransactionsMapper())->jsonToObject($jsonResponse);
+    }
+
+
+    public function updateTransaction(string $transactionId, string $requestSignature)
+    {
+        $options = $this->requestOptions;
+        $options['body'] = \json_encode([
+            'request_signature' => $requestSignature
+        ]);
+
+        $response = $this->guzzleClient->request(
+            self::METHOD_PATCH,
+            $this->routes->updateTransaction($transactionId, $requestSignature),
+            $options
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new TransactionMapper())->jsonToObject($jsonResponse);
+    }
+
+
+    // end transaction methods //
 
 
 

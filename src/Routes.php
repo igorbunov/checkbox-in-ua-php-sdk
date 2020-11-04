@@ -7,6 +7,7 @@ use Checkbox\Models\Receipts\ReceiptsQueryParams;
 use Checkbox\Models\Reports\PeriodicalReportQueryParams;
 use Checkbox\Models\Reports\ReportsQueryParams;
 use Checkbox\Models\Shifts\ShiftsQueryParams;
+use Checkbox\Models\Transactions\TransactionsQueryParams;
 
 class Routes
 {
@@ -233,6 +234,16 @@ class Routes
         $params = implode('&', $params);
 
         return $this->apiUrl . '/reports?' . $params;
+    }
+
+    public function getTransaction(string $transactionId): string
+    {
+        return $this->apiUrl . '/transactions/' . $transactionId;
+    }
+
+    public function updateTransaction(string $transactionId): string
+    {
+        return $this->apiUrl . '/transactions/' . $transactionId;
     }
 
 }

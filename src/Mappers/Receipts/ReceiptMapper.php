@@ -7,7 +7,7 @@ use Checkbox\Mappers\Receipts\Goods\GoodsMapper;
 use Checkbox\Mappers\Receipts\Payments\PaymentsMapper;
 use Checkbox\Mappers\Receipts\Taxes\GoodTaxesMapper;
 use Checkbox\Mappers\Shifts\ShiftMapper;
-use Checkbox\Mappers\TransactionMapper;
+use Checkbox\Mappers\Transactions\TransactionMapper;
 use Checkbox\Models\Receipts\Receipt;
 
 class ReceiptMapper
