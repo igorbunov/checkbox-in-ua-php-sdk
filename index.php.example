@@ -117,6 +117,7 @@ try {
 //    pre('all taxes', $api->getAllTaxes());
 
 
+/*
      // sale receipt
     $allTaxes = $api->getAllTaxes();
     $tax = $allTaxes->getTaxByLabel('Акцизний збір');
@@ -195,6 +196,121 @@ try {
     );
 
     pre('create sell receipt', $api->createSellReceipt($receipt));
+
+*/
+
+    /*
+
+         // sale receipt
+            $allTaxes = $api->getAllTaxes();
+            $tax = $allTaxes->getTaxByLabel('Акцизний збір');
+            $goodTaxes = $allTaxes->getTaxesByLabel('ПДВ');
+            $taxCodes = [];
+
+            foreach ($goodTaxes->results as $goodTax) {
+                $taxCodes[] = $goodTax->code;
+            }
+
+            $receipt = new SellReceipt(
+                'Вася Пупкин',
+                'Отдел продаж',
+                new Goods(
+                    [
+                        new GoodItemModel(
+                            new GoodModel(
+                                'vm-123', // good_id
+                                5000, // 50 грн
+                                'Биовак',
+                                '5р47ле78675е3',
+                                'хидер',
+                                'футер',
+                                '',
+                                $goodTaxes
+                            ),
+                            0,
+                            1000,
+                            false,
+                            $allTaxes->getTaxesByLabel('Акцизний збір'),
+                            '',
+                            new Discounts(
+                                [
+                                    new DiscountModel(
+                                        DiscountModel::TYPE_DISCOUNT,
+                                        DiscountModel::MODE_VALUE,
+                                        100, // 1 грн
+                                        0,
+                                        $tax->code,
+                                        $taxCodes,
+                                        'one good discount'
+                                    )
+                                ]
+                            )
+                        ),
+                        new GoodItemModel(
+                            new GoodModel(
+                                'vm-124', // good_id
+                                2000, // 20 грн
+                                'Биовак 2',
+                                'hhhregerg',
+                                'хидер2',
+                                'футер2',
+                                '',
+                                $goodTaxes
+                            ),
+                            0,
+                            2000, // 1 шт
+                            false,
+                            $allTaxes->getTaxesByLabel('Акцизний збір'),
+                            '',
+                            new Discounts(
+                                [
+                                    new DiscountModel(
+                                        DiscountModel::TYPE_EXTRA_CHARGE,
+                                        DiscountModel::MODE_VALUE,
+                                        200, // 1 грн
+                                        0,
+                                        $tax->code,
+                                        $taxCodes,
+                                        'one good increace'
+                                    )
+                                ]
+                            )
+                        )
+                    ]
+                ),
+                'igorbunov.ua@gmail.com',
+                new Discounts(
+                    [
+                        new DiscountModel(
+                            DiscountModel::TYPE_EXTRA_CHARGE,
+                            DiscountModel::MODE_VALUE,
+                            200, // 1 грн
+                            0,
+                            $tax->code,
+                            $taxCodes,
+                            'total increace'
+                        )
+                    ]
+                ),
+                new Payments([
+                    new CardPaymentPayload(
+                        4700,
+                        0,
+                        'beznalichka'
+                    ),
+                    new CashPaymentPayload(
+                        4700,
+                        'nalichka'
+                    )
+                ]),
+                'check header',
+                'check footer',
+                '45435h543twrege'
+            );
+
+            pre('create sell receipt 2', $api->createSellReceipt($receipt));
+
+    */
 
 
 //    $api->signOutCashier();
