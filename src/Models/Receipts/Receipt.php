@@ -7,7 +7,7 @@ use Checkbox\Models\Receipts\Goods\Goods;
 use Checkbox\Models\Receipts\Payments\Payments;
 use Checkbox\Models\Receipts\Taxes\GoodTaxes;
 use Checkbox\Models\Shifts\Shift;
-use Checkbox\Models\Transaction;
+use Checkbox\Models\Transactions\Transaction;
 
 class Receipt
 {

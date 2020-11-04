@@ -236,6 +236,26 @@ class Routes
         return $this->apiUrl . '/reports?' . $params;
     }
 
+    public function getTransactions(TransactionsQueryParams $queryParams): string
+    {
+        $params = [];
+
+        foreach ($queryParams->statuses as $status) {
+            $params[] = "status={$status}";
+        }
+
+        foreach ($queryParams->types as $type) {
+            $params[] = "type={$type}";
+        }
+
+        $params[] = "limit={$queryParams->limit}";
+        $params[] = "offset={$queryParams->offset}";
+
+        $params = implode('&', $params);
+
+        return $this->apiUrl . '/transactions?' . $params;
+    }
+
     public function getTransaction(string $transactionId): string
     {
         return $this->apiUrl . '/transactions/' . $transactionId;
