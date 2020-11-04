@@ -3,6 +3,7 @@
 namespace Checkbox\Mappers\Receipts\Payments;
 
 use Checkbox\Models\Receipts\Payments\CashPaymentPayload;
+use Checkbox\Models\Receipts\Payments\PaymentParent;
 
 class CashPaymentMapper
 {
@@ -20,7 +21,7 @@ class CashPaymentMapper
         return $receipt;
     }
 
-    public function objectToJson(CashPaymentPayload $obj)
+    public function objectToJson(PaymentParent $obj)
     {
         $result = [
             'type' => $obj->type,

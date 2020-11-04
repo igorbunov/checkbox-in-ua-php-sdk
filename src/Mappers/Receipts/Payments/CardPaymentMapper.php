@@ -15,8 +15,8 @@ class CardPaymentMapper
 
         $receipt = new CardPaymentPayload(
             $json['value'],
-            $json['code'] ?? 0,
             $json['label'] ?? '',
+            $json['code'] ?? 0,
             $json['card_mask'] ?? '0000 0000 0000 0000'
         );
 

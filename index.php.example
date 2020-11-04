@@ -19,6 +19,7 @@ use Checkbox\Models\Receipts\SellReceipt;
 use Checkbox\Models\Receipts\Payments\Payments;
 use Checkbox\Models\Receipts\Payments\CardPaymentPayload;
 use Checkbox\Models\Receipts\Payments\CashPaymentPayload;
+use Checkbox\Models\Receipts\ServiceReceipt;
 
 
 use Checkbox\Models\Receipts\Goods\Goods;
@@ -105,11 +106,11 @@ try {
 
 //    pre('get receipt pdf', $api->getReceiptPdf('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
 
-//    pre('get receipt pdf', $api->getReceiptHtml('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
+//    pre('get receipt html', $api->getReceiptHtml('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
 
-//    pre('get receipt pdf', $api->getReceiptText('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
+//    pre('get receipt text', $api->getReceiptText('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
 
-//    pre('get receipt pdf', $api->getReceiptQrCodeImage('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
+//    pre('get receipt image', $api->getReceiptQrCodeImage('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
 
 //    $rawImageContent = $api->getReceiptQrCodeImage('c6a66550-44b8-4767-9bb0-66f0123c8efa');
 //    echo '<img src="data:image/png;base64,' . base64_encode($rawImageContent) . '"/>';
@@ -118,86 +119,92 @@ try {
 
 
 /*
-     // sale receipt
-    $allTaxes = $api->getAllTaxes();
-    $tax = $allTaxes->getTaxByLabel('Акцизний збір');
-    $goodTaxes = $allTaxes->getTaxesByLabel('ПДВ');
-    $taxCodes = [];
+         // sale receipt
+        $allTaxes = $api->getAllTaxes();
+        $tax = $allTaxes->getTaxByLabel('Акцизний збір');
+        $goodTaxes = $allTaxes->getTaxesByLabel('ПДВ');
+        $taxCodes = [];
 
-    foreach ($goodTaxes->results as $goodTax) {
-        $taxCodes[] = $goodTax->code;
-    }
+        foreach ($goodTaxes->results as $goodTax) {
+            $taxCodes[] = $goodTax->code;
+        }
 
-    $receipt = new SellReceipt(
-        'Вася Пупкин',
-        'Отдел продаж',
-        new Goods(
-            [
-                new GoodItemModel(
-                    new GoodModel(
-                        'vm-123', // good_id
-                        5000, // 50 грн
-                        'Биовак',
-                        '5р47ле78675е3',
-                        'хидер',
-                        'футер',
+        $receipt = new SellReceipt(
+            'Вася Пупкин',
+            'Отдел продаж',
+            new Goods(
+                [
+                    new GoodItemModel(
+                        new GoodModel(
+                            'vm-123', // good_id
+                            5000, // 50 грн
+                            'Биовак',
+                            '5р47ле78675е3',
+                            'хидер',
+                            'футер',
+                            '',
+                            $goodTaxes
+                        ),
+                        0,
+                        1000,
+                        false,
+                        $allTaxes->getTaxesByLabel('Акцизний збір'),
                         '',
-                        $goodTaxes
-                    ),
-                    0,
-                    1000,
-                    false,
-                    $allTaxes->getTaxesByLabel('Акцизний збір'),
-                    '',
-                    new Discounts(
-                        [
-                            new DiscountModel(
-                                DiscountModel::TYPE_DISCOUNT,
-                                DiscountModel::MODE_VALUE,
-                                100, // 1 грн
-                                0,
-                                $tax->code,
-                                $taxCodes,
-                                'one good discount'
-                            )
-                        ]
+                        new Discounts(
+                            [
+                                new DiscountModel(
+                                    DiscountModel::TYPE_DISCOUNT,
+                                    DiscountModel::MODE_VALUE,
+                                    100, // 1 грн
+                                    0,
+                                    $tax->code,
+                                    $taxCodes,
+                                    'one good discount'
+                                )
+                            ]
+                        )
                     )
-                )
-            ]
-        ),
-        'igorbunov.ua@gmail.com',
-        new Discounts(
-            [
-                new DiscountModel(
-                    DiscountModel::TYPE_DISCOUNT,
-                    DiscountModel::MODE_VALUE,
-                    200, // 1 грн
-                    0,
-                    $tax->code,
-                    $taxCodes,
-                    'total discount'
-                )
-            ]
-        ),
-        new Payments([
-            new CardPaymentPayload(
-                400,
-                0,
-                'beznalichka'
+                ]
             ),
-            new CashPaymentPayload(
-                4500,
-                'nalichka'
-            )
-        ]),
-        'check header',
-        'check footer',
-        '45435h543twrege'
-    );
+            'igorbunov.ua@gmail.com',
+            new Discounts(
+                [
+                    new DiscountModel(
+                        DiscountModel::TYPE_DISCOUNT,
+                        DiscountModel::MODE_VALUE,
+                        200, // 1 грн
+                        0,
+                        $tax->code,
+                        $taxCodes,
+                        'total discount'
+                    )
+                ]
+            ),
+            new Payments([
+                new CardPaymentPayload(
+                    400,
+                    'beznalichka',
+                    0
+                ),
+                new CashPaymentPayload(
+                    4300,
+                    'nalichka'
+                )
+            ]),
+            'check header',
+            'check footer',
+            '45435h543twrege'
+        );
 
-    pre('create sell receipt', $api->createSellReceipt($receipt));
+        $saleReceiptResult = $api->createSellReceipt($receipt);
+        pre($saleReceiptResult->id);
 
-*/
+        sleep(10);
+
+    pre('get receipt html', $api->getReceiptHtml($saleReceiptResult->id));
+
+
+    */
 
     /*
 
@@ -295,8 +302,8 @@ try {
                 new Payments([
                     new CardPaymentPayload(
                         4700,
-                        0,
-                        'beznalichka'
+                        'beznalichka',
+                        0
                     ),
                     new CashPaymentPayload(
                         4700,
@@ -312,6 +319,23 @@ try {
 
     */
 
+/*
+    $receipt = new ServiceReceipt(new CashPaymentPayload('5100'));
+    $receiptResponse = $api->createServiceReceipt($receipt);
+    sleep(10);
+//    pre('service receipt', $receiptResponse);
+    pre('get receipt html', $api->getReceiptHtml($receiptResponse->id));
+*/
+/*
+    $receipt = new ServiceReceipt(new CardPaymentPayload(
+        '1000'
+    ));
+
+    $receiptResponse = $api->createServiceReceipt($receipt);
+    sleep(10);
+//    pre('service receipt', $receiptResponse);
+    pre('get receipt html', $api->getReceiptHtml($receiptResponse->id));
+*/
 
 //    $api->signOutCashier();
 

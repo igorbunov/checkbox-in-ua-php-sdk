@@ -2,28 +2,20 @@
 
 namespace Checkbox\Models\Receipts\Payments;
 
-class CardPaymentPayload
+class CardPaymentPayload extends PaymentParent
 {
-    public $type = 'CARD';
     public $code;
-    public $value;
-    public $label;
     public $card_mask;
 
     public function __construct(
         int $value,
+        string $label = 'Безготівковий',
         int $code = 0,
-        string $label = '',
         string $card_mask = ''
     )
     {
-        $this->value = $value;
+        parent::__construct(parent::TYPE_CARD, $value, $label);
 
-        if (mb_strlen($label) > 128) {
-            throw new \Exception('Label is too long');
-        }
-
-        $this->label = $label;
         $this->code = $code;
         $this->card_mask = $card_mask;
     }

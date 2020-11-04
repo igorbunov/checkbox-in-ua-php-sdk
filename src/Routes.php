@@ -124,6 +124,11 @@ class Routes
         return $this->apiUrl . '/receipts/sell';
     }
 
+    public function createServiceReceipt(): string
+    {
+        return $this->apiUrl . '/receipts/service';
+    }
+
     public function getReceipts(ReceiptsQueryParams $queryParams): string
     {
         $params = [];

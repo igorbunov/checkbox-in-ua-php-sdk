@@ -12,6 +12,7 @@ use Checkbox\Mappers\CashRegisters\CashRegistersMapper;
 use Checkbox\Mappers\Receipts\ReceiptMapper;
 use Checkbox\Mappers\Receipts\ReceiptsMapper;
 use Checkbox\Mappers\Receipts\SellReceiptMapper;
+use Checkbox\Mappers\Receipts\ServiceReceiptMapper;
 use Checkbox\Mappers\Receipts\Taxes\GoodTaxesMapper;
 use Checkbox\Mappers\Shifts\CloseShiftMapper;
 use Checkbox\Mappers\Shifts\CreateShiftMapper;
@@ -21,6 +22,7 @@ use Checkbox\Models\Cashier\Cashier;
 use Checkbox\Models\CashRegisters\CashRegistersQueryParams;
 use Checkbox\Models\Receipts\ReceiptsQueryParams;
 use Checkbox\Models\Receipts\SellReceipt;
+use Checkbox\Models\Receipts\ServiceReceipt;
 use Checkbox\Models\Shifts\CloseShift;
 use Checkbox\Models\Shifts\CreateShift;
 use Checkbox\Models\Shifts\Shift;
@@ -414,6 +416,28 @@ class CheckboxJsonApi
         return (new ReceiptMapper())->jsonToObject($jsonResponse);
     }
 
+    public function createServiceReceipt(ServiceReceipt $receipt)
+    {
+        $options = $this->requestOptions;
+        $options['body'] = \json_encode((new ServiceReceiptMapper())->objectToJson($receipt));
+
+//        pre($this->routes->createServiceReceipt(),
+//            $options);
+//        die();
+
+        $response = $this->guzzleClient->request(
+            self::METHOD_POST,
+            $this->routes->createServiceReceipt(),
+            $options
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new ReceiptMapper())->jsonToObject($jsonResponse);
+    }
+
     public function getReceiptPdf(string $receiptId)
     {
         $response = $this->guzzleClient->request(
@@ -441,15 +465,13 @@ class CheckboxJsonApi
             $this->requestOptions
         );
 
-        $response = $response->getBody()->getContents();
+        $responseContents = $response->getBody()->getContents();
 
-        $jsonResponse = json_decode($response, true);
+        $jsonResponse = json_decode($responseContents, true);
 
-        if (!is_null($jsonResponse)) {
-            throw new Validation($jsonResponse);
-        }
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
-        return $response;
+        return $responseContents;
     }
 
     public function getReceiptText(string $receiptId)

@@ -2,23 +2,13 @@
 
 namespace Checkbox\Models\Receipts\Payments;
 
-class CashPaymentPayload
+class CashPaymentPayload extends PaymentParent
 {
-    public $type = 'CASH';
-    public $value;
-    public $label;
-
     public function __construct(
         int $value,
-        string $label = ''
+        string $label = 'Готівкою'
     )
     {
-        $this->value = $value;
-
-        if (mb_strlen($label) > 128) {
-            throw new \Exception('Label is too long');
-        }
-
-        $this->label = $label;
+        parent::__construct(parent::TYPE_CASH, $value, $label);
     }
 }
