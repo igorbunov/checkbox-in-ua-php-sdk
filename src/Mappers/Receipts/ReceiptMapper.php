@@ -28,7 +28,6 @@ class ReceiptMapper
         $discounts = (new DiscountsMapper())->jsonToObject($json['discounts']);
         $shift = (new ShiftMapper())->jsonToObject($json['shift']);
 
-//        pre($json);
 
         $receipt = new Receipt(
             $json['id'],

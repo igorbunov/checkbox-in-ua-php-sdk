@@ -85,6 +85,10 @@ class CheckboxJsonApi
 
     private function validateResponseStatus($json, $statusCode)
     {
+        if (!empty($json['message'])) {
+            throw new \Exception($json['message']);
+        }
+
         switch ($statusCode) {
             case 403:
                 throw new InvalidCredentials($json['message']);

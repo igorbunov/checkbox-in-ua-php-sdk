@@ -2,6 +2,7 @@
 
 namespace Checkbox\Mappers\Receipts\Goods;
 
+use Checkbox\Mappers\Receipts\Taxes\GoodTaxMapper;
 use Checkbox\Mappers\Shifts\TaxesMapper;
 use Checkbox\Models\Receipts\Goods\GoodModel;
 
@@ -28,6 +29,12 @@ class GoodModelMapper
 
     public function objectToJson(GoodModel $goodModel)
     {
+        $goodTaxeRatesArr = [];
+
+        foreach ($goodModel->taxes->results as $tax) {
+            $goodTaxeRatesArr[] = $tax->rate;
+        }
+
         return [
             'code' => $goodModel->code,
             'name' => $goodModel->name,
@@ -35,7 +42,7 @@ class GoodModelMapper
             'header' => $goodModel->header,
             'footer' => $goodModel->footer,
             'price' => $goodModel->price,
-            'tax' => (new TaxesMapper())->objectToJson($goodModel->tax)
+            'taxes' => $goodTaxeRatesArr
         ];
     }
 }

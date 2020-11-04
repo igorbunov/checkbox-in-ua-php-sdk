@@ -117,10 +117,15 @@ try {
 //    pre('all taxes', $api->getAllTaxes());
 
 
-    /*
      // sale receipt
     $allTaxes = $api->getAllTaxes();
     $tax = $allTaxes->getTaxByLabel('Акцизний збір');
+    $goodTaxes = $allTaxes->getTaxesByLabel('ПДВ');
+    $taxCodes = [];
+
+    foreach ($goodTaxes->results as $goodTax) {
+        $taxCodes[] = $goodTax->code;
+    }
 
     $receipt = new SellReceipt(
         'Вася Пупкин',
@@ -136,7 +141,7 @@ try {
                         'хидер',
                         'футер',
                         '',
-                        [1]
+                        $goodTaxes
                     ),
                     0,
                     1000,
@@ -151,16 +156,28 @@ try {
                                 100, // 1 грн
                                 0,
                                 $tax->code,
-                                [],
-                                'my super discount'
+                                $taxCodes,
+                                'one good discount'
                             )
                         ]
                     )
                 )
             ]
         ),
-        'admin@gmail.com',
-        null,
+        'igorbunov.ua@gmail.com',
+        new Discounts(
+            [
+                new DiscountModel(
+                    DiscountModel::TYPE_DISCOUNT,
+                    DiscountModel::MODE_VALUE,
+                    200, // 1 грн
+                    0,
+                    $tax->code,
+                    $taxCodes,
+                    'total discount'
+                )
+            ]
+        ),
         new Payments([
             new CardPaymentPayload(
                 400,
@@ -179,7 +196,6 @@ try {
 
     pre('create sell receipt', $api->createSellReceipt($receipt));
 
-    */
 
 //    $api->signOutCashier();
 

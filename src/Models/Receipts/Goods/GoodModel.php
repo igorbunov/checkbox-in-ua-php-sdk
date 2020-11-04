@@ -2,6 +2,8 @@
 
 namespace Checkbox\Models\Receipts\Goods;
 
+use Checkbox\Models\Receipts\Taxes\GoodTaxes;
+
 class GoodModel
 {
     public $code;
@@ -11,7 +13,7 @@ class GoodModel
     public $footer;
     public $uktzed;
     public $price;
-    public $tax;
+    public $taxes;
 
     public function __construct(
         string $code,
@@ -21,7 +23,7 @@ class GoodModel
         string $header = '',
         string $footer = '',
         string $uktzed = '',
-        array $tax = []
+        ?GoodTaxes $taxes = null
     ) {
         $this->code = $code;
         $this->price = $price;
@@ -30,6 +32,6 @@ class GoodModel
         $this->header = $header;
         $this->footer = $footer;
         $this->uktzed = $uktzed;
-        $this->tax = $tax;
+        $this->taxes = $taxes;
     }
 }
