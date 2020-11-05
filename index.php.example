@@ -75,7 +75,7 @@ try {
 //    pre('get shift', $api->getShift('d05ceab6-772f-42c2-9cba-4394ba95de75'));
 
 //    pre('get shifts', $api->getShifts());
-
+//
 //    pre('get shifts', $api->getShifts(new ShiftsQueryParams(
 //        [ShiftsQueryParams::STATUS_CLOSED, ShiftsQueryParams::STATUS_OPENED], false, 2, 0
 //    )));
@@ -89,7 +89,7 @@ try {
 
 //    pre('cash registers', $api->getCashRegisters());
 //    pre('cash registers', $api->getCashRegisters(new CashRegistersQueryParams(true, 3, 0)));
-
+//
 //    pre('cash register', $api->getCashRegister('3e650f3e-09b9-44e4-baea-f40f143cbb00'));
 //    pre('cash register', $api->getCashRegister('1c9b7dfb-4ffd-4f40-83da-d9b758c0c29a'));
 //    pre('cash register', $api->getCashRegisterInfo());
@@ -112,14 +112,137 @@ try {
 //    pre('get receipt text', $api->getReceiptText('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
 
 //    pre('get receipt image', $api->getReceiptQrCodeImage('c6a66550-44b8-4767-9bb0-66f0123c8efa'));
-
+//
 //    $rawImageContent = $api->getReceiptQrCodeImage('c6a66550-44b8-4767-9bb0-66f0123c8efa');
 //    echo '<img src="data:image/png;base64,' . base64_encode($rawImageContent) . '"/>';
 
 //    pre('all taxes', $api->getAllTaxes());
 
+
+// простая оплата
 /*
-     // sale receipt
+         // sale receipt
+            $receipt = new SellReceipt(
+                'Вася Пупкин',
+                'Отдел продаж',
+                new Goods(
+                    [
+                        new GoodItemModel(
+                            new GoodModel(
+                                'vm-123', // good_id
+                                50 * 100, // 50 грн
+                                'Биовак'
+                            ),
+                            1 * 1000
+                        ),
+                        new GoodItemModel(
+                            new GoodModel(
+                                'vm-124', // good_id
+                                20 * 100, // 20 грн
+                                'Биовак 2'
+                            ),
+                            2 * 1000 // 2 шт
+                        )
+                    ]
+                ),
+                'igorbunov.ua@gmail.com',
+                new Payments([
+                    new CardPaymentPayload(
+                        40 * 100 // 40 грн
+                    ),
+                    new CashPaymentPayload(
+                        50 * 100 // 50 грн
+                    )
+                ])
+            );
+
+            pre('create sell receipt 2', $api->createSellReceipt($receipt));
+    */
+// сложная оплата
+/*
+    $allTaxes = $api->getAllTaxes(); // получили все налоги
+    $tax = $allTaxes->getTaxByLabel('Акцизний збір'); // получили один налог по лейбл
+    $goodTaxes = $allTaxes->getTaxesByLabel('ПДВ'); // получили массив налогов по лейбл
+    $taxCodes = [];
+
+// подготавливаем массив кодов налогов
+    foreach ($goodTaxes->results as $goodTax) {
+        $taxCodes[] = $goodTax->code;
+    }
+
+    $receipt = new SellReceipt(
+        'Вася Пупкин', // имя кассира
+        'Отдел продаж', // отдел
+        new Goods( // товары
+            [
+                new GoodItemModel(
+                    new GoodModel(
+                        'vm-123', // good_id айди товара
+                        5000, // 50 грн  цена 100 = 1 грн
+                        'Биовак', // название
+                        '5р47ле78675е3', // баркод
+                        'хидер', // хидер
+                        'футер', // футер
+                        '', // ktzed
+                        $goodTaxes // налоги товара
+                    ),
+                    1000, // кол-во 1000 = 1 шт
+                    new Discounts( // скидки или надбавки
+                        [
+                            new DiscountModel(
+                                DiscountModel::TYPE_DISCOUNT, // скидка или надбавка
+                                DiscountModel::MODE_VALUE, // по значению или по проценту
+                                100, // 1 грн  сумма скидки/надбавки  100 = 1 грн
+                                0, // сумма (не используется в данном sdk)
+                                $tax->code, // код налога (подготовили выше)
+                                $taxCodes, // массив кодов налога (подготовили выше)
+                                'one good discount' // название
+                            )
+                        ]
+                    ),
+                    $allTaxes->getTaxesByLabel('Акцизний збір'), // налоги товара
+                    false, // возврат товара (false or true)
+                    0, // сумма (не используется в данном sdk)
+                    '' // айди товара (только если вы загружали список товарв (не используется в данном sdk))
+                )
+            ]
+        ),
+        'igorbunov.ua@gmail.com', // кому отправлять чек по почте
+        new Payments([ // оплаты
+            new CardPaymentPayload( // безналичная оплата
+                400, // сумма оплаты 400 = 4 грн
+                'beznalichka', // текст оплаты
+                0, // code - не знаю для чего (видимо пин код карты)
+                '0000 0000 0000 0000' // номер карты
+            ),
+            new CashPaymentPayload( // наличная оплата
+                4300, // сумма оплаты 4300 = 43 грн
+                'nalichka' // текст оплаты
+            )
+        ]),
+        new Discounts( // скидки/надбавки на весь чек
+            [
+                new DiscountModel(
+                    DiscountModel::TYPE_DISCOUNT, // скидка или надбавка
+                    DiscountModel::MODE_VALUE, // по значению или по проценту
+                    200, // 2 грн  сумма скидки/надбавки  200 = 2 грн
+                    0, // сумма (не используется в данном sdk)
+                    $tax->code, // код налога (подготовили выше)
+                    $taxCodes, // массив кодов налога (подготовили выше)
+                    'total discount' // название
+                )
+            ]
+        ),
+        'check header', // чек хидер
+        'check footer', // чек футер
+        '45435h543twrege' // баркод
+    );
+
+    $saleReceiptResult = $api->createSellReceipt($receipt); // выполняем оплату
+pre($saleReceiptResult);
+*/
+// еще пример сложной оплаты
+/*
     $allTaxes = $api->getAllTaxes();
     $tax = $allTaxes->getTaxByLabel('Акцизний збір');
     $goodTaxes = $allTaxes->getTaxesByLabel('ПДВ');
@@ -139,17 +262,13 @@ try {
                         'vm-123', // good_id
                         5000, // 50 грн
                         'Биовак',
-                        '5р47ле78675е3',
-                        'хидер',
-                        'футер',
+                        '',
+                        '',
+                        '',
                         '',
                         $goodTaxes
                     ),
-                    0,
                     1000,
-                    false,
-                    $allTaxes->getTaxesByLabel('Акцизний збір'),
-                    '',
                     new Discounts(
                         [
                             new DiscountModel(
@@ -159,165 +278,74 @@ try {
                                 0,
                                 $tax->code,
                                 $taxCodes,
-                                'one good discount'
+                                'моя скидка'
                             )
                         ]
-                    )
+                    ),
+                    $allTaxes->getTaxesByLabel('Акцизний збір'),
+                    false,
+                    0,
+                    ''
+                ),
+                new GoodItemModel(
+                    new GoodModel(
+                        'vm-124', // good_id
+                        2000, // 20 грн
+                        'Биовак 2',
+                        '',
+                        '',
+                        '',
+                        '',
+                        $goodTaxes
+                    ),
+                    2000, // 2 шт
+                    new Discounts(
+                        [
+                            new DiscountModel(
+                                DiscountModel::TYPE_EXTRA_CHARGE,
+                                DiscountModel::MODE_VALUE,
+                                200, // 2 грн
+                                0,
+                                $tax->code,
+                                $taxCodes,
+                                'моя надбавка'
+                            )
+                        ]
+                    ),
+                    $allTaxes->getTaxesByLabel('Акцизний збір'),
+                    false,
+                    0,
+                    ''
                 )
             ]
         ),
         'igorbunov.ua@gmail.com',
+        new Payments([
+            new CardPaymentPayload(
+                4700
+            ),
+            new CashPaymentPayload(
+                4700
+            )
+        ]),
         new Discounts(
             [
                 new DiscountModel(
-                    DiscountModel::TYPE_DISCOUNT,
+                    DiscountModel::TYPE_EXTRA_CHARGE,
                     DiscountModel::MODE_VALUE,
-                    200, // 1 грн
+                    200, // 2 грн
                     0,
                     $tax->code,
                     $taxCodes,
-                    'total discount'
+                    'общая надбавка'
                 )
             ]
-        ),
-        new Payments([
-            new CardPaymentPayload(
-                400,
-                'beznalichka',
-                0
-            ),
-            new CashPaymentPayload(
-                4300,
-                'nalichka'
-            )
-        ]),
-        'check header',
-        'check footer',
-        '45435h543twrege'
+        )
     );
 
-    $saleReceiptResult = $api->createSellReceipt($receipt);
-    pre($saleReceiptResult->id);
-
-    sleep(10);
-
-pre('get receipt html', $api->getReceiptHtml($saleReceiptResult->id));
-
-
+pre(    $api->createSellReceipt($receipt));
 */
 
-/*
-
-     // sale receipt
-        $allTaxes = $api->getAllTaxes();
-        $tax = $allTaxes->getTaxByLabel('Акцизний збір');
-        $goodTaxes = $allTaxes->getTaxesByLabel('ПДВ');
-        $taxCodes = [];
-
-        foreach ($goodTaxes->results as $goodTax) {
-            $taxCodes[] = $goodTax->code;
-        }
-
-        $receipt = new SellReceipt(
-            'Вася Пупкин',
-            'Отдел продаж',
-            new Goods(
-                [
-                    new GoodItemModel(
-                        new GoodModel(
-                            'vm-123', // good_id
-                            5000, // 50 грн
-                            'Биовак',
-                            '5р47ле78675е3',
-                            'хидер',
-                            'футер',
-                            '',
-                            $goodTaxes
-                        ),
-                        0,
-                        1000,
-                        false,
-                        $allTaxes->getTaxesByLabel('Акцизний збір'),
-                        '',
-                        new Discounts(
-                            [
-                                new DiscountModel(
-                                    DiscountModel::TYPE_DISCOUNT,
-                                    DiscountModel::MODE_VALUE,
-                                    100, // 1 грн
-                                    0,
-                                    $tax->code,
-                                    $taxCodes,
-                                    'one good discount'
-                                )
-                            ]
-                        )
-                    ),
-                    new GoodItemModel(
-                        new GoodModel(
-                            'vm-124', // good_id
-                            2000, // 20 грн
-                            'Биовак 2',
-                            'hhhregerg',
-                            'хидер2',
-                            'футер2',
-                            '',
-                            $goodTaxes
-                        ),
-                        0,
-                        2000, // 1 шт
-                        false,
-                        $allTaxes->getTaxesByLabel('Акцизний збір'),
-                        '',
-                        new Discounts(
-                            [
-                                new DiscountModel(
-                                    DiscountModel::TYPE_EXTRA_CHARGE,
-                                    DiscountModel::MODE_VALUE,
-                                    200, // 1 грн
-                                    0,
-                                    $tax->code,
-                                    $taxCodes,
-                                    'one good increace'
-                                )
-                            ]
-                        )
-                    )
-                ]
-            ),
-            'igorbunov.ua@gmail.com',
-            new Discounts(
-                [
-                    new DiscountModel(
-                        DiscountModel::TYPE_EXTRA_CHARGE,
-                        DiscountModel::MODE_VALUE,
-                        200, // 1 грн
-                        0,
-                        $tax->code,
-                        $taxCodes,
-                        'total increace'
-                    )
-                ]
-            ),
-            new Payments([
-                new CardPaymentPayload(
-                    4700,
-                    'beznalichka',
-                    0
-                ),
-                new CashPaymentPayload(
-                    4700,
-                    'nalichka'
-                )
-            ]),
-            'check header',
-            'check footer',
-            '45435h543twrege'
-        );
-
-        pre('create sell receipt 2', $api->createSellReceipt($receipt));
-
-*/
 
 /*
 $receipt = new ServiceReceipt(new CashPaymentPayload('5100'));
@@ -349,7 +377,7 @@ pre('get receipt html', $api->getReceiptHtml($receiptResponse->id));
 //    pre('get report text by id', $api->getReportText('e89ca619-6562-46e2-a5ce-5434f1a1ca63', 60));
 
 //    pre('get periodical report', $api->getPeriodicalReport(
-//        new PeriodicalReportQueryParams('2020-10-27 00:00:00', '2020-11-04 13:15:00')
+//        new PeriodicalReportQueryParams('2020-10-27 00:00:00', '2020-11-04 13:15:00', 60)
 //    ));
 
 //    pre('get reports', $api->getReports(
