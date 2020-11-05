@@ -45,7 +45,6 @@ $config = new \igorbunov\Checkbox\Config([
 ```php
 $api = new \igorbunov\Checkbox\CheckboxJsonApi($config);
 $api->signInCashier();
-$api->signOutCashier();
 ```
 или
 ```php
@@ -572,4 +571,3 @@ composer unit-tests
 
 composer all-tests
 ```
->>>>>>> Stashed changes
