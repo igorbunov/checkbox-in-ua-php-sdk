@@ -23,16 +23,13 @@ jobs:
       - name: Install dependency
         run: |
           composer install
-      - name: Security check
+      - name: Check composer
         run: |
-          composer security
-      - name: Check code standart
+          composer check-composer
+      - name: Check static
         run: |
-          composer check-style
-      - name: Analyze code
-        run: |
-          composer check-static-analyze
+          composer static
       - name: Run tests
         run: |
-          composer unit
+          composer unit-tests
 
