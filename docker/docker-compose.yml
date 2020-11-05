@@ -1,0 +1,12 @@
+version: "3.1"
+services:
+
+    php-cli:
+      build: phpdocker/php-cli
+      container_name: checkbox-sdk
+      working_dir: /application
+      volumes:
+        - ..:/application
+        - ./phpdocker/php-cli/php-ini-overrides.ini:/etc/php/7.4/cli/conf.d/99-overrides.ini
+      command: /bin/bash -c "sleep infinity"
+

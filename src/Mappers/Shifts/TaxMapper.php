@@ -33,6 +33,6 @@ class TaxMapper
 
     public function objectToJson(Tax $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

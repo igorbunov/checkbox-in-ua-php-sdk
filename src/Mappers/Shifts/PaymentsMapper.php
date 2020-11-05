@@ -25,6 +25,6 @@ class PaymentsMapper
 
     public function objectToJson(Payments $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

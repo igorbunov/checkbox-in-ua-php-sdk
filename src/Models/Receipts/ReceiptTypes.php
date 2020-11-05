@@ -4,10 +4,10 @@ namespace igorbunov\Checkbox\Models\Receipts;
 
 class ReceiptTypes
 {
-    const SELL = 'SELL';
-    const RETURN = 'RETURN';
-    const SERVICE_IN = 'SERVICE_IN';
-    const SERVICE_OUT = 'SERVICE_OUT';
+    public const SELL = 'SELL';
+    public const RETURN = 'RETURN';
+    public const SERVICE_IN = 'SERVICE_IN';
+    public const SERVICE_OUT = 'SERVICE_OUT';
 
     private $allowedValues = [];
     private $value = '';

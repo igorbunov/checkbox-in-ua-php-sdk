@@ -49,6 +49,6 @@ class CloseShiftMapper
 
     public function objectToJson(CloseShift $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

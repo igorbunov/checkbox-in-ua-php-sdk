@@ -30,6 +30,6 @@ class CashierMapper
 
     public function objectToJson(Cashier $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

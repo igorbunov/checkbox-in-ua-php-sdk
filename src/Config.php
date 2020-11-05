@@ -6,10 +6,10 @@ class Config
 {
     private $data;
 
-    const API_URL = 'apiUrl';
-    const LOGIN = 'login';
-    const PASSWORD = 'password';
-    const LICENSE_KEY = 'licenseKey';
+    public const API_URL = 'apiUrl';
+    public const LOGIN = 'login';
+    public const PASSWORD = 'password';
+    public const LICENSE_KEY = 'licenseKey';
 
     public function __construct(array $data)
     {
@@ -24,5 +24,4 @@ class Config
 
         throw new \Exception("Error: '{$name}' not found in config class");
     }
-
 }

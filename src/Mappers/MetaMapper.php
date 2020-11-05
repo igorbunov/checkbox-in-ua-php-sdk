@@ -22,6 +22,6 @@ class MetaMapper
 
     public function objectToJson(Meta $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

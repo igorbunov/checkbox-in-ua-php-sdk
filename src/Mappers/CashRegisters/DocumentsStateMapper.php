@@ -23,6 +23,6 @@ class DocumentsStateMapper
 
     public function objectToJson(DocumentsState $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

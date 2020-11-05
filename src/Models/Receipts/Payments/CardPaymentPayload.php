@@ -12,8 +12,7 @@ class CardPaymentPayload extends PaymentParent
         string $label = 'Безготівковий',
         int $code = 0,
         string $card_mask = ''
-    )
-    {
+    ) {
         parent::__construct(parent::TYPE_CARD, $value, $label);
 
         $this->code = $code;

@@ -10,11 +10,11 @@ class ShiftsQueryParams
     public $offset;
     private $allowedStatuses = [];
 
-    const STATUS_CREATED = 'CREATED';
-    const STATUS_OPENING = 'OPENING';
-    const STATUS_OPENED = 'OPENED';
-    const STATUS_CLOSING = 'CLOSING';
-    const STATUS_CLOSED = 'CLOSED';
+    public const STATUS_CREATED = 'CREATED';
+    public const STATUS_OPENING = 'OPENING';
+    public const STATUS_OPENED = 'OPENED';
+    public const STATUS_CLOSING = 'CLOSING';
+    public const STATUS_CLOSED = 'CLOSED';
 
     public function __construct(
         array $statuses = [],

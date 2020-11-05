@@ -4,11 +4,11 @@ namespace igorbunov\Checkbox\Models\Receipts\Discounts;
 
 class DiscountModel
 {
-    const TYPE_DISCOUNT = 'DISCOUNT';
-    const TYPE_EXTRA_CHARGE = 'EXTRA_CHARGE';
+    public const TYPE_DISCOUNT = 'DISCOUNT';
+    public const TYPE_EXTRA_CHARGE = 'EXTRA_CHARGE';
 
-    const MODE_PERCENT = 'PERCENT';
-    const MODE_VALUE = 'VALUE';
+    public const MODE_PERCENT = 'PERCENT';
+    public const MODE_VALUE = 'VALUE';
 
     private $allowedTypes = [];
     private $allowedModes = [];

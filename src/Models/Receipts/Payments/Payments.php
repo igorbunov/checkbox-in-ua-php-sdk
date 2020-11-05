@@ -10,8 +10,8 @@ class Payments
     {
         foreach ($payments as $payment) {
             if (
-                is_a($payment,  CardPaymentPayload::class) or
-                is_a($payment,  CashPaymentPayload::class)
+                is_a($payment, CardPaymentPayload::class) or
+                is_a($payment, CashPaymentPayload::class)
             ) {
                 $this->results[] = $payment;
             }

@@ -19,6 +19,6 @@ class ReceiptTypeMapper
 
     public function objectToJson(ReceiptTypes $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

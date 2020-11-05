@@ -265,5 +265,4 @@ class Routes
     {
         return $this->apiUrl . '/transactions/' . $transactionId;
     }
-
 }

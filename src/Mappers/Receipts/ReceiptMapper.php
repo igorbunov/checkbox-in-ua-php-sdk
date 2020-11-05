@@ -40,7 +40,6 @@ class ReceiptMapper
             $json['total_sum'] ?? $json['sum'],
             $json['total_payment'],
             $json['total_rest'] ?? $json['rest'],
-
             $json['fiscal_code'],
             $json['fiscal_date'],
             $json['delivered_at'] ?? '',
@@ -51,7 +50,6 @@ class ReceiptMapper
             $json['header'] ?? '',
             $json['footer'] ?? '',
             $json['barcode'] ?? '',
-
             $json['is_created_offline'],
             $json['is_sent_dps'],
             $json['sent_dps_at'] ?? '',
@@ -63,6 +61,8 @@ class ReceiptMapper
 
     public function objectToJson(Receipt $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
+        //TODO: fix NULL
+        return null;
     }
 }
