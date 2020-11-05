@@ -1,8 +1,8 @@
 <?php
 
-namespace Checkbox\Mappers\Receipts\Goods;
+namespace igorbunov\Checkbox\Mappers\Receipts\Goods;
 
-use Checkbox\Models\Receipts\Goods\Goods;
+use igorbunov\Checkbox\Models\Receipts\Goods\Goods;
 
 class GoodsMapper
 {

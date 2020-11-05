@@ -1,6 +1,6 @@
 <?php
 
-namespace Checkbox\Models\Receipts\Discounts;
+namespace igorbunov\Checkbox\Models\Receipts\Discounts;
 
 class DiscountModel
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Checkbox\Mappers\Receipts\Payments;
+namespace igorbunov\Checkbox\Mappers\Receipts\Payments;
 
-use Checkbox\Models\Receipts\Payments\Payments;
+use igorbunov\Checkbox\Models\Receipts\Payments\Payments;
 
 class PaymentsMapper
 {

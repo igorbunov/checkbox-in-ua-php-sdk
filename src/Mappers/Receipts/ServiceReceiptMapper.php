@@ -1,10 +1,10 @@
 <?php
 
-namespace Checkbox\Mappers\Receipts;
+namespace igorbunov\Checkbox\Mappers\Receipts;
 
-use Checkbox\Mappers\Receipts\Payments\CashPaymentMapper;
-use Checkbox\Models\Receipts\Payments\PaymentParent;
-use Checkbox\Models\Receipts\ServiceReceipt;
+use igorbunov\Checkbox\Mappers\Receipts\Payments\CashPaymentMapper;
+use igorbunov\Checkbox\Models\Receipts\Payments\PaymentParent;
+use igorbunov\Checkbox\Models\Receipts\ServiceReceipt;
 
 class ServiceReceiptMapper
 {

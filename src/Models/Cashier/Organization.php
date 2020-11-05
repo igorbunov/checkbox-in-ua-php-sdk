@@ -1,6 +1,6 @@
 <?php
 
-namespace Checkbox\Models\Cashier;
+namespace igorbunov\Checkbox\Models\Cashier;
 
 class Organization
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Checkbox\Models\CashRegisters;
+namespace igorbunov\Checkbox\Models\CashRegisters;
 
-use Checkbox\Models\Meta;
+use igorbunov\Checkbox\Models\Meta;
 
 class CashRegisters
 {

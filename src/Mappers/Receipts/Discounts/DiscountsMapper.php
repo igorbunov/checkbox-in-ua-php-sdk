@@ -1,8 +1,8 @@
 <?php
 
-namespace Checkbox\Mappers\Receipts\Discounts;
+namespace igorbunov\Checkbox\Mappers\Receipts\Discounts;
 
-use Checkbox\Models\Receipts\Discounts\Discounts;
+use igorbunov\Checkbox\Models\Receipts\Discounts\Discounts;
 
 class DiscountsMapper
 {

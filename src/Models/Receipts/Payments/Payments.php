@@ -1,6 +1,6 @@
 <?php
 
-namespace Checkbox\Models\Receipts\Payments;
+namespace igorbunov\Checkbox\Models\Receipts\Payments;
 
 class Payments
 {

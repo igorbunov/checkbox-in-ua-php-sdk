@@ -1,6 +1,6 @@
 <?php
 
-namespace Checkbox\Models\CashRegisters;
+namespace igorbunov\Checkbox\Models\CashRegisters;
 
 class DocumentsState
 {

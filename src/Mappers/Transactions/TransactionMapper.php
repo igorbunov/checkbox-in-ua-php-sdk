@@ -1,8 +1,8 @@
 <?php
 
-namespace Checkbox\Mappers\Transactions;
+namespace igorbunov\Checkbox\Mappers\Transactions;
 
-use Checkbox\Models\Transactions\Transaction;
+use igorbunov\Checkbox\Models\Transactions\Transaction;
 
 class TransactionMapper
 {

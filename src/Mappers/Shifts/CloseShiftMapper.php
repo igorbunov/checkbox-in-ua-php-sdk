@@ -1,11 +1,11 @@
 <?php
 
-namespace Checkbox\Mappers\Shifts;
+namespace igorbunov\Checkbox\Mappers\Shifts;
 
-use Checkbox\Errors\NoActiveShift;
-use Checkbox\Mappers\Cashier\CashierMapper;
-use Checkbox\Mappers\CashRegisters\CashRegisterMapper;
-use Checkbox\Models\Shifts\CloseShift;
+use igorbunov\Checkbox\Errors\NoActiveShift;
+use igorbunov\Checkbox\Mappers\Cashier\CashierMapper;
+use igorbunov\Checkbox\Mappers\CashRegisters\CashRegisterMapper;
+use igorbunov\Checkbox\Models\Shifts\CloseShift;
 
 class CloseShiftMapper
 {

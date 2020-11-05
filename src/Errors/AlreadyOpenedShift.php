@@ -1,6 +1,6 @@
 <?php
 
-namespace Checkbox\Errors;
+namespace igorbunov\Checkbox\Errors;
 
 class AlreadyOpenedShift extends \Exception
 {

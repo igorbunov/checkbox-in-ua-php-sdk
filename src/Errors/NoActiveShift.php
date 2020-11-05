@@ -1,6 +1,6 @@
 <?php
 
-namespace Checkbox\Errors;
+namespace igorbunov\Checkbox\Errors;
 
 class NoActiveShift extends \Exception
 {

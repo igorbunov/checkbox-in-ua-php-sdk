@@ -1,9 +1,9 @@
 <?php
 
-namespace Checkbox\Mappers\Receipts\Payments;
+namespace igorbunov\Checkbox\Mappers\Receipts\Payments;
 
-use Checkbox\Models\Receipts\Payments\CashPaymentPayload;
-use Checkbox\Models\Receipts\Payments\PaymentParent;
+use igorbunov\Checkbox\Models\Receipts\Payments\CashPaymentPayload;
+use igorbunov\Checkbox\Models\Receipts\Payments\PaymentParent;
 
 class CashPaymentMapper
 {

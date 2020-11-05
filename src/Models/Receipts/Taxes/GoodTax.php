@@ -1,6 +1,6 @@
 <?php
 
-namespace Checkbox\Models\Receipts\Taxes;
+namespace igorbunov\Checkbox\Models\Receipts\Taxes;
 
 class GoodTax
 {

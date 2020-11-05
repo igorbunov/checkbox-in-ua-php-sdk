@@ -1,8 +1,8 @@
 <?php
 
-namespace Checkbox\Mappers\Cashier;
+namespace igorbunov\Checkbox\Mappers\Cashier;
 
-use Checkbox\Models\Cashier\Organization;
+use igorbunov\Checkbox\Models\Cashier\Organization;
 
 class OrganizationMapper
 {

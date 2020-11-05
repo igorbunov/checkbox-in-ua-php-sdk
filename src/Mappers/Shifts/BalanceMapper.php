@@ -1,8 +1,8 @@
 <?php
 
-namespace Checkbox\Mappers\Shifts;
+namespace igorbunov\Checkbox\Mappers\Shifts;
 
-use Checkbox\Models\Shifts\Balance;
+use igorbunov\Checkbox\Models\Shifts\Balance;
 
 class BalanceMapper
 {

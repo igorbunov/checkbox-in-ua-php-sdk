@@ -1,8 +1,8 @@
 <?php
 
-namespace Checkbox\Mappers\Shifts;
+namespace igorbunov\Checkbox\Mappers\Shifts;
 
-use Checkbox\Models\Shifts\Taxes;
+use igorbunov\Checkbox\Models\Shifts\Taxes;
 
 class TaxesMapper
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Checkbox\Models\Transactions;
+namespace igorbunov\Checkbox\Models\Transactions;
 
-use Checkbox\Models\Meta;
+use igorbunov\Checkbox\Models\Meta;
 
 class Transactions
 {

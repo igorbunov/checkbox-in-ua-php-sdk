@@ -1,8 +1,8 @@
 <?php
 
-namespace Checkbox\Mappers\CashRegisters;
+namespace igorbunov\Checkbox\Mappers\CashRegisters;
 
-use Checkbox\Models\CashRegisters\CashRegisterInfo;
+use igorbunov\Checkbox\Models\CashRegisters\CashRegisterInfo;
 
 class CashRegisterInfoMapper
 {

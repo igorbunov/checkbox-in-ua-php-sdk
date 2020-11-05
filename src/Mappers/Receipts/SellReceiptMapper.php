@@ -1,11 +1,11 @@
 <?php
 
-namespace Checkbox\Mappers\Receipts;
+namespace igorbunov\Checkbox\Mappers\Receipts;
 
-use Checkbox\Mappers\Receipts\Discounts\DiscountsMapper;
-use Checkbox\Mappers\Receipts\Goods\GoodsMapper;
-use Checkbox\Mappers\Receipts\Payments\PaymentsMapper;
-use Checkbox\Models\Receipts\SellReceipt;
+use igorbunov\Checkbox\Mappers\Receipts\Discounts\DiscountsMapper;
+use igorbunov\Checkbox\Mappers\Receipts\Goods\GoodsMapper;
+use igorbunov\Checkbox\Mappers\Receipts\Payments\PaymentsMapper;
+use igorbunov\Checkbox\Models\Receipts\SellReceipt;
 
 class SellReceiptMapper
 {

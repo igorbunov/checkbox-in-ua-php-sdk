@@ -1,9 +1,9 @@
 <?php
 
-namespace Checkbox\Mappers\CashRegisters;
+namespace igorbunov\Checkbox\Mappers\CashRegisters;
 
-use Checkbox\Mappers\MetaMapper;
-use Checkbox\Models\CashRegisters\CashRegisters;
+use igorbunov\Checkbox\Mappers\MetaMapper;
+use igorbunov\Checkbox\Models\CashRegisters\CashRegisters;
 
 class CashRegistersMapper
 {

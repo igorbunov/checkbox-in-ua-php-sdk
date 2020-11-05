@@ -1,11 +1,11 @@
 <?php
 
-namespace Checkbox\Mappers\Shifts;
+namespace igorbunov\Checkbox\Mappers\Shifts;
 
-use Checkbox\Errors\AlreadyOpenedShift;
-use Checkbox\Mappers\Cashier\CashierMapper;
-use Checkbox\Mappers\CashRegisters\CashRegisterMapper;
-use Checkbox\Models\Shifts\CreateShift;
+use igorbunov\Checkbox\Errors\AlreadyOpenedShift;
+use igorbunov\Checkbox\Mappers\Cashier\CashierMapper;
+use igorbunov\Checkbox\Mappers\CashRegisters\CashRegisterMapper;
+use igorbunov\Checkbox\Models\Shifts\CreateShift;
 
 class CreateShiftMapper
 {

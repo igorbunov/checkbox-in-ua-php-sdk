@@ -1,8 +1,8 @@
 <?php
 
-namespace Checkbox\Models\CashRegisters;
+namespace igorbunov\Checkbox\Models\CashRegisters;
 
-use Checkbox\Models\Shifts\Shift;
+use igorbunov\Checkbox\Models\Shifts\Shift;
 
 class CashRegister
 {

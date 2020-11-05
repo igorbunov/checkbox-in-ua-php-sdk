@@ -1,10 +1,10 @@
 <?php
 
-namespace Checkbox\Mappers\Receipts\Goods;
+namespace igorbunov\Checkbox\Mappers\Receipts\Goods;
 
-use Checkbox\Mappers\Receipts\Discounts\DiscountsMapper;
-use Checkbox\Mappers\Receipts\Taxes\GoodTaxesMapper;
-use Checkbox\Models\Receipts\Goods\GoodItemModel;
+use igorbunov\Checkbox\Mappers\Receipts\Discounts\DiscountsMapper;
+use igorbunov\Checkbox\Mappers\Receipts\Taxes\GoodTaxesMapper;
+use igorbunov\Checkbox\Models\Receipts\Goods\GoodItemModel;
 
 class GoodItemModelMapper
 {

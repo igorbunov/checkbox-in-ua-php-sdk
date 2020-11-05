@@ -1,8 +1,8 @@
 <?php
 
-namespace Checkbox\Mappers\Receipts;
+namespace igorbunov\Checkbox\Mappers\Receipts;
 
-use Checkbox\Models\Receipts\ReceiptStatus;
+use igorbunov\Checkbox\Models\Receipts\ReceiptStatus;
 
 class ReceiptStatusMapper
 {

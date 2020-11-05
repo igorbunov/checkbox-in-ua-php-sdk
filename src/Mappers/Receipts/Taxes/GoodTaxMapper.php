@@ -1,8 +1,8 @@
 <?php
 
-namespace Checkbox\Mappers\Receipts\Taxes;
+namespace igorbunov\Checkbox\Mappers\Receipts\Taxes;
 
-use Checkbox\Models\Receipts\Taxes\GoodTax;
+use igorbunov\Checkbox\Models\Receipts\Taxes\GoodTax;
 
 class GoodTaxMapper
 {

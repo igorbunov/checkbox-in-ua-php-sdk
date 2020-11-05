@@ -1,14 +1,14 @@
 <?php
 
-namespace Checkbox\Mappers\Receipts;
+namespace igorbunov\Checkbox\Mappers\Receipts;
 
-use Checkbox\Mappers\Receipts\Discounts\DiscountsMapper;
-use Checkbox\Mappers\Receipts\Goods\GoodsMapper;
-use Checkbox\Mappers\Receipts\Payments\PaymentsMapper;
-use Checkbox\Mappers\Receipts\Taxes\GoodTaxesMapper;
-use Checkbox\Mappers\Shifts\ShiftMapper;
-use Checkbox\Mappers\Transactions\TransactionMapper;
-use Checkbox\Models\Receipts\Receipt;
+use igorbunov\Checkbox\Mappers\Receipts\Discounts\DiscountsMapper;
+use igorbunov\Checkbox\Mappers\Receipts\Goods\GoodsMapper;
+use igorbunov\Checkbox\Mappers\Receipts\Payments\PaymentsMapper;
+use igorbunov\Checkbox\Mappers\Receipts\Taxes\GoodTaxesMapper;
+use igorbunov\Checkbox\Mappers\Shifts\ShiftMapper;
+use igorbunov\Checkbox\Mappers\Transactions\TransactionMapper;
+use igorbunov\Checkbox\Models\Receipts\Receipt;
 
 class ReceiptMapper
 {

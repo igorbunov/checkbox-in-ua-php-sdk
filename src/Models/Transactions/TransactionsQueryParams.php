@@ -1,6 +1,6 @@
 <?php
 
-namespace Checkbox\Models\Transactions;
+namespace igorbunov\Checkbox\Models\Transactions;
 
 class TransactionsQueryParams
 {

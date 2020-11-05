@@ -1,6 +1,6 @@
 <?php
 
-namespace Checkbox\Models\Reports;
+namespace igorbunov\Checkbox\Models\Reports;
 
 class ReportsQueryParams
 {

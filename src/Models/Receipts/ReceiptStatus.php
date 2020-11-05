@@ -1,6 +1,6 @@
 <?php
 
-namespace Checkbox\Models\Receipts;
+namespace igorbunov\Checkbox\Models\Receipts;
 
 class ReceiptStatus
 {

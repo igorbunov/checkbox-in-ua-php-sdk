@@ -1,8 +1,8 @@
 <?php
 
-namespace Checkbox\Models\Receipts;
+namespace igorbunov\Checkbox\Models\Receipts;
 
-use Checkbox\Models\Receipts\Payments\PaymentParent;
+use igorbunov\Checkbox\Models\Receipts\Payments\PaymentParent;
 
 class ServiceReceipt
 {
