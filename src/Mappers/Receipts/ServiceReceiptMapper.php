@@ -13,6 +13,8 @@ class ServiceReceiptMapper
         if (is_null($json)) {
             return null;
         }
+        //TODO: fix null
+        return null;
     }
 
     public function objectToJson(ServiceReceipt $receipt)

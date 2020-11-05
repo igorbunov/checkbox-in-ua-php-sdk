@@ -26,6 +26,6 @@ class OrganizationMapper
 
     public function objectToJson(Organization $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

@@ -4,9 +4,9 @@ namespace igorbunov\Checkbox\Models\Receipts;
 
 class ReceiptStatus
 {
-    const CREATED = 'CREATED';
-    const DONE = 'DONE';
-    const ERROR = 'ERROR';
+    public const CREATED = 'CREATED';
+    public const DONE = 'DONE';
+    public const ERROR = 'ERROR';
 
     private $allowedValues = [];
     private $value = '';

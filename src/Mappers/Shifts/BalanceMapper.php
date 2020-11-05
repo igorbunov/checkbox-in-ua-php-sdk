@@ -29,6 +29,6 @@ class BalanceMapper
 
     public function objectToJson(Balance $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

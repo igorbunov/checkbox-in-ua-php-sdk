@@ -32,6 +32,6 @@ class ReportsMapper
 
     public function objectToJson(Reports $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

@@ -19,6 +19,6 @@ class ReceiptStatusMapper
 
     public function objectToJson(ReceiptStatus $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

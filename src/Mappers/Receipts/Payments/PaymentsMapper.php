@@ -6,8 +6,8 @@ use igorbunov\Checkbox\Models\Receipts\Payments\Payments;
 
 class PaymentsMapper
 {
-    const TYPE_CASH = 'CASH';
-    const TYPE_CARD = 'CARD';
+    public const TYPE_CASH = 'CASH';
+    public const TYPE_CARD = 'CARD';
 
     public function jsonToObject($json): ?Payments
     {

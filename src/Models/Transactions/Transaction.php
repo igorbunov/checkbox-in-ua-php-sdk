@@ -32,7 +32,6 @@ class Transaction
         $response_error_message,
         $created_at,
         $updated_at,
-
         string $request_data = '',
         string $request_signature = '',
         string $response_id = '',

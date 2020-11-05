@@ -31,6 +31,6 @@ class CashRegistersMapper
 
     public function objectToJson(CashRegisters $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

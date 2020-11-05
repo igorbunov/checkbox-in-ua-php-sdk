@@ -22,7 +22,7 @@ class SellReceipt
         string $cashier_name,
         string $departament,
         Goods $goods,
-        string $deliveryEmail = '',
+        string $deliveryEmail,
         Payments $payments,
         ?Discounts $discounts = null,
         string $header = '',

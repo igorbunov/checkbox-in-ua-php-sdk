@@ -31,6 +31,6 @@ class TransactionsMapper
 
     public function objectToJson(Transactions $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

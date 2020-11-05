@@ -4,8 +4,8 @@ namespace igorbunov\Checkbox\Models\Receipts\Payments;
 
 class PaymentParent
 {
-    const TYPE_CASH = 'CASH';
-    const TYPE_CARD = 'CARD';
+    public const TYPE_CASH = 'CASH';
+    public const TYPE_CARD = 'CARD';
 
     public $type;
     public $value;
@@ -15,8 +15,7 @@ class PaymentParent
         string $type,
         int $value,
         string $label = ''
-    )
-    {
+    ) {
         if (!in_array($type, [self::TYPE_CASH, self::TYPE_CARD])) {
             throw new \Exception('Wrong payment type');
         }

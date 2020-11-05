@@ -14,6 +14,8 @@ class SellReceiptMapper
         if (is_null($json)) {
             return null;
         }
+        //TODO: fix NULL
+        return null;
     }
 
     public function objectToJson(SellReceipt $receipt)

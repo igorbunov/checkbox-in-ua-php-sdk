@@ -1,3 +1,4 @@
+![GitHub CI](https://github.com/igorbunov/checkbox-in-ua-php-sdk/workflows/CI/badge.svg)
 # checkbox-in-ua-php-sdk
 ### PHP SDK for integration with checkbox.in.ua api
 
@@ -538,3 +539,35 @@ use igorbunov\Checkbox\Models\Receipts\Goods\Goods;
 use igorbunov\Checkbox\Models\Receipts\Goods\GoodItemModel;
 use igorbunov\Checkbox\Models\Receipts\Goods\GoodModel;
 ```
+
+# Для котрибьюторов
+
+## Run docker container
+```
+cd docker
+docker-compose up
+```
+
+now you can connect to terminal
+
+```
+docker exec -it checkbox-sdk /bin/bash
+```
+
+## Run tests
+
+```
+#validate composer json
+composer check-composer
+
+#static analyzes and codestyle 
+composer static
+
+#run unit tests
+composer unit-tests
+
+#run all tests
+
+composer all-tests
+```
+>>>>>>> Stashed changes

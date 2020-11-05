@@ -49,6 +49,6 @@ class CreateShiftMapper
 
     public function objectToJson(CreateShift $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

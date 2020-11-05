@@ -55,9 +55,9 @@ class CheckboxJsonApi
     private $config = null;
     private $requestOptions;
 
-    const METHOD_GET = 'get';
-    const METHOD_POST = 'post';
-    const METHOD_PATCH = 'patch';
+    public const METHOD_GET = 'get';
+    public const METHOD_POST = 'post';
+    public const METHOD_PATCH = 'patch';
 
     public function __construct(Config $config = null, int $connectTimeoutSeconds = 5)
     {
@@ -687,8 +687,4 @@ class CheckboxJsonApi
 
 
     // end transaction methods //
-
-
-
-
 }

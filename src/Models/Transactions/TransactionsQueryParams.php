@@ -12,23 +12,23 @@ class TransactionsQueryParams
     private $allowedStatuses;
     private $allowedTypes;
 
-    const STATUS_CREATED = 'CREATED';
-    const STATUS_PENDING = 'PENDING';
-    const STATUS_SIGNED = 'SIGNED';
-    const STATUS_DELIVERED = 'DELIVERED';
-    const STATUS_DONE = 'DONE';
-    const STATUS_ERROR = 'ERROR';
+    public const STATUS_CREATED = 'CREATED';
+    public const STATUS_PENDING = 'PENDING';
+    public const STATUS_SIGNED = 'SIGNED';
+    public const STATUS_DELIVERED = 'DELIVERED';
+    public const STATUS_DONE = 'DONE';
+    public const STATUS_ERROR = 'ERROR';
 
-    const TYPE_SHIFT_OPEN = 'SHIFT_OPEN';
-    const TYPE_X_REPORT = 'X_REPORT';
-    const TYPE_Z_REPORT = 'Z_REPORT';
-    const TYPE_PING = 'PING';
-    const TYPE_RECEIPT = 'RECEIPT';
-    const TYPE_LAST_RECEIPT = 'LAST_RECEIPT';
-    const TYPE_GO_OFFLINE = 'GO_OFFLINE';
-    const TYPE_ASK_OFFLINE_CODES = 'ASK_OFFLINE_CODES';
-    const TYPE_GO_ONLINE = 'GO_ONLINE';
-    const TYPE_DEL_LAST_RECEIPT = 'DEL_LAST_RECEIPT';
+    public const TYPE_SHIFT_OPEN = 'SHIFT_OPEN';
+    public const TYPE_X_REPORT = 'X_REPORT';
+    public const TYPE_Z_REPORT = 'Z_REPORT';
+    public const TYPE_PING = 'PING';
+    public const TYPE_RECEIPT = 'RECEIPT';
+    public const TYPE_LAST_RECEIPT = 'LAST_RECEIPT';
+    public const TYPE_GO_OFFLINE = 'GO_OFFLINE';
+    public const TYPE_ASK_OFFLINE_CODES = 'ASK_OFFLINE_CODES';
+    public const TYPE_GO_ONLINE = 'GO_ONLINE';
+    public const TYPE_DEL_LAST_RECEIPT = 'DEL_LAST_RECEIPT';
 
     public function __construct(
         array $statuses = [],

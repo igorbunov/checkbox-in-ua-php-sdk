@@ -34,6 +34,6 @@ class ZReportMapper
 
     public function objectToJson(ZReport $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

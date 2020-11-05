@@ -25,6 +25,6 @@ class GoodTaxesMapper
 
     public function objectToJson(GoodTaxes $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }

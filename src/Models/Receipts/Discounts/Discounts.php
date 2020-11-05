@@ -9,7 +9,7 @@ class Discounts
     public function __construct(array $discounts)
     {
         foreach ($discounts as $discount) {
-            if (!is_a($discount,  DiscountModel::class)) {
+            if (!is_a($discount, DiscountModel::class)) {
                 throw new \Exception('Discount has wrong class');
             }
 

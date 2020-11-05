@@ -23,7 +23,6 @@ class InitialTransactionMapper
             $json['response_error_message'],
             $json['created_at'],
             $json['updated_at'],
-
             $json['request_data'] ?? '',
             $json['request_signature'] ?? '',
             $json['response_id'] ?? '',
@@ -36,6 +35,6 @@ class InitialTransactionMapper
 
     public function objectToJson(InitialTransaction $obj)
     {
-        pre('objectToJson', $obj);
+        var_dump('objectToJson', $obj);
     }
 }
