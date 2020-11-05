@@ -22,32 +22,6 @@ composer require igorbunov/checkbox-in-ua-php-sdk
 require_once 'vendor/autoload.php';
 ```
 
-##### подключение всех неймспейсов:
-```php
-use Checkbox\CheckboxJsonApi;
-use Checkbox\Config;
-use Checkbox\Errors\InvalidCredentials;
-use Checkbox\Errors\Validation;
-use Checkbox\Errors\NoActiveShift;
-use Checkbox\Errors\AlreadyOpenedShift;
-use Checkbox\Errors\EmptyResponse;
-use Checkbox\Models\CashRegisters\CashRegistersQueryParams;
-use Checkbox\Models\Shifts\ShiftsQueryParams;
-use Checkbox\Models\Receipts\ReceiptsQueryParams;
-use Checkbox\Models\Receipts\Discounts\Discounts;
-use Checkbox\Models\Receipts\Discounts\DiscountModel;
-use Checkbox\Models\Receipts\SellReceipt;
-use Checkbox\Models\Receipts\Payments\Payments;
-use Checkbox\Models\Receipts\Payments\CardPaymentPayload;
-use Checkbox\Models\Receipts\Payments\CashPaymentPayload;
-use Checkbox\Models\Receipts\ServiceReceipt;
-use Checkbox\Models\Reports\PeriodicalReportQueryParams;
-use Checkbox\Models\Reports\ReportsQueryParams;
-use Checkbox\Models\Transactions\TransactionsQueryParams;
-use Checkbox\Models\Receipts\Goods\Goods;
-use Checkbox\Models\Receipts\Goods\GoodItemModel;
-use Checkbox\Models\Receipts\Goods\GoodModel;
-```
 ##### Настройка конфига:
 
 >адрес продакшен сервера http://api.checkbox.in.ua<br/>
@@ -55,24 +29,24 @@ use Checkbox\Models\Receipts\Goods\GoodModel;
 >текущая версия API - v1
 
 ```php
-$config = new Config([
-    Config::API_URL => 'https://dev-api.checkbox.in.ua/api/v1',
-    Config::LOGIN => 'логин кассира',
-    Config::PASSWORD => 'пароль кассира',
-    Config::LICENSE_KEY => 'ключ лицензии кассы'
+$config = new \igorbunov\Checkbox\Config([
+    \igorbunov\Checkbox\Config::API_URL => 'https://dev-api.checkbox.in.ua/api/v1',
+    \igorbunov\Checkbox\Config::LOGIN => 'логин кассира',
+    \igorbunov\Checkbox\Config::PASSWORD => 'пароль кассира',
+    \igorbunov\Checkbox\Config::LICENSE_KEY => 'ключ лицензии кассы'
 ]);
 ```
 
 ##### Логин кассира:
 
 ```php
-$api = new CheckboxJsonApi($config);
+$api = new \igorbunov\Checkbox\CheckboxJsonApi($config);
 $api->signInCashier();
 $api->signOutCashier();
 ```
 или
 ```php
-$api = (new CheckboxJsonApi())
+$api = (new \igorbunov\Checkbox\CheckboxJsonApi())
     ->setConfig($config)
     ->setConnectTimeout(10)
     ->signInCashier();
@@ -83,19 +57,19 @@ $api->signOutCashier();
 ```
 ##### Ошибки (Exceptions):
 ```php
-InvalidCredentials - не верные данные логина или пароля
+\igorbunov\Checkbox\Errors\InvalidCredentials - не верные данные логина или пароля
 ```
 ```php
-EmptyResponse - пустой ответ
+\igorbunov\Checkbox\Errors\EmptyResponse - пустой ответ
 ```
 ```php
-Validation - ошибка валидации (есть детальные. данные $err->getDetail())
+\igorbunov\Checkbox\Errors\Validation - ошибка валидации (есть детальные. данные $err->getDetail())
 ```
 ```php
-NoActiveShift - нет активной смены
+\igorbunov\Checkbox\Errors\NoActiveShift - нет активной смены
 ```
 ```php
-AlreadyOpenedShift - смена уже открыта
+\igorbunov\Checkbox\Errors\AlreadyOpenedShift - смена уже открыта
 ```
 ```php
 \Exception  - стандартная ошибка
@@ -105,96 +79,96 @@ AlreadyOpenedShift - смена уже открыта
 
 ##### profile (касир):
 ```php
-$api->getCashierProfile() : Cashier // возвращает профиль кассира
+$api->getCashierProfile() : \igorbunov\Checkbox\Models\Cashier\Cashier // возвращает профиль кассира
 ```
 ##### shifts (смены):
 ```php
-$api->getCashierShift() : Shift // возвращает текущую смену кассира
+$api->getCashierShift() : \igorbunov\Checkbox\Models\Shifts\Shift // возвращает текущую смену кассира
 ```
 ```php
-$api->getShift('ид смены') : Shift // возвращает смену по ид
+$api->getShift('ид смены') : \igorbunov\Checkbox\Models\Shifts\Shift // возвращает смену по ид
 ```
 ```php
-$api->getShifts() : Shifts // возвращает смены
+$api->getShifts() : \igorbunov\Checkbox\Models\Shifts\Shifts // возвращает смены
 ```
 или
 ```php
 $api->getShifts(
-    new ShiftsQueryParams(
+    new \igorbunov\Checkbox\Models\Shifts\ShiftsQueryParams(
         [
-            ShiftsQueryParams::STATUS_CLOSED,
-            ShiftsQueryParams::STATUS_OPENED
-        ], // статусы смены
+            \igorbunov\Checkbox\Models\Shifts\ShiftsQueryParams::STATUS_CLOSED,
+            \igorbunov\Checkbox\Models\Shifts\ShiftsQueryParams::STATUS_OPENED
+        ], // статусы смен
         false, // desc - сортировка (false or true)
         2, // limit
         0 // offset
     )
-): Shifts // возвращает смены с учетом фильтра
+): \igorbunov\Checkbox\Models\Shifts\Shifts // возвращает смены с учетом фильтра
 ```
 ```php
-$api->createShift() : CreateShift // создает смену
+$api->createShift() : \igorbunov\Checkbox\Models\Shifts\CreateShift // создает смену
 ```
 ```php
-$api->closeShift() : CloseShift // закрывает смену
+$api->closeShift() : \igorbunov\Checkbox\Models\Shifts\CloseShift // закрывает смену
 ```
 ##### cash registers (пРРО):
 ```php
-$api->getCashRegisters() : CashRegisters // возвращает кассовые регистраторы
+$api->getCashRegisters() : \igorbunov\Checkbox\Models\CashRegisters\CashRegisters // возвращает кассовые регистраторы
 ```
 или
 ```php
 $api->getCashRegisters(
-    new CashRegistersQueryParams(
+    new \igorbunov\Checkbox\Models\CashRegisters\CashRegistersQueryParams(
         true, // inUse - используется или нет (true or false)
         3, // limit
         0 // offset
     )
-) : CashRegisters // возвращает кассовые регистраторы по фильтру
+) : \igorbunov\Checkbox\Models\CashRegisters\CashRegisters // возвращает кассовые регистраторы по фильтру
 ```
 ```php
-$api->getCashRegister('ид кассы') : CashRegister // возвращает кассу по айди
+$api->getCashRegister('ид кассы') : \igorbunov\Checkbox\Models\CashRegisters\CashRegister // возвращает кассу по айди
 ```
 ```php
-$api->getCashRegisterInfo() : CashRegisterInfo // возвращает информацию текущей кассы
+$api->getCashRegisterInfo() : \igorbunov\Checkbox\Models\CashRegisters\CashRegisterInfo // возвращает информацию текущей кассы
 ```
 ##### taxes (налоги):
 ```php
-$api->getAllTaxes() : GoodTaxes // возвращает все налоги
+$api->getAllTaxes() : \igorbunov\Checkbox\Models\Receipts\Taxes\GoodTaxes // возвращает все налоги
 ```
 ##### transactions (транзакции):
 ```php
 $api->getTransactions(
-    new TransactionsQueryParams(
+    new \igorbunov\Checkbox\Models\Transactions\TransactionsQueryParams(
         [
-            TransactionsQueryParams::STATUS_CREATED,
-            TransactionsQueryParams::STATUS_DONE,
-            TransactionsQueryParams::STATUS_SIGNED
+            \igorbunov\Checkbox\Models\Transactions\TransactionsQueryParams::STATUS_CREATED,
+            \igorbunov\Checkbox\Models\Transactions\TransactionsQueryParams::STATUS_DONE,
+            \igorbunov\Checkbox\Models\Transactions\TransactionsQueryParams::STATUS_SIGNED
         ], // статусы транзакции
         [
-            TransactionsQueryParams::TYPE_RECEIPT,
-            TransactionsQueryParams::TYPE_SHIFT_OPEN,
-            TransactionsQueryParams::TYPE_Z_REPORT
+            \igorbunov\Checkbox\Models\Transactions\TransactionsQueryParams::TYPE_RECEIPT,
+            \igorbunov\Checkbox\Models\Transactions\TransactionsQueryParams::TYPE_SHIFT_OPEN,
+            \igorbunov\Checkbox\Models\Transactions\TransactionsQueryParams::TYPE_Z_REPORT
         ], // типы транзакций
         2, // limit
         0 // offset
     )
-) : Transactions // возвращает транзакции по фильтру
+) : \igorbunov\Checkbox\Models\Transactions\Transactions // возвращает транзакции по фильтру
 ```
 ```php
-$api->getTransaction('ид транзакции') : Transaction // возвращает транзакцию по айди
+$api->getTransaction('ид транзакции') : \igorbunov\Checkbox\Models\Transactions\Transaction // возвращает транзакцию по айди
 ```
 ```php
 $api->updateTransaction(
     'ид транзакции',
     base64_encode('request_signature')
-) : Transaction // меняет request_signature у транзакции, работает только если у транзакции статус PENDING
+) : \igorbunov\Checkbox\Models\Transactions\Transaction // меняет request_signature у транзакции, работает только если у транзакции статус PENDING
 ```
 ##### reports (отчеты):
 ```php
-$api->getReport() : ZReport // создает х отчет
+$api->getReport() : \igorbunov\Checkbox\Models\Shifts\ZReport // создает х отчет
 ```
 ```php
-$api->getReport('ид отчета') : ZReport // возвращает данные отчета по айди
+$api->getReport('ид отчета') : \igorbunov\Checkbox\Models\Shifts\ZReport // возвращает данные отчета по айди
 ```
 ```php
 $api->getReportText('ид отчета') : string // возвращает данные отчета по айди в виде текста
@@ -205,7 +179,7 @@ $api->getReportText('ид отчета', 60) : string // возвращает д
 ```
 ```php
 $api->getPeriodicalReport(
-    new PeriodicalReportQueryParams(
+    new \igorbunov\Checkbox\Models\Reports\PeriodicalReportQueryParams(
         '2020-10-27 00:00:00', // дата с
         '2020-11-04 13:15:00', // дата по
         60 // ширина текста
@@ -214,7 +188,7 @@ $api->getPeriodicalReport(
 ```
 ```php
 $api->getReports(
-    new ReportsQueryParams(
+    new \igorbunov\Checkbox\Models\Reports\ReportsQueryParams(
         '2020-10-27 00:00:00', // дата с
         '2020-11-04 13:15:00', // дата по
         [], // массив ид смен
@@ -223,25 +197,25 @@ $api->getReports(
         3, // limit
         0 // offset
     )
-) : Reports // возвращает отчеты по фильтру
+) : \igorbunov\Checkbox\Models\Reports\Reports // возвращает отчеты по фильтру
 ```
 ##### receipts (чеки):
 ```php
-$api->getReceipts() : Receipts // возвращает чеки
+$api->getReceipts() : \igorbunov\Checkbox\Models\Receipts\Receipts // возвращает чеки
 ```
 ```php
 $api->getReceipts(
-    new ReceiptsQueryParams(
+    new \igorbunov\Checkbox\Models\Receipts\ReceiptsQueryParams(
         '', // fiscal code
         '', // serial
         false, // desc - сортировка (false or true)
         2, // limit
         0 // offset
     )
-) : Receipts // возвращает чеки по фильтру
+) : \igorbunov\Checkbox\Models\Receipts\Receipts // возвращает чеки по фильтру
 ```
 ```php
-$api->getReceipt('ид чека') : Receipt // возвращает чек по айди
+$api->getReceipt('ид чека') : \igorbunov\Checkbox\Models\Receipts\Receipt // возвращает чек по айди
 ```
 ```php
 $api->getReceiptPdf('ид чека') : pdf // возвращает чек по айди в виде пдф
@@ -263,21 +237,21 @@ echo '<img src="data:image/png;base64,' . base64_encode($rawImageContent) . '"/>
 ```
 ###### чек продажи:
 ```php
-$receipt = new SellReceipt(
+$receipt = new \igorbunov\Checkbox\Models\Receipts\SellReceipt(
     'Вася Пупкин', // кассир
     'Отдел продаж', // отдел
-    new Goods(
+    new \igorbunov\Checkbox\Models\Receipts\Goods\Goods(
         [
-            new GoodItemModel( // товар 1
-                new GoodModel(
+            new \igorbunov\Checkbox\Models\Receipts\Goods\GoodItemModel( // товар 1
+                new \igorbunov\Checkbox\Models\Receipts\Goods\GoodModel(
                     'vm-123', // good_id
                     50 * 100, // 50 грн
                     'Биовак' // название товара
                 ),
                 1 * 1000 // кол-во товара  1 шт
             ),
-            new GoodItemModel( // товар 2
-                new GoodModel(
+            new \igorbunov\Checkbox\Models\Receipts\Goods\GoodItemModel( // товар 2
+                new \igorbunov\Checkbox\Models\Receipts\Goods\GoodModel(
                     'vm-124', // good_id
                     20 * 100, // 20 грн
                     'Биовак 2' // название товара
@@ -287,17 +261,17 @@ $receipt = new SellReceipt(
         ]
     ),
     'admin@gmail.com', // кому отправлять чек по почте
-    new Payments([
-        new CardPaymentPayload( // безналичная оплата
+    new \igorbunov\Checkbox\Models\Receipts\Payments\Payments([
+        new \igorbunov\Checkbox\Models\Receipts\Payments\CardPaymentPayload( // безналичная оплата
             40 * 100 // 40 грн
         ),
-        new CashPaymentPayload( // наличная оплата
+        new \igorbunov\Checkbox\Models\Receipts\Payments\CashPaymentPayload( // наличная оплата
             50 * 100 // 50 грн
         )
     ])
 );
 
-$api->createSellReceipt($receipt): Receipt; // выполняем оплату
+$api->createSellReceipt($receipt): \igorbunov\Checkbox\Models\Receipts\Receipt; // выполняем оплату
 ```
 более сложная оплата:
 ```php
@@ -311,13 +285,13 @@ foreach ($goodTaxes->results as $goodTax) {
     $taxCodes[] = $goodTax->code;
 }
 
-$receipt = new SellReceipt(
+$receipt = new \igorbunov\Checkbox\Models\Receipts\SellReceipt(
     'Вася Пупкин', // имя кассира
     'Отдел продаж', // отдел
-    new Goods( // товары
+    new \igorbunov\Checkbox\Models\Receipts\Goods\Goods( // товары
         [
-            new GoodItemModel(
-                new GoodModel(
+            new \igorbunov\Checkbox\Models\Receipts\Goods\GoodItemModel(
+                new \igorbunov\Checkbox\Models\Receipts\Goods\GoodModel(
                     'vm-123', // good_id айди товара
                     5000, // 50 грн  цена 100 = 1 грн
                     'Биовак', // название
@@ -328,11 +302,11 @@ $receipt = new SellReceipt(
                     $goodTaxes // налоги товара
                 ),
                 1000, // кол-во 1000 = 1 шт
-                new Discounts( // скидки или надбавки
+                new \igorbunov\Checkbox\Models\Receipts\Discounts\Discounts( // скидки или надбавки
                     [
-                        new DiscountModel(
-                            DiscountModel::TYPE_DISCOUNT, // скидка или надбавка
-                            DiscountModel::MODE_VALUE, // по значению или по проценту
+                        new \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel(
+                            \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel::TYPE_DISCOUNT, // скидка или надбавка
+                            \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel::MODE_VALUE, // по значению или по проценту
                             100, // 1 грн  сумма скидки/надбавки  100 = 1 грн
                             0, // сумма (не используется в данном sdk)
                             $tax->code, // код налога (подготовили выше)
@@ -349,23 +323,23 @@ $receipt = new SellReceipt(
         ]
     ),
     'admin@gmail.com', // кому отправлять чек по почте
-    new Payments([ // оплаты
-        new CardPaymentPayload( // безналичная оплата
+    new \igorbunov\Checkbox\Models\Receipts\Payments\Payments([ // оплаты
+        new \igorbunov\Checkbox\Models\Receipts\Payments\CardPaymentPayload( // безналичная оплата
             400, // сумма оплаты 400 = 4 грн
             'beznalichka', // текст оплаты
             0, // code - не знаю для чего (видимо пин код карты)
             '0000 0000 0000 0000' // номер карты
         ),
-        new CashPaymentPayload( // наличная оплата
+        new \igorbunov\Checkbox\Models\Receipts\Payments\CashPaymentPayload( // наличная оплата
             4300, // сумма оплаты 4300 = 43 грн
             'nalichka' // текст оплаты
         )
     ]),
-    new Discounts( // скидки/надбавки на весь чек
+    new \igorbunov\Checkbox\Models\Receipts\Discounts\Discounts( // скидки/надбавки на весь чек
         [
-            new DiscountModel(
-                DiscountModel::TYPE_DISCOUNT, // скидка или надбавка
-                DiscountModel::MODE_VALUE, // по значению или по проценту
+            new \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel(
+                \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel::TYPE_DISCOUNT, // скидка или надбавка
+                \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel::MODE_VALUE, // по значению или по проценту
                 200, // 2 грн  сумма скидки/надбавки  200 = 2 грн
                 0, // сумма (не используется в данном sdk)
                 $tax->code, // код налога (подготовили выше)
@@ -379,7 +353,7 @@ $receipt = new SellReceipt(
     '45435h543twrege' // баркод
 );
 
-$saleReceiptResult = $api->createSellReceipt($receipt): Receipt; // выполняем оплату
+$saleReceiptResult = $api->createSellReceipt($receipt): \igorbunov\Checkbox\Models\Receipts\Receipt; // выполняем оплату
 ```
 еще пример
 ```php
@@ -392,13 +366,13 @@ foreach ($goodTaxes->results as $goodTax) {
     $taxCodes[] = $goodTax->code;
 }
 
-$receipt = new SellReceipt(
+$receipt = new \igorbunov\Checkbox\Models\Receipts\SellReceipt(
     'Вася Пупкин',
     'Отдел продаж',
-    new Goods(
+    new \igorbunov\Checkbox\Models\Receipts\Goods\Goods(
         [
-            new GoodItemModel(
-                new GoodModel(
+            new \igorbunov\Checkbox\Models\Receipts\Goods\GoodItemModel(
+                new \igorbunov\Checkbox\Models\Receipts\Goods\GoodModel(
                     'vm-123', // good_id
                     5000, // 50 грн
                     'Биовак',
@@ -409,11 +383,11 @@ $receipt = new SellReceipt(
                     $goodTaxes
                 ),
                 1000,
-                new Discounts(
+                new \igorbunov\Checkbox\Models\Receipts\Discounts\Discounts(
                     [
-                        new DiscountModel(
-                            DiscountModel::TYPE_DISCOUNT,
-                            DiscountModel::MODE_VALUE,
+                        new \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel(
+                            \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel::TYPE_DISCOUNT,
+                            \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel::MODE_VALUE,
                             100, // 1 грн
                             0,
                             $tax->code,
@@ -427,8 +401,8 @@ $receipt = new SellReceipt(
                 0,
                 ''
             ),
-            new GoodItemModel(
-                new GoodModel(
+            new \igorbunov\Checkbox\Models\Receipts\Goods\GoodItemModel(
+                new \igorbunov\Checkbox\Models\Receipts\Goods\GoodModel(
                     'vm-124', // good_id
                     2000, // 20 грн
                     'Биовак 2',
@@ -439,11 +413,11 @@ $receipt = new SellReceipt(
                     $goodTaxes
                 ),
                 2000, // 2 шт
-                new Discounts(
+                new \igorbunov\Checkbox\Models\Receipts\Discounts\Discounts(
                     [
-                        new DiscountModel(
-                            DiscountModel::TYPE_EXTRA_CHARGE,
-                            DiscountModel::MODE_VALUE,
+                        new \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel(
+                            \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel::TYPE_EXTRA_CHARGE,
+                            \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel::MODE_VALUE,
                             200, // 2 грн
                             0,
                             $tax->code,
@@ -460,19 +434,19 @@ $receipt = new SellReceipt(
         ]
     ),
     'admin@gmail.com',
-    new Payments([
-        new CardPaymentPayload(
+    new \igorbunov\Checkbox\Models\Receipts\Payments\Payments([
+        new \igorbunov\Checkbox\Models\Receipts\Payments\CardPaymentPayload(
             4700
         ),
-        new CashPaymentPayload(
+        new \igorbunov\Checkbox\Models\Receipts\Payments\CashPaymentPayload(
             4700
         )
     ]),
-    new Discounts(
+    new \igorbunov\Checkbox\Models\Receipts\Discounts\Discounts(
         [
-            new DiscountModel(
-                DiscountModel::TYPE_EXTRA_CHARGE,
-                DiscountModel::MODE_VALUE,
+            new \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel(
+                \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel::TYPE_EXTRA_CHARGE,
+                \igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel::MODE_VALUE,
                 200, // 2 грн
                 0,
                 $tax->code,
@@ -483,35 +457,35 @@ $receipt = new SellReceipt(
     )
 );
 
-$api->createSellReceipt($receipt): Receipt;
+$api->createSellReceipt($receipt): \igorbunov\Checkbox\Models\Receipts\Receipt;
 ```
 ```php
 $api->createServiceReceipt(
-    new ServiceReceipt(
-        new CashPaymentPayload(5100)
+    new \igorbunov\Checkbox\Models\Receipts\ServiceReceipt(
+        new \igorbunov\Checkbox\Models\Receipts\Payments\CashPaymentPayload(5100)
     )
-): Receipt // создаем чек сервисного внесения денег (наличкой)
+): \igorbunov\Checkbox\Models\Receipts\Receipt // создаем чек сервисного внесения денег (наличкой)
 ```
 ```php
 $api->createServiceReceipt(
-    new ServiceReceipt(
-        new CardPaymentPayload(1000)
+    new \igorbunov\Checkbox\Models\Receipts\ServiceReceipt(
+        new \igorbunov\Checkbox\Models\Receipts\Payments\CardPaymentPayload(1000)
     )
-): Receipt // создаем чек сервисного внесения денег (картой)
+): \igorbunov\Checkbox\Models\Receipts\Receipt // создаем чек сервисного внесения денег (картой)
 ```
 ```php
 $api->createServiceReceipt(
-    new ServiceReceipt(
-        new CashPaymentPayload(-5100)
+    new \igorbunov\Checkbox\Models\Receipts\ServiceReceipt(
+        new new \igorbunov\Checkbox\Models\Receipts\Payments\CashPaymentPayload(-5100)
     )
-): Receipt // создаем чек сервисного вынесения денег (наличкой) (знак минус)
+): \igorbunov\Checkbox\Models\Receipts\Receipt // создаем чек сервисного вынесения денег (наличкой) (знак минус)
 ```
 ```php
 $api->createServiceReceipt(
-    new ServiceReceipt(
-        new CardPaymentPayload(-1000)
+    new \igorbunov\Checkbox\Models\Receipts\ServiceReceipt(
+        new new \igorbunov\Checkbox\Models\Receipts\Payments\CardPaymentPayload(-1000)
     )
-): Receipt // создаем чек сервисного вынесения денег (картой) (знак минус)
+): \igorbunov\Checkbox\Models\Receipts\Receipt // создаем чек сервисного вынесения денег (картой) (знак минус)
 ```
 
 ##### Рекомендации:
@@ -522,18 +496,45 @@ try {
 
     // тут все делаем
 
-} catch (InvalidCredentials $err) {
+} catch (\igorbunov\Checkbox\Errors\InvalidCredentials $err) {
     var_dump('creds err', $err->getMessage());
-}  catch (EmptyResponse $err) {
+}  catch (\igorbunov\Checkbox\Errors\EmptyResponse $err) {
     var_dump('empty response', $err->getMessage(), $err->getTraceAsString());
-} catch (Validation $err) {
+} catch (\igorbunov\Checkbox\Errors\Validation $err) {
     var_dump('valid err', $err->getMessage());
     var_dump('error detail', $err->getDetail());
-} catch (NoActiveShift $err) {
+} catch (\igorbunov\Checkbox\Errors\NoActiveShift $err) {
     var_dump('no shift', $err->getMessage());
-} catch (AlreadyOpenedShift $err) {
+} catch (\igorbunov\Checkbox\Errors\AlreadyOpenedShift $err) {
     var_dump('opened shift', $err->getMessage());
 } catch (\Exception $err) {
     var_dump('default err', $err->getMessage());
 }
+```
+
+##### подключение всех неймспейсов из примеров:
+```php
+use igorbunov\Checkbox\CheckboxJsonApi;
+use igorbunov\Checkbox\Config;
+use igorbunov\Checkbox\Errors\InvalidCredentials;
+use igorbunov\Checkbox\Errors\Validation;
+use igorbunov\Checkbox\Errors\NoActiveShift;
+use igorbunov\Checkbox\Errors\AlreadyOpenedShift;
+use igorbunov\Checkbox\Errors\EmptyResponse;
+use igorbunov\Checkbox\Models\CashRegisters\CashRegistersQueryParams;
+use igorbunov\Checkbox\Models\Shifts\ShiftsQueryParams;
+use igorbunov\Checkbox\Models\Receipts\ReceiptsQueryParams;
+use igorbunov\Checkbox\Models\Receipts\Discounts\Discounts;
+use igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel;
+use igorbunov\Checkbox\Models\Receipts\SellReceipt;
+use igorbunov\Checkbox\Models\Receipts\Payments\Payments;
+use igorbunov\Checkbox\Models\Receipts\Payments\CardPaymentPayload;
+use igorbunov\Checkbox\Models\Receipts\Payments\CashPaymentPayload;
+use igorbunov\Checkbox\Models\Receipts\ServiceReceipt;
+use igorbunov\Checkbox\Models\Reports\PeriodicalReportQueryParams;
+use igorbunov\Checkbox\Models\Reports\ReportsQueryParams;
+use igorbunov\Checkbox\Models\Transactions\TransactionsQueryParams;
+use igorbunov\Checkbox\Models\Receipts\Goods\Goods;
+use igorbunov\Checkbox\Models\Receipts\Goods\GoodItemModel;
+use igorbunov\Checkbox\Models\Receipts\Goods\GoodModel;
 ```

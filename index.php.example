@@ -3,29 +3,29 @@
 require_once 'vendor/autoload.php';
 ini_set("xdebug.overload_var_dump", "off");
 
-use Checkbox\CheckboxJsonApi;
-use Checkbox\Config;
-use Checkbox\Errors\InvalidCredentials;
-use Checkbox\Errors\Validation;
-use Checkbox\Errors\NoActiveShift;
-use Checkbox\Errors\AlreadyOpenedShift;
-use Checkbox\Errors\EmptyResponse;
-use Checkbox\Models\CashRegisters\CashRegistersQueryParams;
-use Checkbox\Models\Shifts\ShiftsQueryParams;
-use Checkbox\Models\Receipts\ReceiptsQueryParams;
-use Checkbox\Models\Receipts\Discounts\Discounts;
-use Checkbox\Models\Receipts\Discounts\DiscountModel;
-use Checkbox\Models\Receipts\SellReceipt;
-use Checkbox\Models\Receipts\Payments\Payments;
-use Checkbox\Models\Receipts\Payments\CardPaymentPayload;
-use Checkbox\Models\Receipts\Payments\CashPaymentPayload;
-use Checkbox\Models\Receipts\ServiceReceipt;
-use Checkbox\Models\Reports\PeriodicalReportQueryParams;
-use Checkbox\Models\Reports\ReportsQueryParams;
-use Checkbox\Models\Transactions\TransactionsQueryParams;
-use Checkbox\Models\Receipts\Goods\Goods;
-use Checkbox\Models\Receipts\Goods\GoodItemModel;
-use Checkbox\Models\Receipts\Goods\GoodModel;
+use igorbunov\Checkbox\CheckboxJsonApi;
+use igorbunov\Checkbox\Config;
+use igorbunov\Checkbox\Errors\InvalidCredentials;
+use igorbunov\Checkbox\Errors\Validation;
+use igorbunov\Checkbox\Errors\NoActiveShift;
+use igorbunov\Checkbox\Errors\AlreadyOpenedShift;
+use igorbunov\Checkbox\Errors\EmptyResponse;
+use igorbunov\Checkbox\Models\CashRegisters\CashRegistersQueryParams;
+use igorbunov\Checkbox\Models\Shifts\ShiftsQueryParams;
+use igorbunov\Checkbox\Models\Receipts\ReceiptsQueryParams;
+use igorbunov\Checkbox\Models\Receipts\Discounts\Discounts;
+use igorbunov\Checkbox\Models\Receipts\Discounts\DiscountModel;
+use igorbunov\Checkbox\Models\Receipts\SellReceipt;
+use igorbunov\Checkbox\Models\Receipts\Payments\Payments;
+use igorbunov\Checkbox\Models\Receipts\Payments\CardPaymentPayload;
+use igorbunov\Checkbox\Models\Receipts\Payments\CashPaymentPayload;
+use igorbunov\Checkbox\Models\Receipts\ServiceReceipt;
+use igorbunov\Checkbox\Models\Reports\PeriodicalReportQueryParams;
+use igorbunov\Checkbox\Models\Reports\ReportsQueryParams;
+use igorbunov\Checkbox\Models\Transactions\TransactionsQueryParams;
+use igorbunov\Checkbox\Models\Receipts\Goods\Goods;
+use igorbunov\Checkbox\Models\Receipts\Goods\GoodItemModel;
+use igorbunov\Checkbox\Models\Receipts\Goods\GoodModel;
 
 
 if (!function_exists('pre')) {
