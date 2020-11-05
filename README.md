@@ -1,5 +1,5 @@
 # checkbox-in-ua-php-sdk
-### PHP SDK for integration with checkbox.in.ua api
+### PHP SDK для работы с Checkbox api (Украина)
 
 ##### Примечание:
 
@@ -10,6 +10,8 @@
 <https://dev-api.checkbox.in.ua/api/redoc>
 
 <https://dev-api.checkbox.in.ua/api/docs>
+
+<https://docs.google.com/document/d/1Zhkc4OljKjea_235YafVvZunkWSp6TCAKeckhgl8t2w/edit>
 
 #### Установка: 
 ```bash
