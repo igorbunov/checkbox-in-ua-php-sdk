@@ -31,16 +31,18 @@ class GoodModelMapper
     {
         $goodTaxeRatesArr = [];
 
-        foreach ($goodModel->taxes->results as $tax) {
-            $goodTaxeRatesArr[] = $tax->rate;
+        if (!is_null($goodModel->taxes)) {
+            foreach ($goodModel->taxes->results as $tax) {
+                $goodTaxeRatesArr[] = $tax->rate;
+            }
         }
 
         return [
             'code' => $goodModel->code,
             'name' => $goodModel->name,
-            'barcode' => $goodModel->barcode,
-            'header' => $goodModel->header,
-            'footer' => $goodModel->footer,
+            'barcode' => $goodModel->barcode ?? '',
+            'header' => $goodModel->header ?? '',
+            'footer' => $goodModel->footer ?? '',
             'price' => $goodModel->price,
             'taxes' => $goodTaxeRatesArr
         ];

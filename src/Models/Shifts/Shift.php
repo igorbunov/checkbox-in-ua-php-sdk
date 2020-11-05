@@ -33,7 +33,7 @@ class Shift
         $closing_transaction,
         $created_at,
         $updated_at,
-        Balance $balance,
+        ?Balance $balance,
         Taxes $taxes,
         ?CashRegister $cash_register,
         ?Cashier $cashier

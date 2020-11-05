@@ -20,12 +20,12 @@ class GoodItemModelMapper
 
         $goods = new GoodItemModel(
             $goodModel,
-            $json['sum'],
             $json['quantity'],
-            $json['is_return'],
+            $discounts,
             $taxes,
-            $json['good_id'] ?? '',
-            $discounts
+            $json['is_return'],
+            $json['sum'],
+            $json['good_id'] ?? ''
         );
 
         return $goods;

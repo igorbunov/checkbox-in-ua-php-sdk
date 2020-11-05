@@ -23,8 +23,8 @@ class SellReceipt
         string $departament,
         Goods $goods,
         string $deliveryEmail = '',
-        ?Discounts $discounts = null,
         Payments $payments,
+        ?Discounts $discounts = null,
         string $header = '',
         string $footer = '',
         string $barcode = ''

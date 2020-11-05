@@ -23,17 +23,27 @@ use Checkbox\Mappers\Shifts\ZReportMapper;
 use Checkbox\Mappers\Transactions\TransactionMapper;
 use Checkbox\Mappers\Transactions\TransactionsMapper;
 use Checkbox\Models\Cashier\Cashier;
+use Checkbox\Models\CashRegisters\CashRegister;
+use Checkbox\Models\CashRegisters\CashRegisterInfo;
+use Checkbox\Models\CashRegisters\CashRegisters;
 use Checkbox\Models\CashRegisters\CashRegistersQueryParams;
+use Checkbox\Models\Receipts\Receipt;
+use Checkbox\Models\Receipts\Receipts;
 use Checkbox\Models\Receipts\ReceiptsQueryParams;
 use Checkbox\Models\Receipts\SellReceipt;
 use Checkbox\Models\Receipts\ServiceReceipt;
+use Checkbox\Models\Receipts\Taxes\GoodTaxes;
 use Checkbox\Models\Reports\PeriodicalReportQueryParams;
+use Checkbox\Models\Reports\Reports;
 use Checkbox\Models\Reports\ReportsQueryParams;
 use Checkbox\Models\Shifts\CloseShift;
 use Checkbox\Models\Shifts\CreateShift;
 use Checkbox\Models\Shifts\Shift;
 use Checkbox\Models\Shifts\Shifts;
 use Checkbox\Models\Shifts\ShiftsQueryParams;
+use Checkbox\Models\Shifts\ZReport;
+use Checkbox\Models\Transactions\Transaction;
+use Checkbox\Models\Transactions\Transactions;
 use Checkbox\Models\Transactions\TransactionsQueryParams;
 use GuzzleHttp\Client;
 
@@ -318,7 +328,7 @@ class CheckboxJsonApi
 
     // start cash registers methods //
 
-    public function getCashRegisters(CashRegistersQueryParams $queryParams = null)
+    public function getCashRegisters(CashRegistersQueryParams $queryParams = null): CashRegisters
     {
         if (is_null($queryParams)) {
             $queryParams = new CashRegistersQueryParams();
@@ -337,7 +347,7 @@ class CheckboxJsonApi
         return (new CashRegistersMapper())->jsonToObject($jsonResponse);
     }
 
-    public function getCashRegister(string $registerId)
+    public function getCashRegister(string $registerId): CashRegister
     {
         $response = $this->guzzleClient->request(
             self::METHOD_GET,
@@ -352,7 +362,7 @@ class CheckboxJsonApi
         return (new CashRegisterMapper())->jsonToObject($jsonResponse);
     }
 
-    public function getCashRegisterInfo()
+    public function getCashRegisterInfo(): CashRegisterInfo
     {
         $response = $this->guzzleClient->request(
             self::METHOD_GET,
@@ -371,7 +381,7 @@ class CheckboxJsonApi
 
     // start receipts methods //
 
-    public function getReceipts(ReceiptsQueryParams $queryParams = null)
+    public function getReceipts(ReceiptsQueryParams $queryParams = null): Receipts
     {
         if (is_null($queryParams)) {
             $queryParams = new ReceiptsQueryParams();
@@ -391,7 +401,7 @@ class CheckboxJsonApi
         return (new ReceiptsMapper())->jsonToObject($jsonResponse);
     }
 
-    public function getReceipt(string $receiptId)
+    public function getReceipt(string $receiptId): Receipt
     {
         $response = $this->guzzleClient->request(
             self::METHOD_GET,
@@ -406,7 +416,7 @@ class CheckboxJsonApi
         return (new ReceiptMapper())->jsonToObject($jsonResponse);
     }
 
-    public function createSellReceipt(SellReceipt $receipt)
+    public function createSellReceipt(SellReceipt $receipt): Receipt
     {
         $options = $this->requestOptions;
         $options['body'] = \json_encode((new SellReceiptMapper())->objectToJson($receipt));
@@ -424,7 +434,7 @@ class CheckboxJsonApi
         return (new ReceiptMapper())->jsonToObject($jsonResponse);
     }
 
-    public function createServiceReceipt(ServiceReceipt $receipt)
+    public function createServiceReceipt(ServiceReceipt $receipt): Receipt
     {
         $options = $this->requestOptions;
         $options['body'] = \json_encode((new ServiceReceiptMapper())->objectToJson($receipt));
@@ -517,7 +527,7 @@ class CheckboxJsonApi
 
     // start taxes methods //
 
-    public function getAllTaxes()
+    public function getAllTaxes(): GoodTaxes
     {
         $response = $this->guzzleClient->request(
             self::METHOD_GET,
@@ -536,7 +546,7 @@ class CheckboxJsonApi
 
     // start report methods //
 
-    public function createXReport()
+    public function createXReport(): ZReport
     {
         $response = $this->guzzleClient->request(
             self::METHOD_POST,
@@ -551,7 +561,7 @@ class CheckboxJsonApi
         return (new ZReportMapper())->jsonToObject($jsonResponse);
     }
 
-    public function getReport(string $reportId)
+    public function getReport(string $reportId): ZReport
     {
         $response = $this->guzzleClient->request(
             self::METHOD_GET,
@@ -604,7 +614,7 @@ class CheckboxJsonApi
         return $responseContents;
     }
 
-    public function getReports(ReportsQueryParams $queryParams)
+    public function getReports(ReportsQueryParams $queryParams): Reports
     {
         $response = $this->guzzleClient->request(
             self::METHOD_GET,
@@ -624,7 +634,7 @@ class CheckboxJsonApi
 
     // start transaction methods //
 
-    public function getTransaction(string $transactionId)
+    public function getTransaction(string $transactionId): Transaction
     {
         $response = $this->guzzleClient->request(
             self::METHOD_GET,
@@ -639,7 +649,7 @@ class CheckboxJsonApi
         return (new TransactionMapper())->jsonToObject($jsonResponse);
     }
 
-    public function getTransactions(TransactionsQueryParams $queryParams)
+    public function getTransactions(TransactionsQueryParams $queryParams): Transactions
     {
         $response = $this->guzzleClient->request(
             self::METHOD_GET,
@@ -655,7 +665,7 @@ class CheckboxJsonApi
     }
 
 
-    public function updateTransaction(string $transactionId, string $requestSignature)
+    public function updateTransaction(string $transactionId, string $requestSignature): Transaction
     {
         $options = $this->requestOptions;
         $options['body'] = \json_encode([

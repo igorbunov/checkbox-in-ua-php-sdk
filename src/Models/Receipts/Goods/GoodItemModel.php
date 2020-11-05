@@ -17,12 +17,12 @@ class GoodItemModel
 
     public function __construct(
         GoodModel $good,
-        int $sum,
         int $quantity,
-        bool $is_return = false,
+        ?Discounts $discounts = null,
         ?GoodTaxes $taxes = null,
-        string $good_id = '',
-        ?Discounts $discounts = null
+        bool $is_return = false,
+        int $sum = 0,
+        string $good_id = ''
     ) {
         $this->good = $good;
         $this->sum = $sum;
