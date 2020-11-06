@@ -22,7 +22,7 @@ class Transaction
     public $response_error_message;
     /** @var string $created_at */
     public $created_at;
-    /** @var string $updated_at */
+    /** @var string|null $updated_at */
     public $updated_at;
 
     /** @var string $request_data */
@@ -46,7 +46,7 @@ class Transaction
         ?string $response_status,
         ?string $response_error_message,
         string $created_at,
-        string $updated_at,
+        ?string $updated_at,
         string $request_data = '',
         string $request_signature = '',
         string $response_id = '',

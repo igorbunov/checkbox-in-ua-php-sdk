@@ -31,31 +31,31 @@ class Receipt
     public $total_payment;
     /** @var int $total_rest */
     public $total_rest;
-    /** @var string $fiscal_code */
+    /** @var string|null $fiscal_code */
     public $fiscal_code;
-    /** @var string $fiscal_date */
+    /** @var string|null $fiscal_date */
     public $fiscal_date;
-    /** @var string $delivered_at */
+    /** @var string|null $delivered_at */
     public $delivered_at;
-    /** @var string $created_at */
+    /** @var string|null $created_at */
     public $created_at;
-    /** @var string $updated_at */
+    /** @var string|null $updated_at */
     public $updated_at;
     /** @var GoodTaxes|null $taxes */
     public $taxes;
     /** @var Discounts|null $discounts */
     public $discounts;
-    /** @var string $header */
+    /** @var string|null $header */
     public $header;
-    /** @var string $footer */
+    /** @var string|null $footer */
     public $footer;
-    /** @var string $barcode */
+    /** @var string|null $barcode */
     public $barcode;
     /** @var bool $is_created_offline */
     public $is_created_offline;
     /** @var bool $is_sent_dps */
     public $is_sent_dps;
-    /** @var string $sent_dps_at */
+    /** @var string|null $sent_dps_at */
     public $sent_dps_at;
     /** @var Shift|null $shift */
     public $shift;
@@ -71,19 +71,19 @@ class Receipt
         int $total_sum,
         int $total_payment,
         int $total_rest,
-        string $fiscal_code,
-        string $fiscal_date,
-        string $delivered_at,
-        string $created_at,
-        string $updated_at,
+        ?string $fiscal_code,
+        ?string $fiscal_date,
+        ?string $delivered_at,
+        ?string $created_at,
+        ?string $updated_at,
         ?GoodTaxes $taxes,
         ?Discounts $discounts,
-        string $header,
-        string $footer,
-        string $barcode,
+        ?string $header,
+        ?string $footer,
+        ?string $barcode,
         bool $is_created_offline,
         bool $is_sent_dps,
-        string $sent_dps_at,
+        ?string $sent_dps_at,
         ?Shift $shift
     ) {
         $this->id = $id;

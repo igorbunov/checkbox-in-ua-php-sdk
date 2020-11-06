@@ -32,7 +32,7 @@
       "vendor/bin/phpunit --testsuite main  && vendor/bin/php-coverage-checker build/logs/clover.xml 1"
     ],
     "static": [
-      "vendor/bin/phpcs --ignore-annotations --standard=PSR12 src tests && vendor/bin/phpcf tests src && vendor/bin/phpstan analyse --level=max src tests"
+      "vendor/bin/phpcs --ignore-annotations --standard=PSR12 src tests && vendor/bin/phpcf src tests && vendor/bin/phpstan analyse --level=max src"
     ],
     "check-composer": [
       "composer validate && vendor/bin/security-checker security:check"
