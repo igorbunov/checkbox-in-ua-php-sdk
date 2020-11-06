@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Shifts\Balance;
 
 class BalanceMapper
 {
+    /**
+     * @param mixed $json
+     * @return Balance|null
+     */
     public function jsonToObject($json): ?Balance
     {
         if (is_null($json)) {
@@ -25,10 +29,5 @@ class BalanceMapper
         );
 
         return $balance;
-    }
-
-    public function objectToJson(Balance $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

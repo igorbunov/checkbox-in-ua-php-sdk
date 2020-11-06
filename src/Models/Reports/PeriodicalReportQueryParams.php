@@ -4,8 +4,11 @@ namespace igorbunov\Checkbox\Models\Reports;
 
 class PeriodicalReportQueryParams
 {
+    /** @var string $from_date */
     public $from_date;
+    /** @var string $to_date */
     public $to_date;
+    /** @var int $width */
     public $width;
 
     public function __construct(

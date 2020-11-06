@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Cashier\Cashier;
 
 class CashierMapper
 {
+    /**
+     * @param mixed $json
+     * @return Cashier|null
+     */
     public function jsonToObject($json): ?Cashier
     {
         if (is_null($json)) {
@@ -26,10 +30,5 @@ class CashierMapper
         );
 
         return $cashier;
-    }
-
-    public function objectToJson(Cashier $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

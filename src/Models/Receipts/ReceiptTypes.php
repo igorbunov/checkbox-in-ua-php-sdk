@@ -9,7 +9,9 @@ class ReceiptTypes
     public const SERVICE_IN = 'SERVICE_IN';
     public const SERVICE_OUT = 'SERVICE_OUT';
 
+    /** @var array<string> $allowedValues */
     private $allowedValues = [];
+    /** @var string $value */
     private $value = '';
 
     public function __construct(string $value)
@@ -21,7 +23,7 @@ class ReceiptTypes
         $this->validate();
     }
 
-    private function initAllowedValues()
+    private function initAllowedValues(): void
     {
         $this->allowedValues = [
             self::SELL,
@@ -31,14 +33,14 @@ class ReceiptTypes
         ];
     }
 
-    private function validate()
+    private function validate(): void
     {
         if (!in_array($this->value, $this->allowedValues)) {
             throw new \Exception("Type '{$this->value}' is not allowed");
         }
     }
 
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }

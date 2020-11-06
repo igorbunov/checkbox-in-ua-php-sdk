@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Cashier\Organization;
 
 class OrganizationMapper
 {
+    /**
+     * @param mixed $json
+     * @return Organization|null
+     */
     public function jsonToObject($json): ?Organization
     {
         if (is_null($json)) {
@@ -22,10 +26,5 @@ class OrganizationMapper
         );
 
         return $organization;
-    }
-
-    public function objectToJson(Organization $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

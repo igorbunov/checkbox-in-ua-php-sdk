@@ -4,8 +4,15 @@ namespace igorbunov\Checkbox\Models\Receipts\Payments;
 
 class Payments
 {
+    /** @var array<CardPaymentPayload|CashPaymentPayload> $results */
     public $results = [];
 
+    /**
+     * Constructor
+     *
+     * @param array<CardPaymentPayload|CashPaymentPayload> $payments
+     *
+     */
     public function __construct(array $payments)
     {
         foreach ($payments as $payment) {

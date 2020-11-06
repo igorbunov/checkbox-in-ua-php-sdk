@@ -4,10 +4,15 @@ namespace igorbunov\Checkbox\Models\Shifts;
 
 class ShiftsQueryParams
 {
+    /** @var array<string> $statuses */
     public $statuses;
+    /** @var bool $desc */
     public $desc;
+    /** @var int $limit */
     public $limit;
+    /** @var int $offset */
     public $offset;
+    /** @var array<string> $allowedStatuses */
     private $allowedStatuses = [];
 
     public const STATUS_CREATED = 'CREATED';
@@ -16,6 +21,15 @@ class ShiftsQueryParams
     public const STATUS_CLOSING = 'CLOSING';
     public const STATUS_CLOSED = 'CLOSED';
 
+    /**
+     * Constructor
+     *
+     * @param array<string> $statuses
+     * @param bool $desc
+     * @param int $limit
+     * @param int $offset
+     *
+     */
     public function __construct(
         array $statuses = [],
         bool $desc = false,
@@ -41,7 +55,7 @@ class ShiftsQueryParams
         $this->desc = $desc;
     }
 
-    private function initAllowedStatuses()
+    private function initAllowedStatuses(): void
     {
         $this->allowedStatuses = [
             self::STATUS_CREATED,
@@ -52,7 +66,7 @@ class ShiftsQueryParams
         ];
     }
 
-    private function validateStatuses()
+    private function validateStatuses(): void
     {
         foreach ($this->statuses as $status) {
             if (!in_array($status, $this->allowedStatuses)) {

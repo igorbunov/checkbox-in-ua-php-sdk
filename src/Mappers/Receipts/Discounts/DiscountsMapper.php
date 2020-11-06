@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Receipts\Discounts\Discounts;
 
 class DiscountsMapper
 {
+    /**
+     * @param mixed $json
+     * @return Discounts|null
+     */
     public function jsonToObject($json): ?Discounts
     {
         if (is_null($json)) {
@@ -15,7 +19,11 @@ class DiscountsMapper
         $results = [];
 
         foreach ($json as $row) {
-            $results[] = (new DiscountModelMapper())->jsonToObject($row);
+            $discount = (new DiscountModelMapper())->jsonToObject($row);
+
+            if (!is_null($discount)) {
+                $results[] = $discount;
+            }
         }
 
         $discounts = new Discounts($results);
@@ -23,7 +31,11 @@ class DiscountsMapper
         return $discounts;
     }
 
-    public function objectToJson(?Discounts $discounts = null)
+    /**
+     * @param Discounts|null $discounts
+     * @return array<array<string, string>>
+     */
+    public function objectToJson(?Discounts $discounts = null): array
     {
         if (is_null($discounts)) {
             return [];

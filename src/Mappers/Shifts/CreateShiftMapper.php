@@ -9,6 +9,10 @@ use igorbunov\Checkbox\Models\Shifts\CreateShift;
 
 class CreateShiftMapper
 {
+    /**
+     * @param mixed $json
+     * @return CreateShift|null
+     */
     public function jsonToObject($json): ?CreateShift
     {
         if (is_null($json)) {
@@ -45,10 +49,5 @@ class CreateShiftMapper
         );
 
         return $shift;
-    }
-
-    public function objectToJson(CreateShift $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

@@ -9,6 +9,10 @@ use igorbunov\Checkbox\Models\Shifts\CloseShift;
 
 class CloseShiftMapper
 {
+    /**
+     * @param mixed $json
+     * @return CloseShift|null
+     */
     public function jsonToObject($json): ?CloseShift
     {
         if (is_null($json)) {
@@ -45,10 +49,5 @@ class CloseShiftMapper
         );
 
         return $shift;
-    }
-
-    public function objectToJson(CloseShift $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

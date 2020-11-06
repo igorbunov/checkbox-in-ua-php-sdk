@@ -8,16 +8,11 @@ use igorbunov\Checkbox\Models\Receipts\ServiceReceipt;
 
 class ServiceReceiptMapper
 {
-    public function jsonToObject($json): ?ServiceReceipt
-    {
-        if (is_null($json)) {
-            return null;
-        }
-        //TODO: fix null
-        return null;
-    }
-
-    public function objectToJson(ServiceReceipt $receipt)
+    /**
+     * @param ServiceReceipt $receipt
+     * @return array<string, array<string, int|string>|null>
+     */
+    public function objectToJson(ServiceReceipt $receipt): array
     {
         $payment = null;
 

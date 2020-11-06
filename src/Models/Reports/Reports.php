@@ -7,10 +7,19 @@ use igorbunov\Checkbox\Models\Shifts\ZReport;
 
 class Reports
 {
+    /** @var array<ZReport> $results */
     public $results;
+    /** @var Meta|null $meta */
     public $meta;
 
-    public function __construct(array $reports, Meta $meta)
+    /**
+     * Constructor
+     *
+     * @param array<ZReport> $reports
+     * @param Meta|null $meta
+     *
+     */
+    public function __construct(array $reports, ?Meta $meta)
     {
         foreach ($reports as $report) {
             if (!is_a($report, ZReport::class)) {

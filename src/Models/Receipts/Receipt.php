@@ -11,39 +11,63 @@ use igorbunov\Checkbox\Models\Transactions\Transaction;
 
 class Receipt
 {
+    /** @var string $id */
     public $id;
+    /** @var ReceiptTypes|null $type */
     public $type;
+    /** @var Transaction|null $transaction */
     public $transaction;
+    /** @var int $serial */
     public $serial;
+    /** @var ReceiptStatus|null $status */
     public $status;
+    /** @var Goods|null $goods */
     public $goods;
+    /** @var Payments|null $payments */
     public $payments;
+    /** @var int $total_sum */
     public $total_sum;
+    /** @var int $total_payment */
     public $total_payment;
+    /** @var int $total_rest */
     public $total_rest;
+    /** @var string $fiscal_code */
     public $fiscal_code;
+    /** @var string $fiscal_date */
     public $fiscal_date;
+    /** @var string $delivered_at */
     public $delivered_at;
+    /** @var string $created_at */
     public $created_at;
+    /** @var string $updated_at */
     public $updated_at;
+    /** @var GoodTaxes|null $taxes */
     public $taxes;
+    /** @var Discounts|null $discounts */
     public $discounts;
+    /** @var string $header */
     public $header;
+    /** @var string $footer */
     public $footer;
+    /** @var string $barcode */
     public $barcode;
+    /** @var bool $is_created_offline */
     public $is_created_offline;
+    /** @var bool $is_sent_dps */
     public $is_sent_dps;
+    /** @var string $sent_dps_at */
     public $sent_dps_at;
+    /** @var Shift|null $shift */
     public $shift;
 
     public function __construct(
         string $id,
-        ReceiptTypes $type,
-        Transaction $transaction,
+        ?ReceiptTypes $type,
+        ?Transaction $transaction,
         int $serial,
-        ReceiptStatus $status,
-        Goods $goods,
-        Payments $payments,
+        ?ReceiptStatus $status,
+        ?Goods $goods,
+        ?Payments $payments,
         int $total_sum,
         int $total_payment,
         int $total_rest,
@@ -52,15 +76,15 @@ class Receipt
         string $delivered_at,
         string $created_at,
         string $updated_at,
-        GoodTaxes $taxes,
-        Discounts $discounts,
+        ?GoodTaxes $taxes,
+        ?Discounts $discounts,
         string $header,
         string $footer,
         string $barcode,
         bool $is_created_offline,
         bool $is_sent_dps,
         string $sent_dps_at,
-        Shift $shift
+        ?Shift $shift
     ) {
         $this->id = $id;
         $this->type = $type;

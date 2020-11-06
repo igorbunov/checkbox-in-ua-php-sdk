@@ -4,10 +4,15 @@ namespace igorbunov\Checkbox\Models\Receipts;
 
 class ReceiptsQueryParams
 {
+    /** @var string $fiscal_code */
     public $fiscal_code;
+    /** @var string $serial */
     public $serial;
+    /** @var bool $desc */
     public $desc;
+    /** @var int $limit */
     public $limit;
+    /** @var int $offset */
     public $offset;
 
     public function __construct(

@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Shifts\Tax;
 
 class TaxMapper
 {
+    /**
+     * @param mixed $json
+     * @return Tax|null
+     */
     public function jsonToObject($json): ?Tax
     {
         if (is_null($json)) {
@@ -29,10 +33,5 @@ class TaxMapper
         );
 
         return $tax;
-    }
-
-    public function objectToJson(Tax $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

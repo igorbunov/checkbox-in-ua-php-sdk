@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Receipts\ReceiptStatus;
 
 class ReceiptStatusMapper
 {
+    /**
+     * @param mixed $json
+     * @return ReceiptStatus|null
+     */
     public function jsonToObject($json): ?ReceiptStatus
     {
         if (is_null($json)) {
@@ -15,10 +19,5 @@ class ReceiptStatusMapper
         $receipt = new ReceiptStatus($json);
 
         return $receipt;
-    }
-
-    public function objectToJson(ReceiptStatus $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

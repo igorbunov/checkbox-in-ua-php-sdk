@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Transactions\Transaction;
 
 class TransactionMapper
 {
+    /**
+     * @param mixed $json
+     * @return Transaction|null
+     */
     public function jsonToObject($json): ?Transaction
     {
         if (is_null($json)) {
@@ -31,10 +35,5 @@ class TransactionMapper
         );
 
         return $transaction;
-    }
-
-    public function objectToJson(Transaction $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

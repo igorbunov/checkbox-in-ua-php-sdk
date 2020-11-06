@@ -8,6 +8,10 @@ use igorbunov\Checkbox\Models\Receipts\Goods\GoodItemModel;
 
 class GoodItemModelMapper
 {
+    /**
+     * @param mixed $json
+     * @return GoodItemModel|null
+     */
     public function jsonToObject($json): ?GoodItemModel
     {
         if (is_null($json)) {
@@ -31,8 +35,16 @@ class GoodItemModelMapper
         return $goods;
     }
 
-    public function objectToJson(GoodItemModel $itemModel)
+    /**
+     * @param GoodItemModel $itemModel
+     * @return array<string, mixed>
+     */
+    public function objectToJson(GoodItemModel $itemModel): array
     {
+        if (is_null($itemModel->good)) {
+            return [];
+        }
+
         $result = [
             'good' => (new GoodModelMapper())->objectToJson($itemModel->good),
             'quantity' => $itemModel->quantity,

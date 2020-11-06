@@ -7,16 +7,23 @@ use igorbunov\Checkbox\Models\Receipts\Taxes\GoodTaxes;
 
 class GoodItemModel
 {
+    /** @var GoodModel|null $good */
     public $good;
+    /** @var string $good_id */
     public $good_id;
+    /** @var int $sum */
     public $sum;
+    /** @var int $quantity */
     public $quantity;
+    /** @var bool $is_return */
     public $is_return;
+    /** @var GoodTaxes|null $taxes */
     public $taxes;
+    /** @var Discounts|null $discounts */
     public $discounts;
 
     public function __construct(
-        GoodModel $good,
+        ?GoodModel $good,
         int $quantity,
         ?Discounts $discounts = null,
         ?GoodTaxes $taxes = null,

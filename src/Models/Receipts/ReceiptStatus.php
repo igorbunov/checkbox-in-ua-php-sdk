@@ -8,7 +8,9 @@ class ReceiptStatus
     public const DONE = 'DONE';
     public const ERROR = 'ERROR';
 
+    /** @var array<string> $allowedValues */
     private $allowedValues = [];
+    /** @var string $value */
     private $value = '';
 
     public function __construct(string $value)
@@ -20,7 +22,7 @@ class ReceiptStatus
         $this->validate();
     }
 
-    private function initAllowedValues()
+    private function initAllowedValues(): void
     {
         $this->allowedValues = [
             self::CREATED,
@@ -29,14 +31,14 @@ class ReceiptStatus
         ];
     }
 
-    private function validate()
+    private function validate(): void
     {
         if (!in_array($this->value, $this->allowedValues)) {
             throw new \Exception("Status '{$this->value}' is not allowed");
         }
     }
 
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }

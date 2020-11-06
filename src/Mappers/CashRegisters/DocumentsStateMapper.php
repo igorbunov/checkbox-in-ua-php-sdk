@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\CashRegisters\DocumentsState;
 
 class DocumentsStateMapper
 {
+    /**
+     * @param mixed $json
+     * @return DocumentsState|null
+     */
     public function jsonToObject($json): ?DocumentsState
     {
         if (is_null($json)) {
@@ -19,10 +23,5 @@ class DocumentsStateMapper
         );
 
         return $state;
-    }
-
-    public function objectToJson(DocumentsState $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

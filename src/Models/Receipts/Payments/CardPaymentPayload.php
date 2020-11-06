@@ -4,7 +4,9 @@ namespace igorbunov\Checkbox\Models\Receipts\Payments;
 
 class CardPaymentPayload extends PaymentParent
 {
+    /** @var int $code */
     public $code;
+    /** @var string $card_mask */
     public $card_mask;
 
     public function __construct(

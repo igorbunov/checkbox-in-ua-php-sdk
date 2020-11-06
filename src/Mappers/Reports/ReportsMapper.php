@@ -8,6 +8,10 @@ use igorbunov\Checkbox\Models\Reports\Reports;
 
 class ReportsMapper
 {
+    /**
+     * @param mixed $json
+     * @return Reports|null
+     */
     public function jsonToObject($json): ?Reports
     {
         if (is_null($json)) {
@@ -17,7 +21,11 @@ class ReportsMapper
         $shiftsArr = [];
 
         foreach ($json['results'] as $jsonRow) {
-            $shiftsArr[] = (new ZReportMapper())->jsonToObject($jsonRow);
+            $report = (new ZReportMapper())->jsonToObject($jsonRow);
+
+            if (!is_null($report)) {
+                $shiftsArr[] = $report;
+            }
         }
 
         $meta = (new MetaMapper())->jsonToObject($json['meta']);
@@ -28,10 +36,5 @@ class ReportsMapper
         );
 
         return $shift;
-    }
-
-    public function objectToJson(Reports $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

@@ -12,6 +12,10 @@ use igorbunov\Checkbox\Models\Receipts\Receipt;
 
 class ReceiptMapper
 {
+    /**
+     * @param mixed $json
+     * @return Receipt|null
+     */
     public function jsonToObject($json): ?Receipt
     {
         if (is_null($json)) {
@@ -27,7 +31,6 @@ class ReceiptMapper
         $taxes = (new GoodTaxesMapper())->jsonToObject($json['taxes']);
         $discounts = (new DiscountsMapper())->jsonToObject($json['discounts']);
         $shift = (new ShiftMapper())->jsonToObject($json['shift']);
-
 
         $receipt = new Receipt(
             $json['id'],
@@ -46,7 +49,7 @@ class ReceiptMapper
             $json['created_at'],
             $json['updated_at'],
             $taxes,
-            $discounts ?? [],
+            $discounts ?? null,
             $json['header'] ?? '',
             $json['footer'] ?? '',
             $json['barcode'] ?? '',
@@ -57,12 +60,5 @@ class ReceiptMapper
         );
 
         return $receipt;
-    }
-
-    public function objectToJson(Receipt $obj)
-    {
-        var_dump('objectToJson', $obj);
-        //TODO: fix NULL
-        return null;
     }
 }

@@ -6,13 +6,21 @@ use igorbunov\Checkbox\Models\Receipts\Taxes\GoodTaxes;
 
 class GoodModel
 {
+    /** @var string $code */
     public $code;
+    /** @var string $barcode */
     public $barcode;
+    /** @var string $name */
     public $name;
+    /** @var string $header */
     public $header;
+    /** @var string $footer */
     public $footer;
+    /** @var string $uktzed */
     public $uktzed;
+    /** @var int $price */
     public $price;
+    /** @var GoodTaxes|null $taxes */
     public $taxes;
 
     public function __construct(

@@ -9,16 +9,11 @@ use igorbunov\Checkbox\Models\Receipts\SellReceipt;
 
 class SellReceiptMapper
 {
-    public function jsonToObject($json): ?SellReceipt
-    {
-        if (is_null($json)) {
-            return null;
-        }
-        //TODO: fix NULL
-        return null;
-    }
-
-    public function objectToJson(SellReceipt $receipt)
+    /**
+     * @param SellReceipt $receipt
+     * @return array<string, mixed>
+     */
+    public function objectToJson(SellReceipt $receipt): array
     {
         $delivery = [];
 

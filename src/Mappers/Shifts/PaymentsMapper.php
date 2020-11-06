@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Shifts\Payments;
 
 class PaymentsMapper
 {
+    /**
+     * @param mixed $json
+     * @return Payments|null
+     */
     public function jsonToObject($json): ?Payments
     {
         if (is_null($json)) {
@@ -15,16 +19,15 @@ class PaymentsMapper
         $paymentArr = [];
 
         foreach ($json as $jsonRow) {
-            $paymentArr[] = (new PaymentMapper())->jsonToObject($jsonRow);
+            $payment = (new PaymentMapper())->jsonToObject($jsonRow);
+
+            if (!is_null($payment)) {
+                $paymentArr[] = $payment;
+            }
         }
 
         $taxes = new Payments($paymentArr);
 
         return $taxes;
-    }
-
-    public function objectToJson(Payments $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

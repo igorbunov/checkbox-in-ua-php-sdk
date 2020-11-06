@@ -4,12 +4,18 @@ namespace igorbunov\Checkbox\Models\Transactions;
 
 class TransactionsQueryParams
 {
+    /** @var array<string> $statuses */
     public $statuses;
+    /** @var array<string> $types */
     public $types;
+    /** @var int $limit */
     public $limit;
+    /** @var int $offset */
     public $offset;
 
+    /** @var array<string> $allowedStatuses */
     private $allowedStatuses;
+    /** @var array<string> $allowedTypes */
     private $allowedTypes;
 
     public const STATUS_CREATED = 'CREATED';
@@ -30,6 +36,15 @@ class TransactionsQueryParams
     public const TYPE_GO_ONLINE = 'GO_ONLINE';
     public const TYPE_DEL_LAST_RECEIPT = 'DEL_LAST_RECEIPT';
 
+    /**
+     * Constructor
+     *
+     * @param array<string> $statuses
+     * @param array<string> $types
+     * @param int $limit
+     * @param int $offset
+     *
+     */
     public function __construct(
         array $statuses = [],
         array $types = [],
@@ -56,7 +71,7 @@ class TransactionsQueryParams
         $this->limit = $limit;
     }
 
-    private function initAllowedStatuses()
+    private function initAllowedStatuses(): void
     {
         $this->allowedStatuses = [
             self::STATUS_CREATED,
@@ -68,7 +83,7 @@ class TransactionsQueryParams
         ];
     }
 
-    private function validateStatuses()
+    private function validateStatuses(): void
     {
         foreach ($this->statuses as $status) {
             if (!in_array($status, $this->allowedStatuses)) {
@@ -77,7 +92,7 @@ class TransactionsQueryParams
         }
     }
 
-    private function initAllowedTypes()
+    private function initAllowedTypes(): void
     {
         $this->allowedTypes = [
             self::TYPE_SHIFT_OPEN,
@@ -93,7 +108,7 @@ class TransactionsQueryParams
         ];
     }
 
-    private function validateTypes()
+    private function validateTypes(): void
     {
         foreach ($this->types as $type) {
             if (!in_array($type, $this->allowedTypes)) {

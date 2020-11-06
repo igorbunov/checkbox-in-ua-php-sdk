@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Meta;
 
 class MetaMapper
 {
+    /**
+     * @param mixed $json
+     * @return Meta|null
+     */
     public function jsonToObject($json): ?Meta
     {
         if (is_null($json)) {
@@ -18,10 +22,5 @@ class MetaMapper
         );
 
         return $meta;
-    }
-
-    public function objectToJson(Meta $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

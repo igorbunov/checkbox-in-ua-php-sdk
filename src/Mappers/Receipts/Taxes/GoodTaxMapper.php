@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Receipts\Taxes\GoodTax;
 
 class GoodTaxMapper
 {
+    /**
+     * @param mixed $json
+     * @return GoodTax|null
+     */
     public function jsonToObject($json): ?GoodTax
     {
         if (is_null($json)) {
@@ -22,15 +26,10 @@ class GoodTaxMapper
             $json['included'],
             $json['created_at'],
             $json['updated_at'] ?? null,
-            $json['value'] ?? '',
+            $json['value'] ?? 0,
             $json['extra_value'] ?? ''
         );
 
         return $tax;
-    }
-
-    public function objectToJson(GoodTax $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

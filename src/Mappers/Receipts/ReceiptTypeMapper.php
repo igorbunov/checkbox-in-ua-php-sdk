@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Receipts\ReceiptTypes;
 
 class ReceiptTypeMapper
 {
+    /**
+     * @param mixed $json
+     * @return ReceiptTypes|null
+     */
     public function jsonToObject($json): ?ReceiptTypes
     {
         if (is_null($json)) {
@@ -15,10 +19,5 @@ class ReceiptTypeMapper
         $receipt = new ReceiptTypes($json);
 
         return $receipt;
-    }
-
-    public function objectToJson(ReceiptTypes $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

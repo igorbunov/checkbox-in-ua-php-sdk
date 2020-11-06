@@ -7,6 +7,10 @@ use igorbunov\Checkbox\Models\Receipts\Payments\PaymentParent;
 
 class CashPaymentMapper
 {
+    /**
+     * @param mixed $json
+     * @return CashPaymentPayload|null
+     */
     public function jsonToObject($json): ?CashPaymentPayload
     {
         if (is_null($json)) {
@@ -21,7 +25,11 @@ class CashPaymentMapper
         return $receipt;
     }
 
-    public function objectToJson(PaymentParent $obj)
+    /**
+     * @param PaymentParent $obj
+     * @return array<string, int|string>
+     */
+    public function objectToJson(PaymentParent $obj): array
     {
         $result = [
             'type' => $obj->type,

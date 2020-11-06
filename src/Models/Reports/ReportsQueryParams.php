@@ -4,19 +4,38 @@ namespace igorbunov\Checkbox\Models\Reports;
 
 class ReportsQueryParams
 {
+    /** @var string $from_date */
     public $from_date;
+    /** @var string $to_date */
     public $to_date;
+    /** @var array<string> $shift_id */
     public $shift_id;
+    /** @var bool|null $is_z_report */
     public $is_z_report;
+    /** @var bool $desc */
     public $desc;
+    /** @var int $limit */
     public $limit;
+    /** @var int $offset */
     public $offset;
 
+    /**
+     * Constructor
+     *
+     * @param string $from_date
+     * @param string $to_date
+     * @param array<string> $shift_id
+     * @param bool|null $is_z_report
+     * @param bool $desc
+     * @param int $limit
+     * @param int $offset
+     *
+     */
     public function __construct(
         string $from_date = '',
         string $to_date = '',
         array $shift_id = [],
-        string $is_z_report = '',
+        ?bool $is_z_report = null,
         bool $desc = false,
         int $limit = 25,
         int $offset = 0
@@ -36,7 +55,7 @@ class ReportsQueryParams
             $this->shift_id = $shift_id;
         }
 
-        if (!empty($is_z_report)) {
+        if (!is_null($is_z_report)) {
             $this->is_z_report = filter_var($is_z_report, FILTER_VALIDATE_BOOLEAN);
         }
 

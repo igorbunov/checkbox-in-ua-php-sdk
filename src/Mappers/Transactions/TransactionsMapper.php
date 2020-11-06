@@ -7,6 +7,10 @@ use igorbunov\Checkbox\Models\Transactions\Transactions;
 
 class TransactionsMapper
 {
+    /**
+     * @param mixed $json
+     * @return Transactions|null
+     */
     public function jsonToObject($json): ?Transactions
     {
         if (is_null($json)) {
@@ -16,7 +20,11 @@ class TransactionsMapper
         $transactionArr = [];
 
         foreach ($json['results'] as $jsonRow) {
-            $transactionArr[] = (new TransactionMapper())->jsonToObject($jsonRow);
+            $trans = (new TransactionMapper())->jsonToObject($jsonRow);
+
+            if (!is_null($trans)) {
+                $transactionArr[] = $trans;
+            }
         }
 
         $meta = (new MetaMapper())->jsonToObject($json['meta']);
@@ -27,10 +35,5 @@ class TransactionsMapper
         );
 
         return $transactions;
-    }
-
-    public function objectToJson(Transactions $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

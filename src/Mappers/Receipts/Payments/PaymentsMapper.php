@@ -9,6 +9,10 @@ class PaymentsMapper
     public const TYPE_CASH = 'CASH';
     public const TYPE_CARD = 'CARD';
 
+    /**
+     * @param mixed $json
+     * @return Payments|null
+     */
     public function jsonToObject($json): ?Payments
     {
         if (is_null($json)) {
@@ -19,9 +23,17 @@ class PaymentsMapper
 
         foreach ($json as $payment) {
             if ($payment['type'] == self::TYPE_CASH) {
-                $results[] = (new CashPaymentMapper())->jsonToObject($payment);
+                $pay = (new CashPaymentMapper())->jsonToObject($payment);
+
+                if (!is_null($pay)) {
+                    $results[] = $pay;
+                }
             } elseif ($payment['type'] == self::TYPE_CARD) {
-                $results[] = (new CardPaymentMapper())->jsonToObject($payment);
+                $pay = (new CardPaymentMapper())->jsonToObject($payment);
+
+                if (!is_null($pay)) {
+                    $results[] = $pay;
+                }
             }
         }
 
@@ -30,7 +42,11 @@ class PaymentsMapper
         return $receipt;
     }
 
-    public function objectToJson(Payments $payments)
+    /**
+     * @param Payments $payments
+     * @return array<mixed>
+     */
+    public function objectToJson(Payments $payments): array
     {
         $results = [];
 

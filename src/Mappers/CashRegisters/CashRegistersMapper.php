@@ -7,6 +7,10 @@ use igorbunov\Checkbox\Models\CashRegisters\CashRegisters;
 
 class CashRegistersMapper
 {
+    /**
+     * @param mixed $json
+     * @return CashRegisters|null
+     */
     public function jsonToObject($json): ?CashRegisters
     {
         if (is_null($json)) {
@@ -27,10 +31,5 @@ class CashRegistersMapper
         );
 
         return $registers;
-    }
-
-    public function objectToJson(CashRegisters $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

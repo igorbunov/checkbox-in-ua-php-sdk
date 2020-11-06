@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Shifts\InitialTransaction;
 
 class InitialTransactionMapper
 {
+    /**
+     * @param mixed $json
+     * @return InitialTransaction|null
+     */
     public function jsonToObject($json): ?InitialTransaction
     {
         if (is_null($json)) {
@@ -31,10 +35,5 @@ class InitialTransactionMapper
         );
 
         return $transaction;
-    }
-
-    public function objectToJson(InitialTransaction $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

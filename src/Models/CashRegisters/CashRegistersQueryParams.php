@@ -4,8 +4,11 @@ namespace igorbunov\Checkbox\Models\CashRegisters;
 
 class CashRegistersQueryParams
 {
+    /** @var bool|null $inUse */
     public $inUse; // null, true, false
+    /** @var int $limit */
     public $limit;
+    /** @var int $offset */
     public $offset;
 
     public function __construct(

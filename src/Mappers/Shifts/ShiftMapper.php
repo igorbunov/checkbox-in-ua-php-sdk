@@ -8,6 +8,10 @@ use igorbunov\Checkbox\Models\Shifts\Shift;
 
 class ShiftMapper
 {
+    /**
+     * @param mixed $json
+     * @return Shift|null
+     */
     public function jsonToObject($json): ?Shift
     {
         if (is_null($json)) {
@@ -17,7 +21,13 @@ class ShiftMapper
         $zReport = (new ZReportMapper())->jsonToObject($json['z_report']);
         $balance = (new BalanceMapper())->jsonToObject($json['balance']);
         $initialTransaction = (new InitialTransactionMapper())->jsonToObject($json['initial_transaction']);
-        $closingTransaction = (new ClosingTransactionMapper())->jsonToObject($json['closing_transaction']);
+
+        $closingTransaction = null;
+
+        if (!is_null($json['closing_transaction'])) {
+            $closingTransaction = (new ClosingTransactionMapper())->jsonToObject($json['closing_transaction']);
+        }
+
         $cashRegister = (new CashRegisterMapper())->jsonToObject($json['cash_register'] ?? null);
         $taxes = (new TaxesMapper())->jsonToObject($json['taxes']);
         $cashier = (new CashierMapper())->jsonToObject($json['cashier'] ?? null);
@@ -40,10 +50,5 @@ class ShiftMapper
         );
 
         return $shift;
-    }
-
-    public function objectToJson(Shift $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

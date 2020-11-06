@@ -7,6 +7,10 @@ use igorbunov\Checkbox\Models\Receipts\Receipts;
 
 class ReceiptsMapper
 {
+    /**
+     * @param mixed $json
+     * @return Receipts|null
+     */
     public function jsonToObject($json): ?Receipts
     {
         if (is_null($json)) {
@@ -16,7 +20,11 @@ class ReceiptsMapper
         $receiptsArr = [];
 
         foreach ($json['results'] as $jsonRow) {
-            $receiptsArr[] = (new ReceiptMapper())->jsonToObject($jsonRow);
+            $receipt = (new ReceiptMapper())->jsonToObject($jsonRow);
+
+            if (!is_null($receipt)) {
+                $receiptsArr[] = $receipt;
+            }
         }
 
         $meta = (new MetaMapper())->jsonToObject($json['meta']);
@@ -27,10 +35,5 @@ class ReceiptsMapper
         );
 
         return $shift;
-    }
-
-    public function objectToJson(Receipts $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

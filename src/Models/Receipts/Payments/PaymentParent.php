@@ -7,8 +7,11 @@ class PaymentParent
     public const TYPE_CASH = 'CASH';
     public const TYPE_CARD = 'CARD';
 
+    /** @var string $type */
     public $type;
+    /** @var int $value */
     public $value;
+    /** @var string $label */
     public $label;
 
     public function __construct(

@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Shifts\ZReport;
 
 class ZReportMapper
 {
+    /**
+     * @param mixed $json
+     * @return ZReport|null
+     */
     public function jsonToObject($json): ?ZReport
     {
         if (is_null($json)) {
@@ -30,10 +34,5 @@ class ZReportMapper
         );
 
         return $report;
-    }
-
-    public function objectToJson(ZReport $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

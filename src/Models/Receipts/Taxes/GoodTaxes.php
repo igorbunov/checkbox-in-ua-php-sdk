@@ -4,8 +4,15 @@ namespace igorbunov\Checkbox\Models\Receipts\Taxes;
 
 class GoodTaxes
 {
+    /** @var array<GoodTax> $results */
     public $results;
 
+    /**
+     * Constructor
+     *
+     * @param array<GoodTax> $taxes
+     *
+     */
     public function __construct(array $taxes)
     {
         foreach ($taxes as $tax) {

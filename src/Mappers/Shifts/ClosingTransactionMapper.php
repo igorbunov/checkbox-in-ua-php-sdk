@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Shifts\ClosingTransaction;
 
 class ClosingTransactionMapper
 {
+    /**
+     * @param mixed $json
+     * @return ClosingTransaction|null
+     */
     public function jsonToObject($json): ?ClosingTransaction
     {
         if (is_null($json)) {
@@ -31,10 +35,5 @@ class ClosingTransactionMapper
         );
 
         return $transaction;
-    }
-
-    public function objectToJson(ClosingTransaction $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Receipts\Goods\Goods;
 
 class GoodsMapper
 {
+    /**
+     * @param mixed $json
+     * @return Goods|null
+     */
     public function jsonToObject($json): ?Goods
     {
         if (is_null($json)) {
@@ -15,7 +19,11 @@ class GoodsMapper
         $result = [];
 
         foreach ($json as $goodRow) {
-            $result[] = (new GoodItemModelMapper())->jsonToObject($goodRow);
+            $good = (new GoodItemModelMapper())->jsonToObject($goodRow);
+
+            if (!is_null($good)) {
+                $result[] = $good;
+            }
         }
 
         $goods = new Goods($result);
@@ -23,7 +31,11 @@ class GoodsMapper
         return $goods;
     }
 
-    public function objectToJson(Goods $goods)
+    /**
+     * @param Goods $goods
+     * @return array<mixed>
+     */
+    public function objectToJson(Goods $goods): array
     {
         $result = [];
 

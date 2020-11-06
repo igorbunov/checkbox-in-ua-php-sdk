@@ -11,6 +11,7 @@ use igorbunov\Checkbox\Models\Transactions\TransactionsQueryParams;
 
 class Routes
 {
+    /** @var string $apiUrl */
     private $apiUrl;
 
     public function __construct(string $appUrl)
@@ -220,9 +221,12 @@ class Routes
             }
         }
 
-        if (!empty($queryParams->is_z_report)) {
-            $value = ($queryParams->is_z_report) ? 'true' : 'false';
-            $params[] = "is_z_report={$value}";
+        if (!is_null($queryParams->is_z_report)) {
+            if ($queryParams->is_z_report) {
+                $params[] = "is_z_report=true";
+            } else {
+                $params[] = "is_z_report=false";
+            }
         }
 
         $value = ($queryParams->desc) ? 'true' : 'false';

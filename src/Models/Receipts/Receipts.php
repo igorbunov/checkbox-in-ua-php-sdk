@@ -6,10 +6,19 @@ use igorbunov\Checkbox\Models\Meta;
 
 class Receipts
 {
+    /** @var array<Receipt> $results */
     public $results = [];
+    /** @var Meta|null $meta */
     public $meta;
 
-    public function __construct(array $receipts, Meta $meta)
+    /**
+     * Constructor
+     *
+     * @param array<Receipt> $receipts
+     * @param Meta|null $meta
+     *
+     */
+    public function __construct(array $receipts, ?Meta $meta)
     {
         foreach ($receipts as $receipt) {
             if (!is_a($receipt, Receipt::class)) {

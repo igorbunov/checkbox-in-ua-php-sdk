@@ -7,6 +7,10 @@ use igorbunov\Checkbox\Models\Shifts\Shifts;
 
 class ShiftsMapper
 {
+    /**
+     * @param mixed $json
+     * @return Shifts|null
+     */
     public function jsonToObject($json): ?Shifts
     {
         if (is_null($json)) {
@@ -16,7 +20,11 @@ class ShiftsMapper
         $shiftsArr = [];
 
         foreach ($json['results'] as $jsonRow) {
-            $shiftsArr[] = (new ShiftMapper())->jsonToObject($jsonRow);
+            $shift = (new ShiftMapper())->jsonToObject($jsonRow);
+
+            if (!is_null($shift)) {
+                $shiftsArr[] = $shift;
+            }
         }
 
         $meta = (new MetaMapper())->jsonToObject($json['meta']);
@@ -27,10 +35,5 @@ class ShiftsMapper
         );
 
         return $shift;
-    }
-
-    public function objectToJson(Shifts $obj)
-    {
-        var_dump('objectToJson', $obj);
     }
 }

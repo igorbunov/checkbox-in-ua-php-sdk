@@ -8,14 +8,23 @@ use igorbunov\Checkbox\Models\Receipts\Payments\Payments;
 
 class SellReceipt
 {
+    /** @var string $cashier_name */
     public $cashier_name;
+    /** @var string $departament */
     public $departament;
+    /** @var Goods $goods */
     public $goods;
+    /** @var string $deliveryEmail */
     public $deliveryEmail;
+    /** @var Discounts|null $discounts */
     public $discounts;
+    /** @var Payments $payments */
     public $payments;
+    /** @var string $header */
     public $header;
+    /** @var string $footer */
     public $footer;
+    /** @var string $barcode */
     public $barcode;
 
     public function __construct(

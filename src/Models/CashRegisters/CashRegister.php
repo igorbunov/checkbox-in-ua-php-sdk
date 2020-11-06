@@ -6,20 +6,26 @@ use igorbunov\Checkbox\Models\Shifts\Shift;
 
 class CashRegister
 {
+    /** @var string $id */
     public $id;
+    /** @var string $fiscal_number */
     public $fiscal_number;
+    /** @var string $created_at */
     public $created_at;
+    /** @var string $updated_at */
     public $updated_at;
+    /** @var Shift|null $shift */
     public $shift;
+    /** @var bool|null $offline_mode */
     public $offline_mode;
 
     public function __construct(
-        $id,
-        $fiscal_number,
-        $created_at,
-        $updated_at,
+        string $id,
+        string $fiscal_number,
+        string $created_at,
+        string $updated_at,
         ?Shift $shift,
-        $offline_mode
+        ?bool $offline_mode = false
     ) {
         $this->id = $id;
         $this->fiscal_number = $fiscal_number;

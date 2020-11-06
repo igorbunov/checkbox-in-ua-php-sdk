@@ -3,9 +3,14 @@
 namespace igorbunov\Checkbox\Mappers\Receipts\Payments;
 
 use igorbunov\Checkbox\Models\Receipts\Payments\CardPaymentPayload;
+use igorbunov\Checkbox\Models\Receipts\Payments\PaymentParent;
 
 class CardPaymentMapper
 {
+    /**
+     * @param mixed $json
+     * @return CardPaymentPayload|null
+     */
     public function jsonToObject($json): ?CardPaymentPayload
     {
         if (is_null($json)) {
@@ -22,7 +27,11 @@ class CardPaymentMapper
         return $receipt;
     }
 
-    public function objectToJson(CardPaymentPayload $obj)
+    /**
+     * @param PaymentParent $obj
+     * @return array<string, mixed>
+     */
+    public function objectToJson(PaymentParent $obj)
     {
         $result = [
             'type' => $obj->type,

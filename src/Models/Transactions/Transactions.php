@@ -6,10 +6,19 @@ use igorbunov\Checkbox\Models\Meta;
 
 class Transactions
 {
+    /** @var array<Transaction> $results */
     public $results;
+    /** @var Meta|null $meta */
     public $meta;
 
-    public function __construct(array $transacitons, Meta $meta)
+    /**
+     * Constructor
+     *
+     * @param array<Transaction> $transacitons
+     * @param Meta|null $meta
+     *
+     */
+    public function __construct(array $transacitons, ?Meta $meta)
     {
         foreach ($transacitons as $transaciton) {
             if (!is_a($transaciton, Transaction::class)) {

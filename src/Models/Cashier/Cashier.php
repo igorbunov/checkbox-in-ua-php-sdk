@@ -4,23 +4,31 @@ namespace igorbunov\Checkbox\Models\Cashier;
 
 class Cashier
 {
+    /** @var string $id */
     public $id;
+    /** @var string $full_name */
     public $full_name;
+    /** @var string $nin */
     public $nin;
+    /** @var string $key_id */
     public $key_id;
+    /** @var string $signature_type */
     public $signature_type;
+    /** @var string $created_at */
     public $created_at;
+    /** @var string $updated_at */
     public $updated_at;
+    /** @var Organization|null $organization */
     public $organization;
 
     public function __construct(
-        $id,
-        $full_name,
-        $nin,
-        $key_id,
-        $signature_type,
-        $created_at,
-        $updated_at,
+        string $id,
+        string $full_name,
+        string $nin,
+        string $key_id,
+        string $signature_type,
+        string $created_at,
+        string $updated_at,
         ?Organization $organization
     ) {
         $this->id = $id;
