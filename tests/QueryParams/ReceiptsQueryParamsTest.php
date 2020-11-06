@@ -38,7 +38,11 @@ class ReceiptsQueryParamsTest extends TestCase
     public function testParamsWithCorrect(): void
     {
         $this->assertIsObject(new ReceiptsQueryParams(
-            '', '', false, 2, 0
+            '',
+            '',
+            false,
+            2,
+            0
         ));
     }
 }
