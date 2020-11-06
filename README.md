@@ -46,13 +46,6 @@ $config = new \igorbunov\Checkbox\Config([
 $api = new \igorbunov\Checkbox\CheckboxJsonApi($config);
 $api->signInCashier();
 ```
-или
-```php
-$api = (new \igorbunov\Checkbox\CheckboxJsonApi())
-    ->setConfig($config)
-    ->setConnectTimeout(10)
-    ->signInCashier();
-```
 ##### Логаут кассира:
 ```php
 $api->signOutCashier();
