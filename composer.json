@@ -29,7 +29,7 @@
   },
   "scripts": {
     "unit-tests": [
-      "vendor/bin/phpunit --testsuite main  && vendor/bin/php-coverage-checker build/logs/clover.xml 1"
+      "vendor/bin/phpunit --testsuite main  && vendor/bin/php-coverage-checker build/logs/clover.xml 60"
     ],
     "static": [
       "vendor/bin/phpcs --ignore-annotations --standard=PSR12 src tests && vendor/bin/phpcf src tests && vendor/bin/phpstan analyse --level=max src"
