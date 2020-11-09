@@ -567,7 +567,7 @@ class CheckboxJsonApi
             $this->routes->getReport($reportId),
             $this->requestOptions
         );
-pre($response->getBody()->getContents());
+
         $jsonResponse = json_decode($response->getBody()->getContents(), true);
 
         $this->validateResponseStatus($jsonResponse, $response->getStatusCode());

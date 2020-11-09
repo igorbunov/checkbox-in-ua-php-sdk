@@ -62,7 +62,8 @@ class TransactionQueryParamsTest extends TestCase
         $this->assertIsObject(new TransactionsQueryParams(
             [
                 TransactionsQueryParams::STATUS_CREATED,
-            ], [
+            ],
+            [
                 'some wrong type'
             ]
         ));
