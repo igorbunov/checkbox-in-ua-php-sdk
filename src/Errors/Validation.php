@@ -4,7 +4,7 @@ namespace igorbunov\Checkbox\Errors;
 
 class Validation extends \Exception
 {
-    /** @var mixed $detail */
+    /** @var array<mixed> $detail */
     protected $detail;
 
     /**
@@ -22,7 +22,10 @@ class Validation extends \Exception
         parent::__construct('Помилка вилідації', $code, $previous);
     }
 
-    public function getDetail(): mixed
+    /**
+     * @return array<mixed>
+     */
+    public function getDetail(): array
     {
         return $this->detail;
     }

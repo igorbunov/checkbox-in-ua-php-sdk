@@ -6,6 +6,7 @@ namespace igorbunov\Checkbox\Mappers;
 
 use igorbunov\Checkbox\Mappers\Receipts\ReceiptMapper;
 use igorbunov\Checkbox\Mappers\Receipts\SellReceiptMapper;
+use igorbunov\Checkbox\Mappers\Receipts\Taxes\GoodTaxMapper;
 use igorbunov\Checkbox\Models\Receipts\Goods\GoodItemModel;
 use igorbunov\Checkbox\Models\Receipts\Goods\GoodModel;
 use igorbunov\Checkbox\Models\Receipts\Goods\Goods;
@@ -13,6 +14,7 @@ use igorbunov\Checkbox\Models\Receipts\Payments\CardPaymentPayload;
 use igorbunov\Checkbox\Models\Receipts\Payments\CashPaymentPayload;
 use igorbunov\Checkbox\Models\Receipts\Payments\Payments;
 use igorbunov\Checkbox\Models\Receipts\SellReceipt;
+use igorbunov\Checkbox\Models\Receipts\Taxes\GoodTaxes;
 use PHPUnit\Framework\TestCase;
 
 class SellReceiptTest extends TestCase
@@ -29,9 +31,9 @@ class SellReceiptTest extends TestCase
         $this->mappedJsonString = '{"cashier_name":"\u0412\u0430\u0441\u044f \u041f\u0443\u043f\u043a\u0438\u04' .
             '3d","departament":"\u041e\u0442\u0434\u0435\u043b \u043f\u0440\u043e\u0434\u0430\u0436","good' .
             's":[{"good":{"code":"vm-123","name":"\u0411\u0438\u043e\u0432\u0430\u043a","barcode":"","head' .
-            'er":"","footer":"","price":5000,"taxes":[]},"quantity":1000,"is_return":false,"discounts":[]},{"g' .
+            'er":"","footer":"","price":5000,"tax":["1"]},"quantity":1000,"is_return":false,"discounts":[]},{"g' .
             'ood":{"code":"vm-124","name":"\u0411\u0438\u043e\u0432\u0430\u043a 2","barcode":"","header":"","foo' .
-            'ter":"","price":2000,"taxes":[]},"quantity":2000,"is_return":false,"discounts":[]}],"deliv' .
+            'ter":"","price":2000,"tax":["1"]},"quantity":2000,"is_return":false,"discounts":[]}],"deliv' .
             'ery":{"email":"admin@gmail.com"},"discounts":[],"payments":[{"type":"CARD","value":4000,"la' .
             'bel":"\u0411\u0435\u0437\u0433\u043e\u0442\u0456\u0432\u043a\u043e\u0432\u0438\u0439"},{"ty' .
             'pe":"CASH","value":5000,"label":"\u0413\u043e\u0442\u0456\u0432\u043a\u043e\u044e"}],"head' .
@@ -353,6 +355,22 @@ class SellReceiptTest extends TestCase
 
     public function testMap(): void
     {
+        $goodTaxJson = '{
+        "id": "8a18b9d2-2ecf-4979-9aef-655553b4c644",
+        "code": 123123,
+        "label": "4",
+        "symbol": "Д",
+        "rate": 1,
+        "extra_rate": null,
+        "included": true,
+        "created_at": "2020-08-14T13:32:07+00:00",
+        "updated_at": "2020-10-22T16:14:11+00:00"
+    }';
+        $goodTaxJson = \json_decode($goodTaxJson, true);
+
+        $goodTax = (new GoodTaxMapper())->jsonToObject($goodTaxJson);
+        $goodTaxes = new GoodTaxes([$goodTax]);
+
         $receipt = new SellReceipt(
             'Вася Пупкин',
             'Отдел продаж',
@@ -362,7 +380,12 @@ class SellReceiptTest extends TestCase
                         new GoodModel(
                             'vm-123', // good_id
                             50 * 100, // 50 грн
-                            'Биовак'
+                            'Биовак',
+                            '',
+                            '',
+                            '',
+                            '',
+                            $goodTaxes
                         ),
                         1 * 1000
                     ),
@@ -370,7 +393,12 @@ class SellReceiptTest extends TestCase
                         new GoodModel(
                             'vm-124', // good_id
                             20 * 100, // 20 грн
-                            'Биовак 2'
+                            'Биовак 2',
+                            '',
+                            '',
+                            '',
+                            '',
+                            $goodTaxes
                         ),
                         2 * 1000 // 2 шт
                     )
