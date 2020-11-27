@@ -234,10 +234,6 @@ class CheckboxJsonApi
 
         $jsonResponse = json_decode($response->getBody()->getContents(), true);
 
-        if (is_null($jsonResponse)) {
-            throw new EmptyResponse('Запрос вернул пустой результат');
-        }
-
         $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
         return (new ShiftMapper())->jsonToObject($jsonResponse);
