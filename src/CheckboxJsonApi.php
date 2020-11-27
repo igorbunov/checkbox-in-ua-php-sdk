@@ -4,6 +4,7 @@ namespace igorbunov\Checkbox;
 
 use igorbunov\Checkbox\Errors\InvalidCredentials;
 use igorbunov\Checkbox\Errors\EmptyResponse;
+use igorbunov\Checkbox\Errors\NoActiveShift;
 use igorbunov\Checkbox\Errors\Validation;
 use igorbunov\Checkbox\Mappers\Cashier\CashierMapper;
 use igorbunov\Checkbox\Mappers\CashRegisters\CashRegisterInfoMapper;
@@ -111,6 +112,8 @@ class CheckboxJsonApi
     private function validateResponseStatus($json, int $statusCode): void
     {
         switch ($statusCode) {
+            case 400:
+                throw new NoActiveShift($json['message']);
             case 403:
                 throw new InvalidCredentials($json['message']);
             case 422:
@@ -547,10 +550,14 @@ class CheckboxJsonApi
 
     public function createXReport(): ?ZReport
     {
+        $options = $this->requestOptions;
+        $options['headers']['X-Client-Name'] = 'Igorbunov Custom SDK';
+        $options['headers']['X-Client-Version'] = '1.0.0';
+
         $response = $this->guzzleClient->request(
             self::METHOD_POST,
             $this->routes->createXReport(),
-            $this->requestOptions
+            $options
         );
 
         $jsonResponse = json_decode($response->getBody()->getContents(), true);

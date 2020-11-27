@@ -160,7 +160,7 @@ $api->updateTransaction(
 ```
 ##### reports (отчеты):
 ```php
-$api->getReport() : \igorbunov\Checkbox\Models\Shifts\ZReport // создает х отчет
+$api->createXReport() : \igorbunov\Checkbox\Models\Shifts\ZReport // создает х отчет
 ```
 ```php
 $api->getReport('ид отчета') : \igorbunov\Checkbox\Models\Shifts\ZReport // возвращает данные отчета по айди
