@@ -41,7 +41,7 @@ class GoodModelMapper
 
         if (!is_null($goodModel->taxes)) {
             foreach ($goodModel->taxes->results as $tax) {
-                $goodTaxeRatesArr[] = $tax->rate;
+                $goodTaxeRatesArr[] = $tax->code;
             }
         }
 
