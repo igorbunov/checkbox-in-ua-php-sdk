@@ -9,14 +9,14 @@ class PaymentParent
 
     /** @var string $type */
     public $type;
-    /** @var int $value */
+    /** @var string $value */
     public $value;
     /** @var string $label */
     public $label;
 
     public function __construct(
         string $type,
-        int $value,
+        string $value,
         string $label = ''
     ) {
         if (!in_array($type, [self::TYPE_CASH, self::TYPE_CARD])) {

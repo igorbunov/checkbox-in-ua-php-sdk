@@ -34,9 +34,9 @@ class SellReceiptTest extends TestCase
             'er":"","footer":"","price":5000,"tax":["123123"]},"quantity":1000,"is_return":false,"discounts":[]},{"g' .
             'ood":{"code":"vm-124","name":"\u0411\u0438\u043e\u0432\u0430\u043a 2","barcode":"","header":"","foo' .
             'ter":"","price":2000,"tax":["123123"]},"quantity":2000,"is_return":false,"discounts":[]}],"deliv' .
-            'ery":{"email":"admin@gmail.com"},"discounts":[],"payments":[{"type":"CARD","value":4000,"la' .
+            'ery":{"email":"admin@gmail.com"},"discounts":[],"payments":[{"type":"CARD","value":"4000","la' .
             'bel":"\u0411\u0435\u0437\u0433\u043e\u0442\u0456\u0432\u043a\u043e\u0432\u0438\u0439"},{"ty' .
-            'pe":"CASH","value":5000,"label":"\u0413\u043e\u0442\u0456\u0432\u043a\u043e\u044e"}],"head' .
+            'pe":"CASH","value":"5000","label":"\u0413\u043e\u0442\u0456\u0432\u043a\u043e\u044e"}],"head' .
             'er":"","footer":"","barcode":""}';
 
         $this->jsonString = '{
@@ -104,13 +104,13 @@ class SellReceiptTest extends TestCase
               {
                  "type":"CARD",
                  "code":null,
-                 "value":4000,
+                 "value":"4000",
                  "label":"Безготівковий",
                  "card_mask":"0000 **** **** 0000"
               },
               {
                  "type":"CASH",
-                 "value":5000,
+                 "value":"5000",
                  "label":"Готівкою"
               }
            ],
@@ -407,10 +407,10 @@ class SellReceiptTest extends TestCase
             'admin@gmail.com',
             new Payments([
                 new CardPaymentPayload(
-                    40 * 100 // 40 грн
+                    "4000" // 40 грн
                 ),
                 new CashPaymentPayload(
-                    50 * 100 // 50 грн
+                    "5000" // 50 грн
                 )
             ])
         );

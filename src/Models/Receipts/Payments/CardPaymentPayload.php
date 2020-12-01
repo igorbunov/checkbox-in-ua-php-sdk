@@ -10,7 +10,7 @@ class CardPaymentPayload extends PaymentParent
     public $card_mask;
 
     public function __construct(
-        int $value,
+        string $value,
         string $label = 'Безготівковий',
         int $code = 0,
         string $card_mask = ''
