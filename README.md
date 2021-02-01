@@ -564,3 +564,30 @@ composer unit-tests
 
 composer all-tests
 ```
+
+## Alternative
+```
+#build docker image
+make build
+
+#install composer dependencies
+make composer_install
+
+#run docker
+make serve
+
+#shut down docker
+make down
+
+#check psr
+make style
+
+#run unit tests
+make unit
+
+#make unit + style
+make checks
+
+#build serve composer_install style unit
+make all
+```
