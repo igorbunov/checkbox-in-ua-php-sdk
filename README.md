@@ -536,20 +536,50 @@ use igorbunov\Checkbox\Models\Receipts\Goods\GoodModel;
 
 # Для котрибьюторов
 
-## Run docker container
-```
-cd docker
-docker-compose up
-```
 
-now you can connect to terminal
-
+For run all tests
+```shell
+make all
 ```
-docker exec -it checkbox-sdk /bin/bash
+or connect to terminal
+```shell
+make exec
 ```
 
-## Run tests
+or use built in php server [http://localhost:8080](http://localhost:8080)
+```shell
+# start server on 8080 port
+make serve 
+# custom port 8081
+make serve PORT=8081
+```
 
+*Dafault php version is 7.4*. Use PHP_VERSION= for using custom version.
+```shell
+make all PHP_VERSION=8.0
+# run both 
+make all PHP_VERSION=7.4 && make all PHP_VERSION=8.0
+```
+
+all commands
+```shell
+# security check
+make security
+# composer install
+make install
+# composer install with --no-dev
+make install-no-dev
+# check code style
+make style
+# run static analyze tools
+make static-analyze
+# run unit tests
+make unit
+#  check coverage
+make coverage
+```
+
+Without Docker
 ```
 #validate composer json
 composer check-composer
@@ -565,29 +595,3 @@ composer unit-tests
 composer all-tests
 ```
 
-## Alternative
-```
-#build docker image
-make build
-
-#install composer dependencies
-make composer_install
-
-#run docker
-make serve
-
-#shut down docker
-make down
-
-#check psr
-make style
-
-#run unit tests
-make unit
-
-#make unit + style
-make checks
-
-#build serve composer_install style unit
-make all
-```
