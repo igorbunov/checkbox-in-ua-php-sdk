@@ -23,13 +23,9 @@ jobs:
       - name: Install dependency
         run: |
           composer install
-      - name: Check composer
-        run: |
-          composer check-composer
-      - name: Check static
+      - name: Analyze code
         run: |
           composer static
       - name: Run tests
         run: |
           composer unit-tests
-
