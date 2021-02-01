@@ -32,6 +32,3 @@ jobs:
       - name: Run tests
         run: |
           composer unit-tests
-      - name: Check coverage
-        run: |
-          composer coverage
