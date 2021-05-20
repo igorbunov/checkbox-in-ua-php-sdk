@@ -47,6 +47,8 @@ use igorbunov\Checkbox\Models\Transactions\Transaction;
 use igorbunov\Checkbox\Models\Transactions\Transactions;
 use igorbunov\Checkbox\Models\Transactions\TransactionsQueryParams;
 use GuzzleHttp\Client;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
 
 class CheckboxJsonApi
 {
@@ -689,7 +691,10 @@ class CheckboxJsonApi
 
     // end transaction methods //
 
-    protected function sendRequest($method, $uri = '', array $options = [])
+    /**
+     * @param array<mixed> $options
+     */
+    protected function sendRequest(string $method, string $uri = '', array $options = []): ResponseInterface
     {
         return $this->guzzleClient->request($method, $uri, $options);
     }
