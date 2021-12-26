@@ -23,6 +23,9 @@ class CashRegisterInfoTest extends TestCase
            "updated_at":"2020-11-06T13:04:56.401242+00:00",
            "address":"УКРАЇНА, АР КРИММ. СІМФЕРОПОЛЬ СЕЛИЩЕ БІТУМНЕ, test 1",
            "title":"test 1",
+           "offline_mode": false,
+           "stay_offline": false,
+           "has_shift": true,
            "documents_state":{
               "last_receipt_code":67,
               "last_report_code":28,
