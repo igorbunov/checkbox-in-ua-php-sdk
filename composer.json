@@ -35,7 +35,7 @@
       "vendor/bin/phpcs --ignore-annotations --standard=PSR12 src tests && vendor/bin/phpcf src tests && vendor/bin/phpstan analyse --level=max src"
     ],
     "check-composer": [
-      "composer validate && vendor/bin/security-checker security:check"
+      "composer validate &&  /usr/bin/local-php-security-checker"
     ],
     "all-tests": [
       "composer check-composer &&  composer unit-test && composer static"

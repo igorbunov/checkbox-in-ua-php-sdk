@@ -5,5 +5,5 @@ error.log
 nbproject/*
 /vendor/*
 index.php
-/build/logs/*
+/build
 .phpunit.result.cache
