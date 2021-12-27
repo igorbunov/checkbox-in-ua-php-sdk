@@ -25,6 +25,9 @@ class CashRegisterInfoMapper
             $json['updated_at'],
             $json['address'],
             $json['title'],
+            $json['offline_mode'],
+            $json['stay_offline'],
+            $json['has_shift'],
             $documentsState
         );
 

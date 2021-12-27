@@ -16,6 +16,13 @@ class CashRegisterInfo
     public $address;
     /** @var string $title */
     public $title;
+    /** @var bool */
+    public $offline_mode;
+    /** @var bool */
+    public $stay_offline;
+    /** @var bool */
+    public $has_shift;
+
     /** @var DocumentsState|null $documents_state */
     public $documents_state;
 
@@ -26,6 +33,9 @@ class CashRegisterInfo
         string $updated_at,
         string $address,
         string $title,
+        bool $offline_mode,
+        bool $stay_offline,
+        bool $has_shift,
         ?DocumentsState $documents_state
     ) {
         $this->id = $id;
@@ -34,6 +44,9 @@ class CashRegisterInfo
         $this->updated_at = $updated_at;
         $this->address = $address;
         $this->title = $title;
+        $this->offline_mode = $offline_mode;
+        $this->stay_offline = $stay_offline;
+        $this->has_shift = $has_shift;
         $this->documents_state = $documents_state;
     }
 }
