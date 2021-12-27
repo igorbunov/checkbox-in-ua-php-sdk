@@ -189,12 +189,12 @@ class CheckboxJsonApi
     }
     */
 
-    /*
-    public function signInCashierViaPinCode(string $pinCode)
+
+    public function signInCashierViaPinCode(): void
     {
         $options = $this->requestOptions;
         $options['body'] = \json_encode([
-            'pin_code' => $pinCode
+            'pin_code' => $this->config->get(Config::PINCODE)
         ]);
 
         $response = $this->sendRequest(
@@ -205,11 +205,15 @@ class CheckboxJsonApi
 
         $jsonResponse = json_decode($response->getBody()->getContents(), true);
 
+        if (is_null($jsonResponse)) {
+            throw new EmptyResponse('Запрос вернул пустой результат');
+        }
+
         $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
-        return $jsonResponse;
+        $this->setHeadersWithToken($jsonResponse['access_token']);
     }
-    */
+
 
     public function getCashierProfile(): ?Cashier
     {
