@@ -21,7 +21,7 @@ class SellReceiptMapper
             $delivery['email'] = $receipt->deliveryEmail;
         }
 
-        return [
+        $output = [
             'cashier_name' => $receipt->cashier_name,
             'departament' => $receipt->departament,
             'goods' => (new GoodsMapper())->objectToJson($receipt->goods),
@@ -32,5 +32,11 @@ class SellReceiptMapper
             'footer' => $receipt->footer,
             'barcode' => $receipt->barcode
         ];
+
+        if ($receipt->id) {
+            $output['id'] = $receipt->id;
+        }
+
+        return $output;
     }
 }
