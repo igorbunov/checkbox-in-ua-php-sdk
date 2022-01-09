@@ -1,6 +1,7 @@
 ![GitHub CI](https://github.com/igorbunov/checkbox-in-ua-php-sdk/workflows/CI/badge.svg)
 # checkbox-in-ua-php-sdk
-### PHP SDK для работы с Checkbox api (Украина)
+### PHP SDK для работы с Checkbox RESTful API (Украина)
+Checkbox – сервіс програмної реєстрації розрахункових операцій.
 
 ##### Примечание:
 
