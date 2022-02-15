@@ -35,7 +35,8 @@ require_once 'vendor/autoload.php';
 $config = new \igorbunov\Checkbox\Config([
     \igorbunov\Checkbox\Config::API_URL => 'https://dev-api.checkbox.in.ua/api/v1',
     \igorbunov\Checkbox\Config::LOGIN => 'логин кассира',
-    \igorbunov\Checkbox\Config::PASSWORD => 'пароль кассира',
+    \igorbunov\Checkbox\Config::PASSWORD => 'пароль кассира', //or 
+    \igorbunov\Checkbox\Config::PINCODE => 02301230440,
     \igorbunov\Checkbox\Config::LICENSE_KEY => 'ключ лицензии кассы'
 ]);
 ```

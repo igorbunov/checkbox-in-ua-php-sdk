@@ -12,6 +12,7 @@ class Config
     public const API_URL = 'apiUrl';
     public const LOGIN = 'login';
     public const PASSWORD = 'password';
+    public const PINCODE = 'pin_code';
     public const LICENSE_KEY = 'licenseKey';
 
     /**

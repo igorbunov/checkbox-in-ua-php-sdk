@@ -412,12 +412,87 @@ class SellReceiptTest extends TestCase
                 new CashPaymentPayload(
                     "5000" // 50 грн
                 )
-            ])
+            ]),
         );
 
         $result = \json_encode((new SellReceiptMapper())->objectToJson($receipt));
 
         $this->assertEquals($this->mappedJsonString, $result);
+    }
+
+    public function testMapWithId()
+    {
+        $goodTaxJson = '{
+        "id": "8a18b9d2-2ecf-4979-9aef-655553b4c644",
+        "code": 123123,
+        "label": "4",
+        "symbol": "Д",
+        "rate": 1,
+        "extra_rate": null,
+        "included": true,
+        "created_at": "2020-08-14T13:32:07+00:00",
+        "updated_at": "2020-10-22T16:14:11+00:00"
+    }';
+        $goodTaxJson = \json_decode($goodTaxJson, true);
+
+        $goodTax = (new GoodTaxMapper())->jsonToObject($goodTaxJson);
+        $goodTaxes = new GoodTaxes([$goodTax]);
+
+        $receipt = new SellReceipt(
+            'Вася Пупкин',
+            'Отдел продаж',
+            new Goods(
+                [
+                    new GoodItemModel(
+                        new GoodModel(
+                            'vm-123', // good_id
+                            50 * 100, // 50 грн
+                            'Биовак',
+                            '',
+                            '',
+                            '',
+                            '',
+                            $goodTaxes
+                        ),
+                        1 * 1000
+                    ),
+                    new GoodItemModel(
+                        new GoodModel(
+                            'vm-124', // good_id
+                            20 * 100, // 20 грн
+                            'Биовак 2',
+                            '',
+                            '',
+                            '',
+                            '',
+                            $goodTaxes
+                        ),
+                        2 * 1000 // 2 шт
+                    )
+                ]
+            ),
+            'admin@gmail.com',
+            new Payments([
+                new CardPaymentPayload(
+                    "4000" // 40 грн
+                ),
+                new CashPaymentPayload(
+                    "5000" // 50 грн
+                )
+            ]),
+            null,
+            '',
+            '',
+            '',
+            'test-source-id'
+        );
+
+        $result = \json_encode((new SellReceiptMapper())->objectToJson($receipt));
+
+        $mappedJsonString = json_decode($this->mappedJsonString, true);
+        $mappedJsonString['id'] = 'test-source-id';
+
+        $this->assertEquals(json_encode($mappedJsonString), $result);
     }
 
     public function testMapReceiptReuslt()
