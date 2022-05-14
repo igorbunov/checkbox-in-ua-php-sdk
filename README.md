@@ -1,4 +1,10 @@
 ![GitHub CI](https://github.com/igorbunov/checkbox-in-ua-php-sdk/workflows/CI/badge.svg)
+[![Packagist](https://img.shields.io/badge/package-igorbunov/checkbox--in--ua--php--sdk-blue.svg?style=flat-square)](https://github.com/igorbunov/checkbox-in-ua-php-sdk)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/igorbunov/checkbox-in-ua-php-sdk.svg?style=flat-square)](https://github.com/igorbunov/checkbox-in-ua-php-sdk)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![PHP >=8.0](https://img.shields.io/badge/php-%3E=_8.0-orange.svg?style=flat-square)](https://github.com/igorbunov/checkbox-in-ua-php-sdk)
+[![Total Downloads](https://poser.pugx.org/igorbunov/checkbox-in-ua-php-sdk/downloads)](https://github.com/igorbunov/checkbox-in-ua-php-sdk)
+
 # checkbox-in-ua-php-sdk
 ### PHP SDK для работы с Checkbox (Украина)
 
@@ -14,7 +20,7 @@
 
 <https://docs.google.com/document/d/1Zhkc4OljKjea_235YafVvZunkWSp6TCAKeckhgl8t2w/edit>
 
-#### Установка: 
+#### Установка:
 ```bash
 composer require igorbunov/checkbox-in-ua-php-sdk
 ```
@@ -35,7 +41,7 @@ require_once 'vendor/autoload.php';
 $config = new \igorbunov\Checkbox\Config([
     \igorbunov\Checkbox\Config::API_URL => 'https://dev-api.checkbox.in.ua/api/v1',
     \igorbunov\Checkbox\Config::LOGIN => 'логин кассира',
-    \igorbunov\Checkbox\Config::PASSWORD => 'пароль кассира', //or 
+    \igorbunov\Checkbox\Config::PASSWORD => 'пароль кассира', //or
     \igorbunov\Checkbox\Config::PINCODE => 02301230440,
     \igorbunov\Checkbox\Config::LICENSE_KEY => 'ключ лицензии кассы'
 ]);
@@ -272,7 +278,7 @@ $api->createSellReceipt($receipt): \igorbunov\Checkbox\Models\Receipts\Receipt; 
 более сложная оплата:
 ```php
 $allTaxes = $api->getAllTaxes(); // получили все налоги
-$tax = $allTaxes->getTaxByLabel('Акцизний збір'); // получили один налог по лейбл 
+$tax = $allTaxes->getTaxByLabel('Акцизний збір'); // получили один налог по лейбл
 $goodTaxes = $allTaxes->getTaxesByLabel('ПДВ'); // получили массив налогов по лейбл
 $taxCodes = [];
 
@@ -550,7 +556,7 @@ make exec
 or use built in php server [http://localhost:8080](http://localhost:8080)
 ```shell
 # start server on 8080 port
-make serve 
+make serve
 # custom port 8081
 make serve PORT=8081
 ```
@@ -558,7 +564,7 @@ make serve PORT=8081
 *Dafault php version is 7.4*. Use PHP_VERSION= for using custom version.
 ```shell
 make all PHP_VERSION=8.0
-# run both 
+# run both
 make all PHP_VERSION=7.4 && make all PHP_VERSION=8.0
 ```
 
@@ -585,7 +591,7 @@ Without Docker
 #validate composer json
 composer check-composer
 
-#static analyzes and codestyle 
+#static analyzes and codestyle
 composer static
 
 #run unit tests
