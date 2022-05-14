@@ -26,13 +26,16 @@ class CashierProfileTest extends TestCase
            "signature_type":"AGENT",
            "created_at":"2020-09-29T11:38:55+00:00",
            "updated_at":"2020-09-29T11:52:36+00:00",
+           "certificate_end": "2019-08-24T14:15:22Z",
+           "blocked": "string",
            "organization":{
               "id":"c5a4205e-92d8-4640-ba69-d0d271d6a4aa",
               "title":"ПрАТ \"Літак\"",
               "edrpou":"3455355",
               "tax_number":"12136789012",
               "created_at":"2020-08-09T15:17:28+00:00",
-              "updated_at":"2020-10-26T16:25:10+00:00"
+              "updated_at":"2020-10-26T16:25:10+00:00",
+              "subscription_exp": "2019-08-24"
            }
         }';
 
@@ -56,6 +59,15 @@ class CashierProfileTest extends TestCase
         );
 
         $this->assertEquals(
+            '2019-08-24T14:15:22Z',
+            $cashier->certificate_end
+        );
+        $this->assertEquals(
+            'string',
+            $cashier->blocked
+        );
+
+        $this->assertEquals(
             'c5a4205e-92d8-4640-ba69-d0d271d6a4aa',
             $cashier->organization->id
         );
@@ -63,6 +75,11 @@ class CashierProfileTest extends TestCase
         $this->assertEquals(
             '12136789012',
             $cashier->organization->tax_number
+        );
+
+        $this->assertEquals(
+            '2019-08-24',
+            $cashier->organization->subscription_exp
         );
     }
 }

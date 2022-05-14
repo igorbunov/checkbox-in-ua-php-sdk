@@ -26,6 +26,8 @@ class CashierMapper
             $json['signature_type'],
             $json['created_at'],
             $json['updated_at'],
+            $json['certificate_end'] ?? '',
+            $json['blocked'] ?? '',
             $organization
         );
 

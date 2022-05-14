@@ -18,6 +18,10 @@ class Cashier
     public $created_at;
     /** @var string $updated_at */
     public $updated_at;
+    /** @var string $certificate_end */
+    public $certificate_end;
+    /** @var string $blocked */
+    public $blocked;
     /** @var Organization|null $organization */
     public $organization;
 
@@ -29,6 +33,8 @@ class Cashier
         string $signature_type,
         string $created_at,
         string $updated_at,
+        string $certificate_end,
+        string $blocked,
         ?Organization $organization
     ) {
         $this->id = $id;
@@ -38,6 +44,8 @@ class Cashier
         $this->signature_type = $signature_type;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
+        $this->certificate_end = $certificate_end;
+        $this->blocked = $blocked;
         $this->organization = $organization;
     }
 }

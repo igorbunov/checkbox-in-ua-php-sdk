@@ -22,7 +22,8 @@ class OrganizationMapper
             $json['edrpou'],
             $json['tax_number'],
             $json['created_at'],
-            $json['updated_at']
+            $json['updated_at'],
+            $json['subscription_exp'] ?? ''
         );
 
         return $organization;
