@@ -139,7 +139,7 @@ class CheckboxJsonApi
 
         $response = $this->sendRequest(
             self::METHOD_POST,
-            $this->routes->singInCashier(),
+            $this->routes->signInCashier(),
             $options
         );
 
@@ -158,7 +158,7 @@ class CheckboxJsonApi
     {
         $response = $this->sendRequest(
             self::METHOD_POST,
-            $this->routes->singOutCashier(),
+            $this->routes->signOutCashier(),
             $this->requestOptions
         );
 
