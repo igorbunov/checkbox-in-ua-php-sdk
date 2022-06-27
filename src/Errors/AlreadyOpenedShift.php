@@ -2,6 +2,6 @@
 
 namespace igorbunov\Checkbox\Errors;
 
-class AlreadyOpenedShift extends \Exception
+class AlreadyOpenedShift extends \Exception implements Exception
 {
 }

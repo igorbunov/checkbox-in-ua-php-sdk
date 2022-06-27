@@ -2,7 +2,7 @@
 
 namespace igorbunov\Checkbox\Errors;
 
-class Validation extends \Exception
+class Validation extends \Exception implements Exception
 {
     /** @var array<mixed> $detail */
     protected $detail;

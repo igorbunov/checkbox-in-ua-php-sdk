@@ -2,6 +2,6 @@
 
 namespace igorbunov\Checkbox\Errors;
 
-class InvalidCredentials extends \Exception
+class InvalidCredentials extends \Exception implements Exception
 {
 }

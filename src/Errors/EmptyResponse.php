@@ -2,6 +2,6 @@
 
 namespace igorbunov\Checkbox\Errors;
 
-class EmptyResponse extends \Exception
+class EmptyResponse extends \Exception implements Exception
 {
 }

@@ -2,6 +2,6 @@
 
 namespace igorbunov\Checkbox\Errors;
 
-class NoActiveShift extends \Exception
+class NoActiveShift extends \Exception implements Exception
 {
 }
