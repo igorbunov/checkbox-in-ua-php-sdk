@@ -2,7 +2,7 @@
 [![Packagist](https://img.shields.io/badge/package-igorbunov/checkbox--in--ua--php--sdk-blue.svg?style=flat-square)](https://github.com/igorbunov/checkbox-in-ua-php-sdk)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/igorbunov/checkbox-in-ua-php-sdk.svg?style=flat-square)](https://github.com/igorbunov/checkbox-in-ua-php-sdk)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![PHP >=7.2](https://img.shields.io/badge/php-%3E=_7.2-orange.svg?style=flat-square)](https://github.com/igorbunov/checkbox-in-ua-php-sdk)
+[![PHP >=7.4](https://img.shields.io/badge/php-%3E=_7.4-orange.svg?style=flat-square)](https://github.com/igorbunov/checkbox-in-ua-php-sdk)
 [![Total Downloads](https://poser.pugx.org/igorbunov/checkbox-in-ua-php-sdk/downloads)](https://github.com/igorbunov/checkbox-in-ua-php-sdk)
 
 # checkbox-in-ua-php-sdk
