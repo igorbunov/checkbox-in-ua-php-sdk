@@ -8,7 +8,6 @@ use igorbunov\Checkbox\Models\Receipts\Payments\Payments;
 
 class SellReceipt
 {
-
     /** @var string $cashier_name */
     public $cashier_name;
     /** @var string $departament */
