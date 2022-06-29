@@ -14,18 +14,18 @@ class Transactions
     /**
      * Constructor
      *
-     * @param array<Transaction> $transacitons
+     * @param array<Transaction> $transactions
      * @param Meta|null $meta
      *
      */
-    public function __construct(array $transacitons, ?Meta $meta)
+    public function __construct(array $transactions, ?Meta $meta)
     {
-        foreach ($transacitons as $transaciton) {
-            if (!is_a($transaciton, Transaction::class)) {
+        foreach ($transactions as $transaction) {
+            if (!is_a($transaction, Transaction::class)) {
                 throw new \Exception('This is not a transaction class');
             }
 
-            $this->results[] = $transaciton;
+            $this->results[] = $transaction;
         }
 
         $this->meta = $meta;
