@@ -245,7 +245,10 @@ class CheckboxJsonApi
         return (new ShiftMapper())->jsonToObject($jsonResponse);
     }
 
-    public function pingTaxServiceAction(): mixed
+    /**
+     * @return mixed
+     */
+    public function pingTaxServiceAction()
     {
         $response = $this->sendRequest(
             self::METHOD_POST,
