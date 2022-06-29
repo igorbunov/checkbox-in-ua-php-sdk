@@ -20,7 +20,7 @@ class RoutesTest extends TestCase
     {
         $this->assertStringContainsString(
             "signin",
-            (new Routes(""))->singInCashier()
+            (new Routes(""))->signInCashier()
         );
     }
 
@@ -28,7 +28,7 @@ class RoutesTest extends TestCase
     {
         $this->assertStringContainsString(
             "signout",
-            (new Routes(""))->singOutCashier()
+            (new Routes(""))->signOutCashier()
         );
     }
     public function testSignInCashierViaSignature(): void

@@ -19,12 +19,24 @@ class Routes
         $this->apiUrl = $appUrl;
     }
 
+    /** @deprecated */
     public function singInCashier(): string
+    {
+        return $this->signInCashier();
+    }
+
+    public function signInCashier(): string
     {
         return $this->apiUrl . '/cashier/signin';
     }
 
+    /** @deprecated */
     public function singOutCashier(): string
+    {
+        return $this->signOutCashier();
+    }
+
+    public function signOutCashier(): string
     {
         return $this->apiUrl . '/cashier/signout';
     }
