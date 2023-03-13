@@ -18,14 +18,14 @@ class GoodModel
     public $footer;
     /** @var string $uktzed */
     public $uktzed;
-    /** @var int $price */
+    /** @var float $price */
     public $price;
     /** @var GoodTaxes|null $taxes */
     public $taxes;
 
     public function __construct(
         string $code,
-        int $price,
+        float $price,
         string $name,
         string $barcode = '',
         string $header = '',
@@ -34,7 +34,7 @@ class GoodModel
         ?GoodTaxes $taxes = null
     ) {
         $this->code = $code;
-        $this->price = $price;
+        $this->price = round($price);
         $this->name = $name;
         $this->barcode = $barcode;
         $this->header = $header;
