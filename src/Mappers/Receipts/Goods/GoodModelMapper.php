@@ -52,7 +52,8 @@ class GoodModelMapper
             'header' => $goodModel->header ?? '',
             'footer' => $goodModel->footer ?? '',
             'price' => $goodModel->price,
-            'tax' => $goodTaxeRatesArr
+            'tax' => $goodTaxeRatesArr,
+            'uktzed' => $goodModel->uktzed
         ];
     }
 }
