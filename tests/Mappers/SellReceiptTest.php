@@ -31,10 +31,11 @@ class SellReceiptTest extends TestCase
         $this->mappedJsonString = '{"cashier_name":"\u0412\u0430\u0441\u044f \u041f\u0443\u043f\u043a\u0438\u04' .
             '3d","departament":"\u041e\u0442\u0434\u0435\u043b \u043f\u0440\u043e\u0434\u0430\u0436","good' .
             's":[{"good":{"code":"vm-123","name":"\u0411\u0438\u043e\u0432\u0430\u043a","barcode":"","head' .
-            'er":"","footer":"","price":5000,"tax":["123123"]},"quantity":1000,"is_return":false,"discounts":[]},{"g' .
-            'ood":{"code":"vm-124","name":"\u0411\u0438\u043e\u0432\u0430\u043a 2","barcode":"","header":"","foo' .
-            'ter":"","price":2000,"tax":["123123"]},"quantity":2000,"is_return":false,"discounts":[]}],"deliv' .
-            'ery":{"email":"admin@gmail.com"},"discounts":[],"payments":[{"type":"CARD","value":"4000","la' .
+            'er":"","footer":"","price":5000,"tax":["123123"],"uktzed":""},"quantity":1000,"is_return":false,' .
+            '"discounts":[]},{"good":{"code":"vm-124","name":"\u0411\u0438\u043e\u0432\u0430\u043a 2",' .
+            '"barcode":"","header":"","footer":"","price":2000,"tax":["123123"],"uktzed":""},' .
+            '"quantity":2000,"is_return":false,"discounts":[]}],"delivery":{"email":"admin@gmail.com"},' .
+            '"discounts":[],"payments":[{"type":"CARD","value":"4000","la' .
             'bel":"\u0411\u0435\u0437\u0433\u043e\u0442\u0456\u0432\u043a\u043e\u0432\u0438\u0439"},{"ty' .
             'pe":"CASH","value":"5000","label":"\u0413\u043e\u0442\u0456\u0432\u043a\u043e\u044e"}],"head' .
             'er":"","footer":"","barcode":""}';
@@ -72,10 +73,10 @@ class SellReceiptTest extends TestCase
                  "quantity":1000,
                  "is_return":false,
                  "taxes":[
-                    
+
                  ],
                  "discounts":[
-                    
+
                  ]
               },
               {
@@ -93,10 +94,10 @@ class SellReceiptTest extends TestCase
                  "quantity":2000,
                  "is_return":false,
                  "taxes":[
-                    
+
                  ],
                  "discounts":[
-                    
+
                  ]
               }
            ],
@@ -123,10 +124,10 @@ class SellReceiptTest extends TestCase
            "created_at":"2020-11-09T08:21:02.362586+00:00",
            "updated_at":"2020-11-09T08:21:02.434213+00:00",
            "taxes":[
-              
+
            ],
            "discounts":[
-              
+
            ],
            "header":"",
            "footer":"",
