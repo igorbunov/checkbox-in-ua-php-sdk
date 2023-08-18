@@ -1,4 +1,4 @@
-default_php_version:=7.4
+default_php_version:=8.0
 default_server_port:=8080
 php_version:=$(PHP_VERSION)
 server_port:=$(PORT)

@@ -4,25 +4,39 @@ on: [push, pull_request]
 
 jobs:
   build:
+    name: Build on ${{ matrix.php-versions }} / ${{ matrix.dependency-level }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: ['7.4']
+        php-versions: ['8.0']
+        dependency-level: ['high', 'low', 'stable']
     steps:
-      - uses: actions/checkout@v1
-      - uses: shivammathur/setup-php@v1
+      - uses: actions/checkout@v3
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: mbstring, gd, zip
           ini-values: max_execution_time=600, memory_limit=-1
           coverage: xdebug
+          tools: composer:v2
       - name: Validate composer.json
         run: |
           curl -sS https://getcomposer.org/installer | php -- --filename=composer
           composer validate
-      - name: Install dependency
+      - name: Install dependency (high deps)
         run: |
-          composer install
+          composer update --prefer-dist --no-interaction
+        if: ${{ matrix.dependency-level == 'high' }}
+
+      - name: Install dependency (low deps)
+        run: |
+          composer update --prefer-dist --no-interaction --prefer-stable --prefer-lowest
+        if: ${{ matrix.dependency-level == 'low' }}
+
+      - name: Install dependency (stable deps)
+        run: |
+          composer update --prefer-dist --no-interaction --prefer-stable
+        if: ${{ matrix.dependency-level == 'stable' }}
       - name: Analyze code
         run: |
           composer static
