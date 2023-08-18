@@ -2,7 +2,7 @@
 [![Packagist](https://img.shields.io/badge/package-igorbunov/checkbox--in--ua--php--sdk-blue.svg?style=flat-square)](https://github.com/igorbunov/checkbox-in-ua-php-sdk)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/igorbunov/checkbox-in-ua-php-sdk.svg?style=flat-square)](https://github.com/igorbunov/checkbox-in-ua-php-sdk)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![PHP >=7.4](https://img.shields.io/badge/php-%3E=_7.4-orange.svg?style=flat-square)](https://github.com/igorbunov/checkbox-in-ua-php-sdk)
+[![PHP >=8.0](https://img.shields.io/badge/php-%3E=_8.0-orange.svg?style=flat-square)](https://github.com/igorbunov/checkbox-in-ua-php-sdk)
 [![Total Downloads](https://poser.pugx.org/igorbunov/checkbox-in-ua-php-sdk/downloads)](https://github.com/igorbunov/checkbox-in-ua-php-sdk)
 
 # checkbox-in-ua-php-sdk
@@ -561,11 +561,9 @@ make serve
 make serve PORT=8081
 ```
 
-*Dafault php version is 7.4*. Use PHP_VERSION= for using custom version.
+*Dafault php version is 8.0*. Use PHP_VERSION= for using custom version.
 ```shell
 make all PHP_VERSION=8.0
-# run both
-make all PHP_VERSION=7.4 && make all PHP_VERSION=8.0
 ```
 
 all commands
