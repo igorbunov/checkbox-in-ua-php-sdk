@@ -2,8 +2,12 @@
 
 namespace igorbunov\Checkbox;
 
-use igorbunov\Checkbox\Errors\InvalidCredentials;
+use GuzzleHttp\Client;
+use igorbunov\Checkbox\Errors\AlreadyOpenedShift;
+use igorbunov\Checkbox\Errors\BadRequest;
+use igorbunov\Checkbox\Errors\BadRequestExceptionFactory;
 use igorbunov\Checkbox\Errors\EmptyResponse;
+use igorbunov\Checkbox\Errors\InvalidCredentials;
 use igorbunov\Checkbox\Errors\NoActiveShift;
 use igorbunov\Checkbox\Errors\Validation;
 use igorbunov\Checkbox\Mappers\Cashier\CashierMapper;
@@ -46,7 +50,6 @@ use igorbunov\Checkbox\Models\Shifts\ZReport;
 use igorbunov\Checkbox\Models\Transactions\Transaction;
 use igorbunov\Checkbox\Models\Transactions\Transactions;
 use igorbunov\Checkbox\Models\Transactions\TransactionsQueryParams;
-use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
@@ -115,7 +118,10 @@ class CheckboxJsonApi
     {
         switch ($statusCode) {
             case 400:
-                throw new NoActiveShift($json['message']);
+                $message = $json['message'] ?? '';
+
+                throw BadRequestExceptionFactory::getExceptionByMessage($message);
+            case 401:
             case 403:
                 throw new InvalidCredentials($json['message']);
             case 422:

@@ -14,9 +14,9 @@
 
 #### Официальная документация:
 
-<https://dev-api.checkbox.in.ua/api/redoc>
+<https://api.checkbox.in.ua/api/redoc>
 
-<https://dev-api.checkbox.in.ua/api/docs>
+<https://api.checkbox.in.ua/api/docs>
 
 <https://docs.google.com/document/d/1Zhkc4OljKjea_235YafVvZunkWSp6TCAKeckhgl8t2w/edit>
 
