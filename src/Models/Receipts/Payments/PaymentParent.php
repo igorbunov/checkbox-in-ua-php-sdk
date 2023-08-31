@@ -5,7 +5,7 @@ namespace igorbunov\Checkbox\Models\Receipts\Payments;
 class PaymentParent
 {
     public const TYPE_CASH = 'CASH';
-    public const TYPE_CARD = 'CARD';
+    public const TYPE_CARD = 'CASHLESS';
 
     /** @var string $type */
     public $type;
