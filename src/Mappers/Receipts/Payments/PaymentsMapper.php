@@ -2,13 +2,11 @@
 
 namespace igorbunov\Checkbox\Mappers\Receipts\Payments;
 
+use igorbunov\Checkbox\Models\Receipts\Payments\PaymentParent;
 use igorbunov\Checkbox\Models\Receipts\Payments\Payments;
 
 class PaymentsMapper
 {
-    public const TYPE_CASH = 'CASH';
-    public const TYPE_CARD = 'CARD';
-
     /**
      * @param mixed $json
      * @return Payments|null
@@ -22,13 +20,13 @@ class PaymentsMapper
         $results = [];
 
         foreach ($json as $payment) {
-            if ($payment['type'] == self::TYPE_CASH) {
+            if ($payment['type'] == PaymentParent::TYPE_CASH) {
                 $pay = (new CashPaymentMapper())->jsonToObject($payment);
 
                 if (!is_null($pay)) {
                     $results[] = $pay;
                 }
-            } elseif ($payment['type'] == self::TYPE_CARD) {
+            } elseif ($payment['type'] == PaymentParent::TYPE_CARD) {
                 $pay = (new CardPaymentMapper())->jsonToObject($payment);
 
                 if (!is_null($pay)) {
@@ -51,9 +49,9 @@ class PaymentsMapper
         $results = [];
 
         foreach ($payments->results as $payment) {
-            if ($payment->type == self::TYPE_CASH) {
+            if ($payment->type == PaymentParent::TYPE_CASH) {
                 $results[] = (new CashPaymentMapper())->objectToJson($payment);
-            } elseif ($payment->type == self::TYPE_CARD) {
+            } elseif ($payment->type == PaymentParent::TYPE_CARD) {
                 $results[] = (new CardPaymentMapper())->objectToJson($payment);
             }
         }

@@ -35,7 +35,7 @@ class SellReceiptTest extends TestCase
             '"discounts":[]},{"good":{"code":"vm-124","name":"\u0411\u0438\u043e\u0432\u0430\u043a 2",' .
             '"barcode":"","header":"","footer":"","price":2000,"tax":["123123"],"uktzed":""},' .
             '"quantity":2000,"is_return":false,"discounts":[]}],"delivery":{"email":"admin@gmail.com"},' .
-            '"discounts":[],"payments":[{"type":"CARD","value":"4000","la' .
+            '"discounts":[],"payments":[{"type":"CASHLESS","value":"4000","la' .
             'bel":"\u0411\u0435\u0437\u0433\u043e\u0442\u0456\u0432\u043a\u043e\u0432\u0438\u0439"},{"ty' .
             'pe":"CASH","value":"5000","label":"\u0413\u043e\u0442\u0456\u0432\u043a\u043e\u044e"}],"head' .
             'er":"","footer":"","barcode":""}';
@@ -103,7 +103,7 @@ class SellReceiptTest extends TestCase
            ],
            "payments":[
               {
-                 "type":"CARD",
+                 "type":"CASHLESS",
                  "code":null,
                  "value":"4000",
                  "label":"Безготівковий",
