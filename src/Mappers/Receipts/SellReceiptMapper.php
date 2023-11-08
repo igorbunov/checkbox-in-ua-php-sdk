@@ -21,6 +21,10 @@ class SellReceiptMapper
             $delivery['email'] = $receipt->deliveryEmail;
         }
 
+        if (!empty($receipt->deliveryPhone)) {
+            $delivery['phone'] = $receipt->deliveryPhone;
+        }
+
         $output = [
             'cashier_name' => $receipt->cashier_name,
             'departament' => $receipt->departament,
