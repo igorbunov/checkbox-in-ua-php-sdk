@@ -25,7 +25,7 @@ class Delivery
     /**
      * @return string[]
      */
-    public function getEmails(): array
+    public function emails(): array
     {
         return $this->emails;
     }
@@ -33,7 +33,7 @@ class Delivery
     /**
      * @return string
      */
-    public function getPhone(): string
+    public function phone(): string
     {
         return $this->phone;
     }

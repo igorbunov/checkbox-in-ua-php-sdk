@@ -14,12 +14,12 @@ class DeliveryMapper
     {
         $output = [];
 
-        if (!empty($delivery->getEmails())) {
-            $output['emails'] = $delivery->getEmails();
+        if (!empty($delivery->emails())) {
+            $output['emails'] = $delivery->emails();
         }
 
-        if (!empty($delivery->getPhone())) {
-            $output['phone'] = $delivery->getPhone();
+        if (!empty($delivery->phone())) {
+            $output['phone'] = $delivery->phone();
         }
 
         return $output;
