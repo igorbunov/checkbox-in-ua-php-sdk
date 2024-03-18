@@ -7,3 +7,4 @@ nbproject/*
 index.php
 /build/logs/*
 .phpunit.result.cache
+test.php

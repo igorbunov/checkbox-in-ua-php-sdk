@@ -14,10 +14,8 @@ class SellReceipt
     public $departament;
     /** @var Goods $goods */
     public $goods;
-    /** @var string $deliveryEmail */
-    public $deliveryEmail;
-    /** @var string $deliveryPhone */
-    public $deliveryPhone;
+    /** @var Delivery $delivery */
+    public Delivery $delivery;
     /** @var Discounts|null $discounts */
     public $discounts;
     /** @var Payments $payments */
@@ -40,21 +38,19 @@ class SellReceipt
         string $cashier_name,
         string $departament,
         Goods $goods,
-        string $deliveryEmail,
+        Delivery $delivery,
         Payments $payments,
         ?Discounts $discounts = null,
         string $header = '',
         string $footer = '',
         string $barcode = '',
-        string $id = '',
-        string $deliveryPhone = '',
+        string $id = ''
     ) {
         $this->id = $id;
         $this->cashier_name = $cashier_name;
         $this->departament = $departament;
         $this->goods = $goods;
-        $this->deliveryEmail = $deliveryEmail;
-        $this->deliveryPhone = $deliveryPhone;
+        $this->delivery = $delivery;
         $this->discounts = $discounts;
         $this->payments = $payments;
         $this->header = $header;
