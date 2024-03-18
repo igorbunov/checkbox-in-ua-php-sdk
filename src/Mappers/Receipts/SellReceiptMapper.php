@@ -15,21 +15,11 @@ class SellReceiptMapper
      */
     public function objectToJson(SellReceipt $receipt): array
     {
-        $delivery = [];
-
-        if (!empty($receipt->deliveryEmail)) {
-            $delivery['email'] = $receipt->deliveryEmail;
-        }
-
-        if (!empty($receipt->deliveryPhone)) {
-            $delivery['phone'] = $receipt->deliveryPhone;
-        }
-
         $output = [
             'cashier_name' => $receipt->cashier_name,
             'departament' => $receipt->departament,
             'goods' => (new GoodsMapper())->objectToJson($receipt->goods),
-            'delivery' => $delivery,
+            'delivery' => (new DeliveryMapper())->objectToJson($receipt->delivery),
             'discounts' => (new DiscountsMapper())->objectToJson($receipt->discounts),
             'payments' => (new PaymentsMapper())->objectToJson($receipt->payments),
             'header' => $receipt->header,

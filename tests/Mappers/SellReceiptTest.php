@@ -7,6 +7,7 @@ namespace igorbunov\Checkbox\Mappers;
 use igorbunov\Checkbox\Mappers\Receipts\ReceiptMapper;
 use igorbunov\Checkbox\Mappers\Receipts\SellReceiptMapper;
 use igorbunov\Checkbox\Mappers\Receipts\Taxes\GoodTaxMapper;
+use igorbunov\Checkbox\Models\Receipts\Delivery;
 use igorbunov\Checkbox\Models\Receipts\Goods\GoodItemModel;
 use igorbunov\Checkbox\Models\Receipts\Goods\GoodModel;
 use igorbunov\Checkbox\Models\Receipts\Goods\Goods;
@@ -34,7 +35,7 @@ class SellReceiptTest extends TestCase
             'er":"","footer":"","price":5000,"tax":["123123"],"uktzed":""},"quantity":1000,"is_return":false,' .
             '"discounts":[]},{"good":{"code":"vm-124","name":"\u0411\u0438\u043e\u0432\u0430\u043a 2",' .
             '"barcode":"","header":"","footer":"","price":2000,"tax":["123123"],"uktzed":""},' .
-            '"quantity":2000,"is_return":false,"discounts":[]}],"delivery":{"email":"admin@gmail.com"},' .
+            '"quantity":2000,"is_return":false,"discounts":[]}],"delivery":{"emails":["admin@gmail.com"]},' .
             '"discounts":[],"payments":[{"type":"CASHLESS","value":"4000","la' .
             'bel":"\u0411\u0435\u0437\u0433\u043e\u0442\u0456\u0432\u043a\u043e\u0432\u0438\u0439"},{"ty' .
             'pe":"CASH","value":"5000","label":"\u0413\u043e\u0442\u0456\u0432\u043a\u043e\u044e"}],"head' .
@@ -405,7 +406,7 @@ class SellReceiptTest extends TestCase
                     )
                 ]
             ),
-            'admin@gmail.com',
+            new Delivery(['admin@gmail.com']),
             new Payments([
                 new CardPaymentPayload(
                     "4000" // 40 грн
@@ -472,7 +473,7 @@ class SellReceiptTest extends TestCase
                     )
                 ]
             ),
-            'admin@gmail.com',
+            new Delivery(['admin@gmail.com']),
             new Payments([
                 new CardPaymentPayload(
                     "4000" // 40 грн
@@ -496,7 +497,7 @@ class SellReceiptTest extends TestCase
         $this->assertEquals(json_encode($mappedJsonString), $result);
     }
 
-    public function testMapReceiptReuslt()
+    public function testMapReceiptResult()
     {
         $jsonResponse = json_decode($this->jsonString, true);
 
