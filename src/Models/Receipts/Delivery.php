@@ -37,4 +37,20 @@ class Delivery
     {
         return $this->phone;
     }
+
+    /**
+     * @param  string $email
+     */
+    public function addEmail(string $email): void
+    {
+        $this->emails[] = $email;
+    }
+
+    /**
+     * @param  string $phone
+     */
+    public function setPhone(string $phone): void
+    {
+        $this->phone = $phone;
+    }
 }
