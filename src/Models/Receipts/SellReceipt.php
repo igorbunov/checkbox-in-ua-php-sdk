@@ -33,6 +33,8 @@ class SellReceipt
      * @var string|null
      */
     public $id;
+    /** @var string $related_receipt_id */
+    public $related_receipt_id;
 
     public function __construct(
         string $cashier_name,
@@ -44,7 +46,8 @@ class SellReceipt
         string $header = '',
         string $footer = '',
         string $barcode = '',
-        string $id = ''
+        string $id = '',
+        string $related_receipt_id = ''
     ) {
         $this->id = $id;
         $this->cashier_name = $cashier_name;
@@ -56,5 +59,6 @@ class SellReceipt
         $this->header = $header;
         $this->footer = $footer;
         $this->barcode = $barcode;
+        $this->related_receipt_id = $related_receipt_id;
     }
 }
