@@ -43,7 +43,9 @@ $config = new \igorbunov\Checkbox\Config([
     \igorbunov\Checkbox\Config::LOGIN => 'логин кассира',
     \igorbunov\Checkbox\Config::PASSWORD => 'пароль кассира', //or
     \igorbunov\Checkbox\Config::PINCODE => 02301230440,
-    \igorbunov\Checkbox\Config::LICENSE_KEY => 'ключ лицензии кассы'
+    \igorbunov\Checkbox\Config::LICENSE_KEY => 'ключ лицензии кассы',
+    \igorbunov\Checkbox\Config::HEADER_CLIENT_NAME => 'Igorbunov Custom SDK', // не обязательный (Igorbunov Custom SDK по умолчанию)
+    \igorbunov\Checkbox\Config::HEADER_CLIENT_VERSION => '1.3.7', // не обязательный
 ]);
 ```
 
@@ -599,4 +601,3 @@ composer unit-tests
 
 composer all-tests
 ```
-

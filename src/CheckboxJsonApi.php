@@ -3,12 +3,9 @@
 namespace igorbunov\Checkbox;
 
 use GuzzleHttp\Client;
-use igorbunov\Checkbox\Errors\AlreadyOpenedShift;
-use igorbunov\Checkbox\Errors\BadRequest;
 use igorbunov\Checkbox\Errors\BadRequestExceptionFactory;
 use igorbunov\Checkbox\Errors\EmptyResponse;
 use igorbunov\Checkbox\Errors\InvalidCredentials;
-use igorbunov\Checkbox\Errors\NoActiveShift;
 use igorbunov\Checkbox\Errors\Validation;
 use igorbunov\Checkbox\Mappers\Cashier\CashierMapper;
 use igorbunov\Checkbox\Mappers\CashRegisters\CashRegisterInfoMapper;
@@ -51,7 +48,6 @@ use igorbunov\Checkbox\Models\Transactions\Transaction;
 use igorbunov\Checkbox\Models\Transactions\Transactions;
 use igorbunov\Checkbox\Models\Transactions\TransactionsQueryParams;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
 
 class CheckboxJsonApi
 {
@@ -99,7 +95,9 @@ class CheckboxJsonApi
             'connect_timeout' => $this->connectTimeout,
             'headers' => [
                 'Content-Type' => 'application/json',
-                'X-License-Key' => $this->config->get('licenseKey')
+                'X-License-Key' => $this->config->get(Config::LICENSE_KEY),
+                'X-Client-Name' => $this->config->get(Config::HEADER_CLIENT_NAME),
+                'X-Client-Version' => $this->config->get(Config::HEADER_CLIENT_VERSION),
             ]
         ];
     }
@@ -586,14 +584,10 @@ class CheckboxJsonApi
 
     public function createXReport(): ?ZReport
     {
-        $options = $this->requestOptions;
-        $options['headers']['X-Client-Name'] = 'Igorbunov Custom SDK';
-        $options['headers']['X-Client-Version'] = '1.0.0';
-
         $response = $this->sendRequest(
             self::METHOD_POST,
             $this->routes->createXReport(),
-            $options
+            $this->requestOptions
         );
 
         $jsonResponse = json_decode($response->getBody()->getContents(), true);

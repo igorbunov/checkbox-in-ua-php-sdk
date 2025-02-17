@@ -14,6 +14,8 @@ class Config
     public const PASSWORD = 'password';
     public const PINCODE = 'pin_code';
     public const LICENSE_KEY = 'licenseKey';
+    public const HEADER_CLIENT_NAME = 'header_client_name';
+    public const HEADER_CLIENT_VERSION = 'header_client_version';
 
     /**
      * Constructor
@@ -24,6 +26,11 @@ class Config
     public function __construct(array $data)
     {
         $this->data = $data;
+
+        if (!array_key_exists(self::HEADER_CLIENT_NAME, $data)) {
+            $data[self::HEADER_CLIENT_NAME] = 'Igorbunov Custom SDK';
+            $data[self::HEADER_CLIENT_VERSION] = '1.3.7';
+        }
     }
 
     public function get(string $name): string
