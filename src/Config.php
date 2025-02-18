@@ -25,12 +25,12 @@ class Config
      */
     public function __construct(array $data)
     {
-        $this->data = $data;
-
         if (!array_key_exists(self::HEADER_CLIENT_NAME, $data)) {
             $data[self::HEADER_CLIENT_NAME] = 'Igorbunov Custom SDK';
             $data[self::HEADER_CLIENT_VERSION] = '1.3.7';
         }
+
+        $this->data = $data;
     }
 
     public function get(string $name): string
