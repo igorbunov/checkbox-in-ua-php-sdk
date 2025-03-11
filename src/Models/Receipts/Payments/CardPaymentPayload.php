@@ -20,6 +20,11 @@ class CardPaymentPayload extends PaymentParent
     public string $acquirer_and_seller;
     public int $commission;
     public string $provider_type;
+    public string $bank_name;
+    public string $owner_name;
+    public bool $signature_required;
+    public string $tapxphone_terminal;
+    public string $transaction_id;
 
     public function __construct(
         string $value,
@@ -34,7 +39,12 @@ class CardPaymentPayload extends PaymentParent
         string $receipt_no = '',
         string $acquirer_and_seller = '',
         int $commission = 0,
-        string $provider_type = ''
+        string $provider_type = '',
+        string $bank_name = '',
+        string $owner_name = '',
+        bool $signature_required = false,
+        string $tapxphone_terminal = '',
+        string $transaction_id = ''
     ) {
         parent::__construct(parent::TYPE_CARD, $value, $label);
 
@@ -59,5 +69,11 @@ class CardPaymentPayload extends PaymentParent
 
             $this->provider_type = $provider_type;
         }
+
+        $this->bank_name = $bank_name;
+        $this->owner_name = $owner_name;
+        $this->signature_required = $signature_required;
+        $this->tapxphone_terminal = $tapxphone_terminal;
+        $this->transaction_id = $transaction_id;
     }
 }
