@@ -2,6 +2,8 @@
 
 namespace igorbunov\Checkbox\Models\Receipts\Payments;
 
+use Exception;
+
 class CardPaymentPayload extends PaymentParent
 {
     /** @var int $code */
@@ -17,6 +19,7 @@ class CardPaymentPayload extends PaymentParent
     public string $receipt_no;
     public string $acquirer_and_seller;
     public int $commission;
+    public string $provider_type;
 
     public function __construct(
         string $value,
@@ -30,7 +33,8 @@ class CardPaymentPayload extends PaymentParent
         string $payment_system = '',
         string $receipt_no = '',
         string $acquirer_and_seller = '',
-        int $commission = 0
+        int $commission = 0,
+        string $provider_type = ''
     ) {
         parent::__construct(parent::TYPE_CARD, $value, $label);
 
@@ -44,5 +48,16 @@ class CardPaymentPayload extends PaymentParent
         $this->receipt_no = $receipt_no;
         $this->acquirer_and_seller = $acquirer_and_seller;
         $this->commission = $commission;
+
+        if (!empty($provider_type)) {
+            if (!ProviderTypeEnum::isCorrectValue($provider_type)) {
+                throw new Exception(
+                    'Wrong provider type: ' . $provider_type . ', allowed keys: '
+                        . implode(', ', ProviderTypeEnum::getKeys())
+                );
+            }
+
+            $this->provider_type = $provider_type;
+        }
     }
 }
