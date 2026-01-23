@@ -31,6 +31,10 @@ class SellReceiptMapper
             $output['id'] = $receipt->id;
         }
 
+        if ($receipt->related_receipt_id) {
+            $output['related_receipt_id'] = $receipt->related_receipt_id;
+        }
+
         return $output;
     }
 }
