@@ -9,7 +9,7 @@ class AfterPaymentReceipt
     /** @var string $cashier_name */
     public $cashier_name;
     /** @var string $departament */
-    public $departament;
+    public string $departament;
     /** @var Delivery $delivery */
     public Delivery $delivery;
     /** @var string $id */
@@ -20,4 +20,22 @@ class AfterPaymentReceipt
     public $header;
     /** @var string $footer */
     public $footer;
+
+    public function __construct(
+        string $cashier_name,
+        string $departament,
+        Delivery $delivery,
+        Payments $payments,
+        string $header = '',
+        string $footer = '',
+        string $id = ''
+    ) {
+        $this->cashier_name = $cashier_name;
+        $this->departament = $departament;
+        $this->delivery = $delivery;
+        $this->payments = $payments;
+        $this->header = $header;
+        $this->footer = $footer;
+        $this->id = $id;
+    }
 }

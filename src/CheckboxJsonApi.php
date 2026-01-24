@@ -11,6 +11,7 @@ use igorbunov\Checkbox\Mappers\Cashier\CashierMapper;
 use igorbunov\Checkbox\Mappers\CashRegisters\CashRegisterInfoMapper;
 use igorbunov\Checkbox\Mappers\CashRegisters\CashRegisterMapper;
 use igorbunov\Checkbox\Mappers\CashRegisters\CashRegistersMapper;
+use igorbunov\Checkbox\Mappers\Receipts\AfterPaymentReceiptMapper;
 use igorbunov\Checkbox\Mappers\Receipts\PrepaymentReceiptMapper;
 use igorbunov\Checkbox\Mappers\Receipts\ReceiptMapper;
 use igorbunov\Checkbox\Mappers\Receipts\ReceiptsMapper;
@@ -30,6 +31,7 @@ use igorbunov\Checkbox\Models\CashRegisters\CashRegister;
 use igorbunov\Checkbox\Models\CashRegisters\CashRegisterInfo;
 use igorbunov\Checkbox\Models\CashRegisters\CashRegisters;
 use igorbunov\Checkbox\Models\CashRegisters\CashRegistersQueryParams;
+use igorbunov\Checkbox\Models\Receipts\AfterPaymentReceipt;
 use igorbunov\Checkbox\Models\Receipts\PrepaymentReceipt;
 use igorbunov\Checkbox\Models\Receipts\Receipt;
 use igorbunov\Checkbox\Models\Receipts\Receipts;
@@ -455,6 +457,24 @@ class CheckboxJsonApi
         $response = $this->sendRequest(
             self::METHOD_POST,
             $this->routes->createPrepaymentReceipt(),
+            $options
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        return (new ReceiptMapper())->jsonToObject($jsonResponse);
+    }
+
+    public function createAfterPaymentReceipt(string $relationId, AfterPaymentReceipt $receipt): ?Receipt
+    {
+        $options = $this->requestOptions;
+        $options['body'] = \json_encode((new AfterPaymentReceiptMapper())->objectToJson($receipt));
+
+        $response = $this->sendRequest(
+            self::METHOD_POST,
+            $this->routes->createAfterPaymentReceipt($relationId),
             $options
         );
 

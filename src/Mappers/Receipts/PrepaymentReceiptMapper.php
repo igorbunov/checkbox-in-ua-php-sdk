@@ -6,7 +6,6 @@ use igorbunov\Checkbox\Mappers\Receipts\Discounts\DiscountsMapper;
 use igorbunov\Checkbox\Mappers\Receipts\Goods\GoodsMapper;
 use igorbunov\Checkbox\Mappers\Receipts\Payments\PaymentsMapper;
 use igorbunov\Checkbox\Models\Receipts\PrepaymentReceipt;
-use igorbunov\Checkbox\Models\Receipts\SellReceipt;
 
 class PrepaymentReceiptMapper
 {
