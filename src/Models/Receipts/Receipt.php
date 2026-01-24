@@ -59,6 +59,8 @@ class Receipt
     public $sent_dps_at;
     /** @var Shift|null $shift */
     public $shift;
+    /** @var string|null $pre_payment_relation_id */
+    public $pre_payment_relation_id;
 
     public function __construct(
         string $id,
@@ -84,7 +86,8 @@ class Receipt
         bool $is_created_offline,
         bool $is_sent_dps,
         ?string $sent_dps_at,
-        ?Shift $shift
+        ?Shift $shift,
+        ?string $pre_payment_relation_id
     ) {
         $this->id = $id;
         $this->type = $type;
@@ -110,5 +113,6 @@ class Receipt
         $this->is_sent_dps = $is_sent_dps;
         $this->sent_dps_at = $sent_dps_at;
         $this->shift = $shift;
+        $this->pre_payment_relation_id = $pre_payment_relation_id;
     }
 }

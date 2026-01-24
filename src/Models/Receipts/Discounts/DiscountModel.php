@@ -6,6 +6,7 @@ class DiscountModel
 {
     public const TYPE_DISCOUNT = 'DISCOUNT';
     public const TYPE_EXTRA_CHARGE = 'EXTRA_CHARGE';
+    public const TYPE_PRE_PAYMENT = 'PRE_PAYMENT';
 
     public const MODE_PERCENT = 'PERCENT';
     public const MODE_VALUE = 'VALUE';
@@ -70,7 +71,8 @@ class DiscountModel
     {
         $this->allowedTypes = [
             self::TYPE_DISCOUNT,
-            self::TYPE_EXTRA_CHARGE
+            self::TYPE_EXTRA_CHARGE,
+            self::TYPE_PRE_PAYMENT
         ];
     }
 

@@ -286,4 +286,14 @@ class Routes
     {
         return $this->apiUrl . '/transactions/' . $transactionId;
     }
+
+    public function createPrepaymentReceipt(): string
+    {
+        return $this->apiUrl . '/prepayment-receipts';
+    }
+
+    public function createAfterPaymentReceipt(string $relationId): string
+    {
+        return $this->apiUrl . '/prepayment-receipts/' . $relationId;
+    }
 }

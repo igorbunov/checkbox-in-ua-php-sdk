@@ -112,6 +112,7 @@ class TransactionsQueryParams
     {
         foreach ($this->types as $type) {
             if (!in_array($type, $this->allowedTypes)) {
+                var_dump("sdf2", $this->type);
                 throw new \Exception('Type "' . $type . '" is not allowed');
             }
         }
