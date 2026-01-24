@@ -60,7 +60,7 @@ class Receipt
     /** @var Shift|null $shift */
     public $shift;
     /** @var string|null $pre_payment_relation_id */
-    public $pre_payment_relation_id;
+    public ?string $pre_payment_relation_id;
 
     public function __construct(
         string $id,

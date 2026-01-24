@@ -722,7 +722,8 @@ class GetReceiptTest extends TestCase
                  "created_at":"2020-09-29T11:38:55+00:00",
                  "updated_at":"2020-09-29T11:52:36+00:00"
               }
-           }
+           },
+           "pre_payment_relation_id":""
         }';
     }
 
