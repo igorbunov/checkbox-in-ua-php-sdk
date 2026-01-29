@@ -264,7 +264,7 @@ $receipt = new \igorbunov\Checkbox\Models\Receipts\SellReceipt(
             )
         ]
     ),
-    'admin@gmail.com', // кому отправлять чек по почте
+    new \igorbunov\Checkbox\Models\Receipts\Delivery(['test@mail.com'], 'phone'), // кому отправлять чек по почте или телефону
     new \igorbunov\Checkbox\Models\Receipts\Payments\Payments([
         new \igorbunov\Checkbox\Models\Receipts\Payments\CardPaymentPayload( // безналичная оплата
             40 * 100 // 40 грн
@@ -326,9 +326,9 @@ $receipt = new \igorbunov\Checkbox\Models\Receipts\SellReceipt(
             )
         ]
     ),
-    'admin@gmail.com', // кому отправлять чек по почте
+    new \igorbunov\Checkbox\Models\Receipts\Delivery(['test@mail.com'], 'phone'), // кому отправлять чек по почте или телефону
     new \igorbunov\Checkbox\Models\Receipts\Payments\Payments([ // оплаты
-        new \igorbunov\Checkbox\Models\Receipts\Payments\CardPaymentPayload( // безналичная оплата
+        new \igorbunov\Checkbox\Models\Receipts\Payments\CardPaymentPayload( // безналичная оплата 
             400, // сумма оплаты 400 = 4 грн
             'beznalichka', // текст оплаты
             0, // code - не знаю для чего (видимо пин код карты)

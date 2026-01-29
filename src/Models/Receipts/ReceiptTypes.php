@@ -8,6 +8,7 @@ class ReceiptTypes
     public const RETURN = 'RETURN';
     public const SERVICE_IN = 'SERVICE_IN';
     public const SERVICE_OUT = 'SERVICE_OUT';
+    public const PRE_PAYMENT = 'PRE_PAYMENT';
 
     /** @var array<string> $allowedValues */
     private $allowedValues = [];
@@ -29,7 +30,8 @@ class ReceiptTypes
             self::SELL,
             self::RETURN,
             self::SERVICE_IN,
-            self::SERVICE_OUT
+            self::SERVICE_OUT,
+            self::PRE_PAYMENT
         ];
     }
 

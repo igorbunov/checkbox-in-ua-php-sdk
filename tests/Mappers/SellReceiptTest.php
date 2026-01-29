@@ -133,6 +133,7 @@ class SellReceiptTest extends TestCase
            "header":"",
            "footer":"",
            "barcode":"",
+           "pre_payment_relation_id":"123qdq123qde12",
            "is_created_offline":true,
            "is_sent_dps":false,
            "sent_dps_at":null,

@@ -56,7 +56,8 @@ class ReceiptMapper
             $json['is_created_offline'],
             $json['is_sent_dps'],
             $json['sent_dps_at'] ?? '',
-            $shift
+            $shift,
+            $json['pre_payment_relation_id']
         );
 
         return $receipt;
