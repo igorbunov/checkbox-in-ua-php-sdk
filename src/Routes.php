@@ -296,4 +296,9 @@ class Routes
     {
         return $this->apiUrl . '/prepayment-receipts/' . $relationId;
     }
+
+    public function createReturnPrePaymentReceiptsChain(string $relationId): string
+    {
+        return $this->apiUrl . '/prepayment-receipts/' . $relationId . '/return';
+    }
 }

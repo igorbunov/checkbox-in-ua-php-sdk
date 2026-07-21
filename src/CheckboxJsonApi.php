@@ -15,6 +15,7 @@ use igorbunov\Checkbox\Mappers\Receipts\AfterPaymentReceiptMapper;
 use igorbunov\Checkbox\Mappers\Receipts\PrepaymentReceiptMapper;
 use igorbunov\Checkbox\Mappers\Receipts\ReceiptMapper;
 use igorbunov\Checkbox\Mappers\Receipts\ReceiptsMapper;
+use igorbunov\Checkbox\Mappers\Receipts\ReturnPrePaymentReceiptsChainMapper;
 use igorbunov\Checkbox\Mappers\Receipts\SellReceiptMapper;
 use igorbunov\Checkbox\Mappers\Receipts\ServiceReceiptMapper;
 use igorbunov\Checkbox\Mappers\Receipts\Taxes\GoodTaxesMapper;
@@ -36,6 +37,7 @@ use igorbunov\Checkbox\Models\Receipts\PrepaymentReceipt;
 use igorbunov\Checkbox\Models\Receipts\Receipt;
 use igorbunov\Checkbox\Models\Receipts\Receipts;
 use igorbunov\Checkbox\Models\Receipts\ReceiptsQueryParams;
+use igorbunov\Checkbox\Models\Receipts\ReturnPrePaymentReceiptsChain;
 use igorbunov\Checkbox\Models\Receipts\SellReceipt;
 use igorbunov\Checkbox\Models\Receipts\ServiceReceipt;
 use igorbunov\Checkbox\Models\Receipts\Taxes\GoodTaxes;
@@ -465,6 +467,38 @@ class CheckboxJsonApi
         $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
 
         return (new ReceiptMapper())->jsonToObject($jsonResponse);
+    }
+
+    /**
+     * @return array<Receipt>
+     */
+    public function createReturnPrePaymentReceiptsChain(
+        string $relation_id,
+        ReturnPrePaymentReceiptsChain $returnPrePaymentReceiptsChain
+    ): array {
+        $options = $this->requestOptions;
+        $options['body'] = \json_encode(
+            (new ReturnPrePaymentReceiptsChainMapper())->objectToJson(
+                $returnPrePaymentReceiptsChain
+            )
+        );
+
+        $response = $this->sendRequest(
+            self::METHOD_POST,
+            $this->routes->createReturnPrePaymentReceiptsChain($relation_id),
+            $options
+        );
+
+        $jsonResponse = json_decode($response->getBody()->getContents(), true);
+
+        $this->validateResponseStatus($jsonResponse, $response->getStatusCode());
+
+        $receipts = [];
+        foreach ($jsonResponse as $returnedReceipt) {
+            $receipts[] = (new ReceiptMapper())->jsonToObject($returnedReceipt);
+        }
+
+        return $receipts;
     }
 
     public function createAfterPaymentReceipt(string $relationId, AfterPaymentReceipt $receipt): ?Receipt
