@@ -6,6 +6,10 @@ use igorbunov\Checkbox\Models\Receipts\ReturnPrePaymentReceiptsChain;
 
 class ReturnPrePaymentReceiptsChainMapper
 {
+    /**
+     * @param ReturnPrePaymentReceiptsChain $receipt
+     * @return array<string, mixed>
+     */
     public function objectToJson(ReturnPrePaymentReceiptsChain $receipt): array
     {
         return [

@@ -470,7 +470,9 @@ class CheckboxJsonApi
     }
 
     /**
-     * @return array<Receipt>
+     * @param string $relation_id
+     * @param ReturnPrePaymentReceiptsChain $returnPrePaymentReceiptsChain
+     * @return array<int, Receipt|null>
      */
     public function createReturnPrePaymentReceiptsChain(
         string $relation_id,
