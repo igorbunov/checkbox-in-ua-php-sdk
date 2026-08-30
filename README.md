@@ -14,9 +14,9 @@
 
 #### Официальная документация:
 
-<https://api.checkbox.in.ua/api/redoc>
+<https://api.checkbox.ua/api/redoc>
 
-<https://api.checkbox.in.ua/api/docs>
+<https://api.checkbox.ua/api/docs>
 
 <https://docs.google.com/document/d/1Zhkc4OljKjea_235YafVvZunkWSp6TCAKeckhgl8t2w/edit>
 
@@ -33,13 +33,12 @@ require_once 'vendor/autoload.php';
 
 ##### Настройка конфига:
 
->адрес продакшен сервера http://api.checkbox.in.ua<br/>
->адрес тестового сервера http://dev-api.checkbox.in.ua<br/>
+>адрес сервера https://api.checkbox.ua <br/>
 >текущая версия API - v1
 
 ```php
 $config = new \igorbunov\Checkbox\Config([
-    \igorbunov\Checkbox\Config::API_URL => 'https://dev-api.checkbox.in.ua/api/v1',
+    \igorbunov\Checkbox\Config::API_URL => 'https://api.checkbox.ua/api/v1',
     \igorbunov\Checkbox\Config::LOGIN => 'логин кассира',
     \igorbunov\Checkbox\Config::PASSWORD => 'пароль кассира', //or
     \igorbunov\Checkbox\Config::PINCODE => 02301230440,
